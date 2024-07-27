@@ -1,7 +1,7 @@
 apiVersion: 1
 
 providers:
-- name: 'Investment'
+- name: 'dashboards'
   orgId: 1
   folder: ''
   folderUid: ''
@@ -11,4 +11,5 @@ providers:
   updateIntervalSeconds: 10
   allowUiUpdates: false
   options:
-    path: /var/lib/grafana/dashboards/Investment
+    path: /var/lib/grafana/dashboards
+    foldersFromFilesStructure: true
