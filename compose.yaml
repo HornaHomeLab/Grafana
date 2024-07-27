@@ -1,6 +1,6 @@
 services:
   Grafana:
-      image: HornaHomeLab/grafana
+      image: horna-home-lab/grafana
       build:
         context: ./
         dockerfile: Dockerfile
@@ -11,11 +11,11 @@ services:
         TZ: ${SYSTEM_TIME_ZONE}
         GF_DATE_FORMATS_DEFAULT_TIMEZONE: ${SYSTEM_TIME_ZONE}
       volumes:
-        - ./Grafana/datasources:/etc/grafana/provisioning/datasources
-        - ./Grafana/dashboards_provisioning:/etc/grafana/provisioning/dashboards
-        - ./Grafana/dashboards:/var/lib/grafana/dashboards
-        - ${APP_DATA_PATH}/${GRAFANA_PERSISTENT_STORAGE_DIR}:/var/lib/grafana
-        - ${APP_LOG_PATH}/${GRAFANA_PERSISTENT_STORAGE_DIR}:/var/log/grafana
+        - ./datasources:/etc/grafana/provisioning/datasources
+        - ./dashboards_provisioning:/etc/grafana/provisioning/dashboards
+        - ./dashboards:/var/lib/grafana/dashboards
+        - ${APP_DATA_PATH}:/var/lib/grafana
+        - ${APP_LOG_PATH}:/var/log/grafana
       ports:
         - ${GRAFANA_EXTERNAL_PORT}:3000
       healthcheck:
