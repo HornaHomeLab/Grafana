@@ -3,9 +3,9 @@ apiVersion: 1
 datasources:
   - name: Investment-DB
     type: postgres
-    url: PGDB:5432
+    url: apps.horna.local:5532
     user: grafana_read
-    isDefault: true
+    isDefault: false
     secureJsonData:
       password: 'inv!w_gf_ead3'
     jsonData:
@@ -17,3 +17,5 @@ datasources:
       connMaxLifetime: 14400 # Grafana v5.4+
       postgresVersion: 903 # 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10
       timescaledb: false
+
+
