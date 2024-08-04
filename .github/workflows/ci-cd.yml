@@ -14,6 +14,14 @@ jobs:
     with:
       pre_release: true
 
+  Deploy_DEV:
+    needs: Pre
+    uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
+    with:
+      environment: "development"
+      version: ${{ needs.Pre.outputs.released_version }}
+    secrets: inherit
+
   Full:
     if: github.event.pull_request.merged == true && github.event.action == 'closed'
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@main
@@ -21,11 +29,11 @@ jobs:
       pre_release: false
       latest: true
 
-  Deploy:
+  Deploy_PRD:
     needs: Full
     uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
     with:
-      environment: "development"
+      environment: "production"
       version: ${{ needs.Full.outputs.released_version }}
     secrets: inherit
 
