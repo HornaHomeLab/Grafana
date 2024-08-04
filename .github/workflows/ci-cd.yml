@@ -13,14 +13,12 @@ jobs:
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@main
     with:
       pre_release: true
-      archive_name: "test"
 
   Full:
     if: github.event.pull_request.merged == true && github.event.action == 'closed'
     uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@main
     with:
       pre_release: false
-      archive_name: "test"
       latest: true
 
   Deploy:
