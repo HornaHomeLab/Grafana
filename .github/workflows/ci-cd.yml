@@ -1,0 +1,36 @@
+name: CI/CD
+
+on:
+  pull_request:
+    types: [ opened, synchronize, closed ]
+
+permissions:
+  contents: write
+
+jobs:
+  Pre:
+    if: github.event.pull_request.merged == false && (github.event.action == 'opened' || github.event.action == 'synchronize')
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@main
+    with:
+      pre_release: true
+      archive_name: "test"
+
+  Full:
+    if: github.event.pull_request.merged == true && github.event.action == 'closed'
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_create_release.yml@main
+    with:
+      pre_release: false
+      archive_name: "test"
+      latest: true
+
+  Deploy:
+    needs: Full
+    uses: HornaHomeLab/Actions_Deployments/.github/workflows/Run_docker_compose.yml@main
+    with:
+      environment: "development"
+      version: ${{ needs.Full.outputs.released_version }}
+    secrets: inherit
+
+  Remove:
+    if: github.event.pull_request.merged == false && github.event.action == 'closed'
+    uses: HornaHomeLab/Actions_Releases/.github/workflows/Process_remove_release.yml@main
