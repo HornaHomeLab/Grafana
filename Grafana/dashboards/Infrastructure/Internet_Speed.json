@@ -20,7 +20,114 @@
     "graphTooltip": 0,
     "id": 7,
     "links": [],
+    "liveNow": true,
     "panels": [
+        {
+            "datasource": "Grafana_PG",
+            "gridPos": {
+                "h": 3,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 10,
+            "options": {
+                "buttons": [
+                    {
+                        "datasource": "Grafana_PG",
+                        "query": "{\n  \"rawSql\": \"CALL run_speedtest();\",\n  \"format\": \"table\"\n}",
+                        "text": "Run SpeedTest"
+                    }
+                ],
+                "orientation": "horizontal"
+            },
+            "title": "Controls",
+            "type": "speakyourcode-button-panel"
+        },
+        {
+            "datasource": "Grafana_PG",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "decimals": 2,
+                    "mappings": [],
+                    "max": 119,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 100
+                            }
+                        ]
+                    },
+                    "unit": "%"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 24,
+                "x": 0,
+                "y": 3
+            },
+            "id": 9,
+            "options": {
+                "displayMode": "gradient",
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+            },
+            "pluginVersion": "11.1.3",
+            "targets": [
+                {
+                    "datasource": "Grafana_PG",
+                    "editorMode": "code",
+                    "format": "table",
+                    "rawQuery": true,
+                    "rawSql": "SELECT get_action_completion_status(get_action_id('SpeedTest'));",
+                    "refId": "A",
+                    "sql": {
+                        "columns": [
+                            {
+                                "parameters": [],
+                                "type": "function"
+                            }
+                        ],
+                        "groupBy": [
+                            {
+                                "property": {
+                                    "type": "string"
+                                },
+                                "type": "groupBy"
+                            }
+                        ],
+                        "limit": 50
+                    }
+                }
+            ],
+            "title": "Completion status",
+            "type": "bargauge"
+        },
         {
             "datasource": "Prometheus_Infrastructure",
             "fieldConfig": {
@@ -52,7 +159,7 @@
                 "h": 8,
                 "w": 4,
                 "x": 0,
-                "y": 0
+                "y": 6
             },
             "id": 5,
             "options": {
@@ -124,7 +231,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 4,
-                "y": 0
+                "y": 6
             },
             "id": 4,
             "options": {
@@ -197,7 +304,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 9,
-                "y": 0
+                "y": 6
             },
             "id": 1,
             "options": {
@@ -271,7 +378,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 14,
-                "y": 0
+                "y": 6
             },
             "id": 2,
             "options": {
@@ -345,7 +452,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 19,
-                "y": 0
+                "y": 6
             },
             "id": 3,
             "options": {
@@ -442,7 +549,7 @@
                 "h": 8,
                 "w": 24,
                 "x": 0,
-                "y": 8
+                "y": 14
             },
             "id": 8,
             "options": {
@@ -536,7 +643,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 16
+                "y": 22
             },
             "id": 6,
             "options": {
@@ -644,7 +751,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 16
+                "y": 22
             },
             "id": 7,
             "options": {
@@ -692,6 +799,7 @@
             "type": "timeseries"
         }
     ],
+    "refresh": "5s",
     "schemaVersion": 39,
     "tags": [],
     "templating": {
