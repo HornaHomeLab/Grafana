@@ -2,7 +2,7 @@ services:
   Grafana:
       image: horna-home-lab/grafana
       build:
-        context: ./
+        context: ./Grafana
         dockerfile: Dockerfile
       container_name: ${GRAFANA_CONTAINER_NAME}
       hostname: ${GRAFANA_HOSTNAME}
@@ -11,9 +11,9 @@ services:
         TZ: ${SYSTEM_TIME_ZONE}
         GF_DATE_FORMATS_DEFAULT_TIMEZONE: ${SYSTEM_TIME_ZONE}
       volumes:
-        - ./datasources:/etc/grafana/provisioning/datasources
-        - ./dashboards_provisioning:/etc/grafana/provisioning/dashboards
-        - ./dashboards:/var/lib/grafana/dashboards
+        - ./Grafana/datasources:/etc/grafana/provisioning/datasources
+        - ./Grafana/dashboards_provisioning:/etc/grafana/provisioning/dashboards
+        - ./Grafana/dashboards:/var/lib/grafana/dashboards
         - ${APP_DATA_PATH}:/var/lib/grafana
         - ${APP_LOG_PATH}:/var/log/grafana
       ports:
@@ -24,3 +24,16 @@ services:
         interval: 3s
         timeout: 1s
         retries: 5
+      
+  Postgres:
+      image: horna-home-lab/postgres
+      build:
+        context: ./PostgreSQL
+        dockerfile: Dockerfile
+      container_name: ${POSTGRES_CONTAINER_NAME}
+      hostname: ${POSTGRES_HOSTNAME}
+      restart: unless-stopped
+      environment:
+        TZ: ${SYSTEM_TIME_ZONE}
+      ports:
+        - ${POSTGRES_EXTERNAL_PORT}:5432
