@@ -14,8 +14,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
-CREATE OR REPLACE FUNCTION run_action_post_request(action_id int)
-RETURNS void AS $$
+CREATE OR REPLACE PROCEDURE run_action_post_request(action_id int)
+LANGUAGE plpgsql
+AS $$
 DECLARE
     ops_id int;
     action_result JSON;
@@ -23,6 +24,8 @@ BEGIN
     INSERT INTO operations(start_time,action_id)
     VALUES(clock_timestamp(),action_id)
     RETURNING ID INTO ops_id;
+
+    COMMIT;
 
     SELECT post_request(
         (
@@ -42,4 +45,4 @@ BEGIN
 
 
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$;
