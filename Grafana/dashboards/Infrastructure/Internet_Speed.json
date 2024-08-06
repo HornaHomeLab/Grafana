@@ -65,8 +65,13 @@
                                     "text": "Failure"
                                 },
                                 "-12": {
-                                    "color": "yellow",
+                                    "color": "orange",
                                     "index": 2,
+                                    "text": "Processing"
+                                },
+                                "-13": {
+                                    "color": "yellow",
+                                    "index": 3,
                                     "text": "No data"
                                 }
                             },

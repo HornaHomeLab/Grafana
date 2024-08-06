@@ -53,9 +53,22 @@ BEGIN
     END IF;
 
     IF completion_percentage = -1 THEN
+        IF (SELECT *
+            FROM Operations
+            WHERE end_time IS NULL 
+                AND action_status IS NULL 
+                AND action_id = in_action_id
+            ORDER BY start_time DESC
+            LIMIT 1) EXISTS THEN
 
-        -- (-12) No estimation available
-        completion_percentage := -12;
+            -- (-12) Processing
+            completion_percentage := -12;
+        ELSE
+            -- (-13) No data available
+            completion_percentage := -13;
+        END IF;
+
+
     END IF;
 
     RETURN completion_percentage;
