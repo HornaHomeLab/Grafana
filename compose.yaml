@@ -14,8 +14,7 @@ services:
         - ./Grafana/datasources:/etc/grafana/provisioning/datasources
         - ./Grafana/dashboards_provisioning:/etc/grafana/provisioning/dashboards
         - ./Grafana/dashboards:/var/lib/grafana/dashboards
-        - ${APP_DATA_PATH}:/var/lib/grafana
-        - ${APP_LOG_PATH}:/var/log/grafana
+        - GF-data:/var/lib/grafana
       ports:
         - ${GRAFANA_EXTERNAL_PORT}:3000
       healthcheck:
@@ -37,9 +36,17 @@ services:
         TZ: ${SYSTEM_TIME_ZONE}
       ports:
         - ${POSTGRES_EXTERNAL_PORT}:5432
+      volumes:
+        - PG-data:/var/lib/postgresql/data
       healthcheck:
         test: ["CMD-SHELL", "pg_isready -U Actions"]
         start_period: 5s
         interval: 10s
         timeout: 5s
         retries: 10
+
+volumes:
+  GF-data:
+
+  PG-data:
+      
