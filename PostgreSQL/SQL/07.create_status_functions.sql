@@ -7,9 +7,10 @@ BEGIN
     WITH last_in_progress_ops AS (
         SELECT *
         FROM Operations
-        WHERE end_time is NULL 
-            AND action_status is NULL 
+        WHERE end_time IS NULL 
+            AND action_status IS NULL 
             AND action_id = in_action_id
+        ORDER BY start_time DESC
         LIMIT 1
     ),
 
@@ -27,11 +28,34 @@ BEGIN
     )
     
     SELECT
-        (SELECT seconds from current_processing_time) / (SELECT seconds FROM avg_processing_time) * 100
-    INTO completion_percentage;
+		CASE
+			WHEN (SELECT seconds FROM avg_processing_time) IS NULL THEN -1
+			WHEN (SELECT seconds from current_processing_time) IS NULL THEN -2
+			ELSE (SELECT seconds from current_processing_time) / (SELECT seconds FROM avg_processing_time) * 100
+		END
+	INTO completion_percentage;
 
-    IF completion_percentage IS NULL THEN
-        completion_percentage := 0;
+    IF completion_percentage = -2 THEN
+        IF (SELECT 
+                action_status ->> 'status' AS "status"
+            FROM Operations
+            WHERE action_id = in_action_id
+                AND end_time IS NOT NULL
+            ORDER BY start_time DESC
+            LIMIT 1) = 'success' THEN
+            
+            -- (-10) last action succeeded status code
+            completion_percentage := -10;
+        ELSE
+            -- (-11) last action failed status code
+            completion_percentage := -11;
+        END IF;
+    END IF;
+
+    IF completion_percentage = -1 THEN
+
+        -- (-12) No estimation available
+        completion_percentage := -12;
     END IF;
 
     RETURN completion_percentage;

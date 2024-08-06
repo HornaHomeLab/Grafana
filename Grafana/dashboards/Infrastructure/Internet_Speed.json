@@ -18,7 +18,6 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 7,
     "links": [],
     "liveNow": true,
     "panels": [
@@ -52,7 +51,28 @@
                         "mode": "thresholds"
                     },
                     "decimals": 2,
-                    "mappings": [],
+                    "mappings": [
+                        {
+                            "options": {
+                                "-10": {
+                                    "color": "dark-green",
+                                    "index": 0,
+                                    "text": "Success"
+                                },
+                                "-11": {
+                                    "color": "red",
+                                    "index": 1,
+                                    "text": "Failure"
+                                },
+                                "-12": {
+                                    "color": "yellow",
+                                    "index": 2,
+                                    "text": "No data"
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
                     "max": 119,
                     "min": 0,
                     "thresholds": {
@@ -813,6 +833,6 @@
     "timezone": "browser",
     "title": "Internet Speed",
     "uid": "cdt7wsc634lc0b",
-    "version": 4,
+    "version": 2,
     "weekStart": ""
 }
