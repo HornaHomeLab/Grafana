@@ -53,7 +53,7 @@ BEGIN
     END IF;
 
     IF completion_percentage = -1 THEN
-        IF (SELECT *
+        IF (SELECT ID
             FROM Operations
             WHERE end_time IS NULL 
                 AND action_status IS NULL 
