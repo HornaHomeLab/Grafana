@@ -1,21 +1,3 @@
-### DESCRIPTION
-# Docker file to create Docker image for with Actions DB, and python functions support.
-
-### INPUTS
-# TZ - time zone to be set in container
-# POSTGRES_PASSWORD - Super admin password
-# POSTGRES_USER - Super admin username
-# POSTGRES_INITDB_ARGS - init args used to set encoding collate, etc.
-
-### CHANGE LOG
-# Author:   Stanisław Horna
-# GitHub Repository:  https://github.com/HornaHomeLab/Grafana
-# Created:  05-Aug-2024
-# Version:  1.0
-
-# Date            Who                     What
-#
-
 FROM postgres:16.2
 
 #### Environmental variables ####
