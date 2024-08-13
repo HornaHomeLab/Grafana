@@ -4,6 +4,7 @@ datasources:
   - name: Prometheus_Infrastructure
     type: prometheus
     access: proxy
+    uid: PD650906C61C03078
     url: http://services.horna.local:9090
     jsonData:
       httpMethod: POST
