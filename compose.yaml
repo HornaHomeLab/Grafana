@@ -14,7 +14,10 @@ services:
         - ./Grafana/datasources:/etc/grafana/provisioning/datasources
         - ./Grafana/dashboards_provisioning:/etc/grafana/provisioning/dashboards
         - ./Grafana/dashboards:/var/lib/grafana/dashboards
+        - ./Grafana/conf:/usr/share/grafana/conf
         - GF-data:/var/lib/grafana
+      command:
+        - --config=/usr/share/grafana/conf/custom.ini
       ports:
         - ${GRAFANA_EXTERNAL_PORT}:3000
       healthcheck:
