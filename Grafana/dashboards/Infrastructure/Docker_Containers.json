@@ -22,7 +22,10 @@
     "links": [],
     "panels": [
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -105,7 +108,10 @@
             "pluginVersion": "7.4.5",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "editorMode": "code",
                     "expr": "sum(rate(container_cpu_usage_seconds_total{instance=~\"$instance\",name=~\".+\", name!~\"$exclude_containers\", name=~\"$include_containers\"}[1m])) by (name) *100",
                     "hide": false,
@@ -119,7 +125,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -202,7 +211,10 @@
             "pluginVersion": "7.4.5",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "editorMode": "code",
                     "expr": "sum(container_memory_rss{instance=~\"$instance\",name=~\".+\",  name!~\"$exclude_containers\", name=~\"$include_containers\"}) by (name)",
                     "hide": false,
@@ -216,7 +228,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -299,7 +314,10 @@
             "pluginVersion": "7.4.5",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "editorMode": "code",
                     "expr": "sum(container_memory_cache{instance=~\"$instance\",name=~\".+\", name!~\"$exclude_containers\", name=~\"$include_containers\"}) by (name)",
                     "hide": false,
@@ -313,7 +331,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -394,7 +415,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "editorMode": "code",
                     "expr": "sum(rate(container_fs_reads_bytes_total{instance=~\"$instance\",name=~\".+\", name!~\"$exclude_containers\", name=~\"$include_containers\"}[1m])) by (name)",
                     "instant": false,
@@ -407,7 +431,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -488,7 +515,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "editorMode": "code",
                     "expr": "sum(rate(container_fs_writes_bytes_total{instance=~\"$instance\",name=~\".+\", name!~\"$exclude_containers\", name=~\"$include_containers\"}[1m])) by (name)",
                     "instant": false,
@@ -501,7 +531,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -584,7 +617,10 @@
             "pluginVersion": "7.4.5",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "editorMode": "code",
                     "expr": "sum(rate(container_network_receive_bytes_total{instance=~\"$instance\",name=~\".+\", name!~\"$exclude_containers\", name=~\"$include_containers\"}[1m])) by (name)",
                     "hide": false,
@@ -598,7 +634,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -681,7 +720,10 @@
             "pluginVersion": "7.4.5",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "editorMode": "code",
                     "expr": "sum(rate(container_network_transmit_bytes_total{instance=~\"$instance\",name=~\".+\", name!~\"$exclude_containers\", name=~\"$include_containers\"}[1m])) by (name)",
                     "interval": "",
@@ -694,7 +736,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "custom": {
@@ -756,7 +801,10 @@
             "pluginVersion": "11.1.3",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "editorMode": "code",
                     "expr": "count by(name) (count_over_time(container_last_seen{instance=~\"$instance\",name=~\".+\", name!~\"$exclude_containers\", name=~\"$include_containers\"}[$__range]))",
                     "instant": false,
@@ -769,7 +817,10 @@
             "type": "heatmap"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -949,7 +1000,10 @@
             "pluginVersion": "11.1.3",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "code",
                     "exemplar": false,
@@ -1050,7 +1104,10 @@
                     "text": "All",
                     "value": "$__all"
                 },
-                "datasource": "Prometheus_Infrastructure",
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "PD650906C61C03078"
+                },
                 "definition": "label_values({job=\"Docker_Containers\"},instance)",
                 "hide": 0,
                 "includeAll": true,
@@ -1080,7 +1137,10 @@
                         "$__all"
                     ]
                 },
-                "datasource": "Prometheus_Infrastructure",
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "PD650906C61C03078"
+                },
                 "definition": "label_values({job=\"Docker_Containers\"},name)",
                 "hide": 0,
                 "includeAll": true,
@@ -1109,7 +1169,10 @@
                         "cAdvisor_metrics"
                     ]
                 },
-                "datasource": "Prometheus_Infrastructure",
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "PD650906C61C03078"
+                },
                 "definition": "label_values({job=\"Docker_Containers\"},name)",
                 "hide": 0,
                 "includeAll": false,

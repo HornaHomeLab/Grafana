@@ -22,7 +22,10 @@
     "links": [],
     "panels": [
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -98,7 +101,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "ohm_cpu_celsius{job=\"Server_Load\", instance=\"Server-Core.Horna.local:4445\", sensor=\"CPU Package\"}",
@@ -111,7 +117,10 @@
                     "useBackend": false
                 },
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "ohm_cpu_celsius{job=\"Server_Load\", instance=\"Ryzen9.Horna.local:4445\", sensor=\"CCDs Average (Tdie)\"}",
@@ -129,7 +138,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -205,7 +217,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "ohm_cpu_load_percent{job=\"Server_Load\", instance=\"Server-Core.Horna.local:4445\", sensor=\"CPU Total\"}",
@@ -218,7 +233,10 @@
                     "useBackend": false
                 },
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "ohm_cpu_load_percent{job=\"Server_Load\", instance=\"Ryzen9.Horna.local:4445\", sensor=\"CPU Total\"}",
@@ -236,7 +254,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -312,7 +333,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "ohm_ram_load_percent{job=\"Server_Load\", instance=\"Server-Core.Horna.local:4445\", sensor=\"Memory\"}",
@@ -346,7 +370,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -422,7 +449,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "ohm_hdd_load_percent{job=\"Server_Load\", instance=\"Server-Core.Horna.local:4445\", sensor=\"Total Activity\", hardware=\"SSDPR-CX400-01T-G2\"}",
@@ -435,7 +465,10 @@
                     "useBackend": false
                 },
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "ohm_hdd_load_percent{job=\"Server_Load\", instance=\"Ryzen9.Horna.local:4445\", sensor=\"Total Activity\", hardware=\"Lexar SSD NM710 1TB\"}",
@@ -453,7 +486,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -529,7 +565,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "ohm_nic_load_percent{job=\"Server_Load\", instance=\"Server-Core.Horna.local:4445\", sensor=\"Network Utilization\", hardware=\"Hyper-V Switch\"}",
@@ -542,7 +581,10 @@
                     "useBackend": false
                 },
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "ohm_nic_load_percent{job=\"Server_Load\", instance=\"Ryzen9.Horna.local:4445\", sensor=\"Network Utilization\", hardware=\"vEthernet (Switch)\"}",

@@ -22,7 +22,10 @@
     "liveNow": true,
     "panels": [
         {
-            "datasource": "Grafana_PG",
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "PDF83BE666DDDEFB8"
+            },
             "gridPos": {
                 "h": 3,
                 "w": 24,
@@ -33,18 +36,24 @@
             "options": {
                 "buttons": [
                     {
-                        "datasource": "Grafana_PG",
+                        "datasource": {
+                            "type": "grafana-postgresql-datasource",
+                            "uid": "PDF83BE666DDDEFB8"
+                        },
                         "query": "{\n  \"rawSql\": \"CALL run_speedtest();\",\n  \"format\": \"table\"\n}",
                         "text": "Run SpeedTest"
                     }
                 ],
-                "orientation": "horizontal"
+                "orientation": "vertical"
             },
             "title": "Controls",
             "type": "speakyourcode-button-panel"
         },
         {
-            "datasource": "Grafana_PG",
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "PDF83BE666DDDEFB8"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -103,7 +112,7 @@
                 "x": 0,
                 "y": 3
             },
-            "id": 9,
+            "id": 11,
             "options": {
                 "displayMode": "gradient",
                 "maxVizHeight": 300,
@@ -125,11 +134,14 @@
             "pluginVersion": "11.1.3",
             "targets": [
                 {
-                    "datasource": "Grafana_PG",
+                    "datasource": {
+                        "type": "grafana-postgresql-datasource",
+                        "uid": "PDF83BE666DDDEFB8"
+                    },
                     "editorMode": "code",
                     "format": "table",
                     "rawQuery": true,
-                    "rawSql": "SELECT get_action_completion_status(get_action_id('SpeedTest'));",
+                    "rawSql": "\nSELECT get_action_completion_status(get_action_id('SpeedTest'));",
                     "refId": "A",
                     "sql": {
                         "columns": [
@@ -154,7 +166,10 @@
             "type": "bargauge"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -205,7 +220,10 @@
             "pluginVersion": "11.1.3",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "packet_loss",
@@ -222,7 +240,10 @@
             "type": "gauge"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -277,7 +298,10 @@
             "pluginVersion": "11.1.3",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "exemplar": false,
@@ -295,7 +319,10 @@
             "type": "gauge"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -350,7 +377,10 @@
             "pluginVersion": "11.1.3",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "exemplar": false,
@@ -368,7 +398,10 @@
             "type": "gauge"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -424,7 +457,10 @@
             "pluginVersion": "11.1.3",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "exemplar": false,
@@ -442,7 +478,10 @@
             "type": "gauge"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -498,7 +537,10 @@
             "pluginVersion": "11.1.3",
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "exemplar": false,
@@ -516,7 +558,10 @@
             "type": "gauge"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -591,7 +636,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "packet_loss{job=\"SpeedTest\"} * 100",
@@ -608,7 +656,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -685,7 +736,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "download_bandwidth / 1000000",
@@ -698,7 +752,10 @@
                     "useBackend": false
                 },
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "upload_bandwidth / 1000000",
@@ -716,7 +773,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "Prometheus_Infrastructure",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -793,7 +853,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "download_latency_high",
@@ -806,7 +869,10 @@
                     "useBackend": false
                 },
                 {
-                    "datasource": "Prometheus_Infrastructure",
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
                     "disableTextWrap": false,
                     "editorMode": "builder",
                     "expr": "upload_latency_high",
@@ -838,6 +904,6 @@
     "timezone": "browser",
     "title": "Internet Speed",
     "uid": "cdt7wsc634lc0b",
-    "version": 2,
+    "version": 3,
     "weekStart": ""
 }
