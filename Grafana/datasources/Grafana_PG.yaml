@@ -3,6 +3,7 @@ apiVersion: 1
 datasources:
   - name: Grafana_PG
     type: postgres
+    uid: PDF83BE666DDDEFB8
     url: Grafana-PG:5432
     user: grafana
     isDefault: false

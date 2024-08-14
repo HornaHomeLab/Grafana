@@ -4,4 +4,5 @@ datasources:
   - name: Loki
     type: loki
     access: proxy
+    uid: P8E80F9AEF21F6940
     url: http://services.horna.local:3100
