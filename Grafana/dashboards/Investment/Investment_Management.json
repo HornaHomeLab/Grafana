@@ -22,62 +22,108 @@
     "liveNow": true,
     "panels": [
         {
-            "datasource": "Investment-DB",
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "PDF83BE666DDDEFB8"
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 2,
+            "options": {
+                "buttons": [
+                    {
+                        "datasource": "Grafana_PG",
+                        "query": "{\n  \"rawSql\": \"CALL download_fund_quotation();\",\n  \"format\": \"table\"\n}",
+                        "text": "Download funds quotation",
+                        "variant": "primary"
+                    },
+                    {
+                        "datasource": "Investment-DB",
+                        "query": "{\n  \"rawSql\": \"SELECT remove_fund_quotation();\",\n  \"format\": \"table\"\n}",
+                        "text": "Delete fund quotation",
+                        "variant": "destructive"
+                    },
+                    {
+                        "datasource": "Grafana_PG",
+                        "query": "{\n  \"rawSql\": \"CALL calculate_investment_result();\",\n  \"format\": \"table\"\n}",
+                        "text": "Calculate investment results",
+                        "variant": "primary"
+                    },
+                    {
+                        "datasource": "Investment-DB",
+                        "query": "{\n    \"rawSql\": \"SELECT remove_investments_result();\",\n    \"format\": \"table\"\n}",
+                        "text": "Delete investment results",
+                        "variant": "destructive"
+                    }
+                ],
+                "orientation": "horizontal"
+            },
+            "pluginVersion": "10.4.1",
+            "title": "Control buttons",
+            "type": "speakyourcode-button-panel"
+        },
+        {
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "PDF83BE666DDDEFB8"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
                         "mode": "thresholds"
                     },
                     "mappings": [],
-                    "max": 100,
-                    "min": 0,
                     "thresholds": {
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
+                                "color": "text",
                                 "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
                             }
                         ]
-                    },
-                    "unit": "%"
+                    }
                 },
                 "overrides": []
             },
             "gridPos": {
-                "h": 7,
-                "w": 24,
+                "h": 3,
+                "w": 7,
                 "x": 0,
-                "y": 0
+                "y": 3
             },
-            "id": 7,
+            "id": 8,
             "options": {
-                "minVizHeight": 75,
-                "minVizWidth": 75,
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
                 "orientation": "auto",
+                "percentChangeColorMode": "standard",
                 "reduceOptions": {
                     "calcs": [
                         "lastNotNull"
                     ],
-                    "fields": "",
+                    "fields": "/^name$/",
                     "values": false
                 },
-                "showThresholdLabels": false,
-                "showThresholdMarkers": true,
-                "sizing": "auto"
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
             },
-            "pluginVersion": "10.4.2",
+            "pluginVersion": "11.1.4",
             "targets": [
                 {
-                    "datasource": "Investment-DB",
+                    "datasource": {
+                        "type": "grafana-postgresql-datasource",
+                        "uid": "PDF83BE666DDDEFB8"
+                    },
                     "editorMode": "code",
                     "format": "table",
                     "rawQuery": true,
-                    "rawSql": "SELECT\n\tcpu.\"CPU normal\",\n\tcpu.\"CPU niced\",\n\tcpu.\"CPU kernel\",\n\tram.\"RAM usage\"\nFROM\n\t(\n\t\tSELECT\n\t\t\tROUND(\n\t\t\t\t(USED_MEMORY::NUMERIC / TOTAL_MEMORY::NUMERIC) * 100,\n\t\t\t\t2\n\t\t\t) AS \"RAM usage\"\n\t\tFROM\n\t\t\tPG_SYS_MEMORY_INFO ()\n\t) AS ram,\n\t(\n\t\tSELECT\n\t\t\tROUND(USERMODE_NORMAL_PROCESS_PERCENT::NUMERIC, 2) AS \"CPU normal\",\n\t\t\tROUND(USERMODE_NICED_PROCESS_PERCENT::NUMERIC, 2) AS \"CPU niced\",\n\t\t\tROUND(KERNELMODE_PROCESS_PERCENT::NUMERIC, 2) AS \"CPU kernel\"\n\t\tFROM\n\t\t\tPG_SYS_CPU_USAGE_INFO ()\n\t) AS cpu;\n\n\n\n",
+                    "rawSql": "WITH last_operation AS (\n\tSELECT\n\t\t*\n\tFROM Operations\n\tWHERE action_id IN (get_action_id('FundQuotation'),get_action_id('InvestmentRefund'))\n\tORDER BY start_time DESC\n\tLIMIT 1\n)\n\nSELECT \n\tname\nFROM actions a\nRIGHT JOIN last_operation lo ON lo.action_id = a.id",
                     "refId": "A",
                     "sql": {
                         "columns": [
@@ -98,53 +144,130 @@
                     }
                 }
             ],
-            "title": "Resource consumption",
-            "type": "gauge"
+            "title": "Last operation",
+            "type": "stat"
         },
         {
-            "datasource": "Investment-DB",
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "PDF83BE666DDDEFB8"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "decimals": 2,
+                    "mappings": [
+                        {
+                            "options": {
+                                "-10": {
+                                    "color": "dark-green",
+                                    "index": 0,
+                                    "text": "Success"
+                                },
+                                "-11": {
+                                    "color": "red",
+                                    "index": 1,
+                                    "text": "Failure"
+                                },
+                                "-12": {
+                                    "color": "orange",
+                                    "index": 2,
+                                    "text": "Processing"
+                                },
+                                "-13": {
+                                    "color": "yellow",
+                                    "index": 3,
+                                    "text": "No data"
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "max": 119,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 100
+                            }
+                        ]
+                    },
+                    "unit": "%"
+                },
+                "overrides": []
+            },
             "gridPos": {
                 "h": 3,
-                "w": 24,
-                "x": 0,
-                "y": 7
+                "w": 17,
+                "x": 7,
+                "y": 3
             },
-            "id": 2,
+            "id": 9,
             "options": {
-                "buttons": [
-                    {
-                        "datasource": "Investment-DB",
-                        "query": "{\n  \"rawSql\": \"SELECT get_funds_quotation(${Backend_IP:singlequote}, ${Backend_Port:singlequote});\",\n  \"format\": \"table\"\n}",
-                        "text": "Download funds quotation",
-                        "variant": "primary"
-                    },
-                    {
-                        "datasource": "Investment-DB",
-                        "query": "{\n  \"rawSql\": \"SELECT remove_fund_quotation();\",\n  \"format\": \"table\"\n}",
-                        "text": "Delete fund quotation",
-                        "variant": "destructive"
-                    },
-                    {
-                        "datasource": "Investment-DB",
-                        "query": "{\n    \"rawSql\": \"SELECT get_investments_result(${Backend_IP:singlequote}, ${Backend_Port:singlequote});\",\n    \"format\": \"table\"\n}",
-                        "text": "Calculate investment results",
-                        "variant": "primary"
-                    },
-                    {
-                        "datasource": "Investment-DB",
-                        "query": "{\n    \"rawSql\": \"SELECT remove_investments_result();\",\n    \"format\": \"table\"\n}",
-                        "text": "Delete investment results",
-                        "variant": "destructive"
-                    }
-                ],
-                "orientation": "horizontal"
+                "displayMode": "gradient",
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
             },
-            "pluginVersion": "10.4.1",
-            "title": "Control buttons",
-            "type": "speakyourcode-button-panel"
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "grafana-postgresql-datasource",
+                        "uid": "PDF83BE666DDDEFB8"
+                    },
+                    "editorMode": "code",
+                    "format": "table",
+                    "rawQuery": true,
+                    "rawSql": "WITH last_operation AS (\n\tSELECT\n\t\t*\n\tFROM Operations\n\tWHERE action_id IN (get_action_id('FundQuotation'),get_action_id('InvestmentRefund'))\n\tORDER BY start_time DESC\n\tLIMIT 1\n)\n\nSELECT\n\tget_action_completion_status(\n\t\t(SELECT \n\t\t\taction_id\n\t\tFROM last_operation)\n\t);\n",
+                    "refId": "A",
+                    "sql": {
+                        "columns": [
+                            {
+                                "parameters": [],
+                                "type": "function"
+                            }
+                        ],
+                        "groupBy": [
+                            {
+                                "property": {
+                                    "type": "string"
+                                },
+                                "type": "groupBy"
+                            }
+                        ],
+                        "limit": 50
+                    }
+                }
+            ],
+            "title": "Completion status",
+            "type": "bargauge"
         },
         {
-            "datasource": "Investment-DB",
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "P15873E22AD1F6020"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -205,7 +328,7 @@
                         "properties": [
                             {
                                 "id": "custom.width",
-                                "value": 135
+                                "value": 70
                             }
                         ]
                     }
@@ -215,7 +338,7 @@
                 "h": 13,
                 "w": 7,
                 "x": 0,
-                "y": 10
+                "y": 6
             },
             "id": 3,
             "options": {
@@ -236,10 +359,13 @@
                     }
                 ]
             },
-            "pluginVersion": "10.4.2",
+            "pluginVersion": "11.1.4",
             "targets": [
                 {
-                    "datasource": "Investment-DB",
+                    "datasource": {
+                        "type": "grafana-postgresql-datasource",
+                        "uid": "P15873E22AD1F6020"
+                    },
                     "editorMode": "code",
                     "format": "table",
                     "rawQuery": true,
@@ -268,7 +394,10 @@
             "type": "table"
         },
         {
-            "datasource": "Investment-DB",
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "P15873E22AD1F6020"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -306,7 +435,7 @@
                 "h": 13,
                 "w": 5,
                 "x": 7,
-                "y": 10
+                "y": 6
             },
             "id": 5,
             "options": {
@@ -331,7 +460,10 @@
             "pluginVersion": "10.4.1",
             "targets": [
                 {
-                    "datasource": "Investment-DB",
+                    "datasource": {
+                        "type": "grafana-postgresql-datasource",
+                        "uid": "P15873E22AD1F6020"
+                    },
                     "editorMode": "code",
                     "format": "table",
                     "rawQuery": true,
@@ -360,7 +492,10 @@
             "type": "piechart"
         },
         {
-            "datasource": "Investment-DB",
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "P15873E22AD1F6020"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -419,7 +554,7 @@
                 "h": 13,
                 "w": 7,
                 "x": 12,
-                "y": 10
+                "y": 6
             },
             "id": 4,
             "options": {
@@ -440,10 +575,13 @@
                     }
                 ]
             },
-            "pluginVersion": "10.4.2",
+            "pluginVersion": "11.1.4",
             "targets": [
                 {
-                    "datasource": "Investment-DB",
+                    "datasource": {
+                        "type": "grafana-postgresql-datasource",
+                        "uid": "P15873E22AD1F6020"
+                    },
                     "editorMode": "code",
                     "format": "table",
                     "rawQuery": true,
@@ -472,7 +610,10 @@
             "type": "table"
         },
         {
-            "datasource": "Investment-DB",
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "P15873E22AD1F6020"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -509,7 +650,7 @@
                 "h": 13,
                 "w": 5,
                 "x": 19,
-                "y": 10
+                "y": 6
             },
             "id": 6,
             "options": {
@@ -533,7 +674,10 @@
             },
             "targets": [
                 {
-                    "datasource": "Investment-DB",
+                    "datasource": {
+                        "type": "grafana-postgresql-datasource",
+                        "uid": "P15873E22AD1F6020"
+                    },
                     "editorMode": "code",
                     "format": "table",
                     "rawQuery": true,
@@ -566,48 +710,7 @@
     "schemaVersion": 39,
     "tags": [],
     "templating": {
-        "list": [
-            {
-                "current": {
-                    "selected": false,
-                    "text": "API",
-                    "value": "API"
-                },
-                "hide": 0,
-                "label": "Backend Address",
-                "name": "Backend_IP",
-                "options": [
-                    {
-                        "selected": true,
-                        "text": "API",
-                        "value": "API"
-                    }
-                ],
-                "query": "API",
-                "skipUrlSync": false,
-                "type": "textbox"
-            },
-            {
-                "current": {
-                    "selected": true,
-                    "text": "5000",
-                    "value": "5000"
-                },
-                "hide": 0,
-                "label": "Backend Port",
-                "name": "Backend_Port",
-                "options": [
-                    {
-                        "selected": true,
-                        "text": "5000",
-                        "value": "5000"
-                    }
-                ],
-                "query": "5000",
-                "skipUrlSync": false,
-                "type": "textbox"
-            }
-        ]
+        "list": []
     },
     "time": {
         "from": "now-1h",
@@ -617,6 +720,6 @@
     "timezone": "browser",
     "title": "Investment Management",
     "uid": "edh4bvsv3kmwwe",
-    "version": 1,
+    "version": 3,
     "weekStart": ""
 }
