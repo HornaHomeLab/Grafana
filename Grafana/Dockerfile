@@ -1,4 +1,4 @@
-FROM grafana/grafana-enterprise
+FROM grafana/grafana-enterprise:11.1.4
 ENV GF_INSTALL_PLUGINS="grafana-clock-panel, grafana-simple-json-datasource, speakyourcode-button-panel, volkovlabs-form-panel"
 
 USER root

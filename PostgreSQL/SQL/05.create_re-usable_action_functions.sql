@@ -14,26 +14,38 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
-CREATE OR REPLACE PROCEDURE run_action_post_request(action_id int)
+CREATE OR REPLACE PROCEDURE run_action_request(action_id int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
     ops_id int;
+    action_url varchar;
+    method varchar;
     action_result JSON;
 BEGIN
+
+    SELECT
+        Endpoint_url
+    INTO action_url
+    FROM Actions
+    WHERE ID = action_id;
+
+    SELECT
+        Actions.Method
+    INTO method
+    FROM Actions
+    WHERE ID = action_id;
+
+
     INSERT INTO operations(start_time,action_id)
     VALUES(clock_timestamp(),action_id)
     RETURNING ID INTO ops_id;
 
     COMMIT;
 
-    SELECT post_request(
-        (
-			SELECT
-				endpoint_url
-			FROM Actions
-			WHERE ID = action_id
-        )
+    SELECT invoke_request(
+        action_url,
+        method
 	)
     INTO action_result;
 

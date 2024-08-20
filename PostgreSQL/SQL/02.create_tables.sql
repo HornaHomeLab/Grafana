@@ -1,7 +1,8 @@
 CREATE TABLE Actions(
     ID serial PRIMARY KEY NOT NULL,
     Name varchar UNIQUE NOT NULL,
-    Endpoint_url varchar NOT NULL
+    Endpoint_url varchar NOT NULL,
+    Method varchar NOT NULL
 );
 
 CREATE TABLE Operations(
