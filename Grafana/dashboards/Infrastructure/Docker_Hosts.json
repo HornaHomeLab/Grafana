@@ -816,7 +816,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -983,8 +984,8 @@
             {
                 "current": {
                     "selected": true,
-                    "text": "apps.Horna.local:54569",
-                    "value": "apps.Horna.local:54569"
+                    "text": "services.Horna.local:54569",
+                    "value": "services.Horna.local:54569"
                 },
                 "datasource": {
                     "type": "prometheus",
@@ -1018,6 +1019,6 @@
     "timezone": "browser",
     "title": "Docker Hosts",
     "uid": "cdul3c9ux1m9sb",
-    "version": 1,
+    "version": 2,
     "weekStart": ""
 }
