@@ -131,7 +131,7 @@
                 "sizing": "auto",
                 "valueMode": "color"
             },
-            "pluginVersion": "11.1.3",
+            "pluginVersion": "11.1.4",
             "targets": [
                 {
                     "datasource": {
@@ -217,7 +217,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.1.3",
+            "pluginVersion": "11.1.4",
             "targets": [
                 {
                     "datasource": {
@@ -226,7 +226,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "builder",
-                    "expr": "packet_loss",
+                    "expr": "packet_loss * 100",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -295,7 +295,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.1.3",
+            "pluginVersion": "11.1.4",
             "targets": [
                 {
                     "datasource": {
@@ -374,7 +374,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.1.3",
+            "pluginVersion": "11.1.4",
             "targets": [
                 {
                     "datasource": {
@@ -454,7 +454,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.1.3",
+            "pluginVersion": "11.1.4",
             "targets": [
                 {
                     "datasource": {
@@ -534,7 +534,7 @@
                 "showThresholdMarkers": true,
                 "sizing": "auto"
             },
-            "pluginVersion": "11.1.3",
+            "pluginVersion": "11.1.4",
             "targets": [
                 {
                     "datasource": {
@@ -702,8 +702,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -819,8 +818,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -904,6 +902,6 @@
     "timezone": "browser",
     "title": "Internet Speed",
     "uid": "cdt7wsc634lc0b",
-    "version": 3,
+    "version": 2,
     "weekStart": ""
 }

@@ -1,6 +1,6 @@
 services:
   Grafana:
-      image: horna-home-lab/grafana
+      image: ${GRAFANA_IMAGE_NAME}
       build:
         context: ./Grafana
         dockerfile: Dockerfile
@@ -28,7 +28,7 @@ services:
         retries: 5
       
   Postgres:
-      image: horna-home-lab/postgres
+      image: ${POSTGRES_IMAGE_NAME}
       build:
         context: ./PostgreSQL
         dockerfile: Dockerfile
