@@ -772,8 +772,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -873,8 +872,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -970,8 +968,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
-                                "value": null
+                                "color": "green"
                             },
                             {
                                 "color": "red",
@@ -1106,13 +1103,13 @@
         ]
     },
     "time": {
-        "from": "now-1h",
+        "from": "now-6h",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "AccessPoint",
     "uid": "bdwa3qd4rwidce",
-    "version": 4,
+    "version": 10,
     "weekStart": ""
 }
