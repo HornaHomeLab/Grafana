@@ -685,8 +685,8 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 12,
-                "w": 12,
+                "h": 11,
+                "w": 24,
                 "x": 0,
                 "y": 20
             },
@@ -786,9 +786,9 @@
             },
             "gridPos": {
                 "h": 12,
-                "w": 12,
-                "x": 12,
-                "y": 20
+                "w": 24,
+                "x": 0,
+                "y": 31
             },
             "id": 8,
             "options": {
@@ -890,7 +890,7 @@
                 "h": 18,
                 "w": 24,
                 "x": 0,
-                "y": 32
+                "y": 43
             },
             "id": 1,
             "options": {
@@ -1023,7 +1023,7 @@
                 "h": 10,
                 "w": 18,
                 "x": 0,
-                "y": 50
+                "y": 61
             },
             "id": 5,
             "options": {
@@ -1106,13 +1106,13 @@
         ]
     },
     "time": {
-        "from": "now-6h",
+        "from": "now-1h",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "AccessPoint",
     "uid": "bdwa3qd4rwidce",
-    "version": 2,
+    "version": 4,
     "weekStart": ""
 }
