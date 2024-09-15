@@ -30,6 +30,138 @@
                     "color": {
                         "mode": "thresholds"
                     },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "purple",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 12,
+                "x": 0,
+                "y": 0
+            },
+            "id": 42,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum(increase(switch_port_tx_sum[$__range]) + increase(switch_port_rx_sum[$__range]))",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Transferred",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "purple",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 12,
+                "x": 12,
+                "y": 0
+            },
+            "id": 43,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum(increase(switch_port_tx_sum[$increase_interval]) + increase(switch_port_rx_sum[$increase_interval]))",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Bandwidth",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
                     "mappings": [
                         {
                             "options": {
@@ -69,7 +201,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 0,
-                "y": 0
+                "y": 4
             },
             "id": 1,
             "options": {
@@ -193,7 +325,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 2,
-                "y": 0
+                "y": 4
             },
             "id": 6,
             "options": {
@@ -317,7 +449,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 4,
-                "y": 0
+                "y": 4
             },
             "id": 8,
             "options": {
@@ -441,7 +573,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 6,
-                "y": 0
+                "y": 4
             },
             "id": 10,
             "options": {
@@ -565,7 +697,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 8,
-                "y": 0
+                "y": 4
             },
             "id": 11,
             "options": {
@@ -689,7 +821,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 10,
-                "y": 0
+                "y": 4
             },
             "id": 12,
             "options": {
@@ -813,7 +945,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 12,
-                "y": 0
+                "y": 4
             },
             "id": 13,
             "options": {
@@ -937,7 +1069,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 14,
-                "y": 0
+                "y": 4
             },
             "id": 14,
             "options": {
@@ -1061,7 +1193,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 16,
-                "y": 0
+                "y": 4
             },
             "id": 15,
             "options": {
@@ -1146,14 +1278,10 @@
                     "color": {
                         "mode": "thresholds"
                     },
-                    "custom": {
-                        "align": "auto",
-                        "cellOptions": {
-                            "type": "auto"
-                        },
-                        "inspect": false
-                    },
+                    "decimals": 1,
                     "mappings": [],
+                    "max": 100,
+                    "min": 0,
                     "thresholds": {
                         "mode": "absolute",
                         "steps": [
@@ -1166,54 +1294,35 @@
                                 "value": 80
                             }
                         ]
-                    }
-                },
-                "overrides": [
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "name"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 73
-                            }
-                        ]
                     },
-                    {
-                        "matcher": {
-                            "id": "byName",
-                            "options": "ip"
-                        },
-                        "properties": [
-                            {
-                                "id": "custom.width",
-                                "value": 98
-                            }
-                        ]
-                    }
-                ]
+                    "unit": "percent"
+                },
+                "overrides": []
             },
             "gridPos": {
                 "h": 8,
                 "w": 6,
                 "x": 18,
-                "y": 0
+                "y": 4
             },
-            "id": 22,
+            "id": 41,
             "options": {
-                "cellHeight": "sm",
-                "footer": {
-                    "countRows": false,
-                    "fields": "",
-                    "reducer": [
-                        "sum"
+                "displayMode": "basic",
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
                     ],
-                    "show": false
+                    "fields": "",
+                    "values": false
                 },
-                "showHeader": true,
-                "sortBy": []
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
             },
             "pluginVersion": "11.1.4",
             "targets": [
@@ -1222,51 +1331,16 @@
                         "type": "prometheus",
                         "uid": "PD650906C61C03078"
                     },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "exemplar": false,
-                    "expr": "device_info{deviceType=\"Switch\"}",
-                    "format": "table",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": true,
+                    "editorMode": "code",
+                    "expr": "(count(switch_port_info{linkSpeed!=\"Down\"})/count(switch_port_info)) * 100",
+                    "instant": false,
                     "legendFormat": "__auto",
-                    "range": false,
-                    "refId": "A",
-                    "useBackend": false
+                    "range": true,
+                    "refId": "A"
                 }
             ],
-            "title": "Devices",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "instance": true,
-                            "job": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {
-                            "Time": 0,
-                            "Value": 10,
-                            "__name__": 1,
-                            "deviceType": 7,
-                            "firmwareVersion": 6,
-                            "instance": 8,
-                            "ip": 4,
-                            "job": 9,
-                            "mac": 3,
-                            "model": 5,
-                            "name": 2
-                        },
-                        "renameByName": {}
-                    }
-                }
-            ],
-            "type": "table"
+            "title": "Port Usage",
+            "type": "bargauge"
         },
         {
             "datasource": {
@@ -1317,7 +1391,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 0,
-                "y": 4
+                "y": 8
             },
             "id": 5,
             "options": {
@@ -1441,7 +1515,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 2,
-                "y": 4
+                "y": 8
             },
             "id": 7,
             "options": {
@@ -1565,7 +1639,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 4,
-                "y": 4
+                "y": 8
             },
             "id": 9,
             "options": {
@@ -1689,7 +1763,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 6,
-                "y": 4
+                "y": 8
             },
             "id": 16,
             "options": {
@@ -1813,7 +1887,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 8,
-                "y": 4
+                "y": 8
             },
             "id": 17,
             "options": {
@@ -1937,7 +2011,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 10,
-                "y": 4
+                "y": 8
             },
             "id": 18,
             "options": {
@@ -2061,7 +2135,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 12,
-                "y": 4
+                "y": 8
             },
             "id": 19,
             "options": {
@@ -2185,7 +2259,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 14,
-                "y": 4
+                "y": 8
             },
             "id": 21,
             "options": {
@@ -2309,7 +2383,7 @@
                 "h": 4,
                 "w": 2,
                 "x": 16,
-                "y": 4
+                "y": 8
             },
             "id": 20,
             "options": {
@@ -2424,7 +2498,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 0,
-                "y": 8
+                "y": 12
             },
             "id": 23,
             "options": {
@@ -2506,7 +2580,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 3,
-                "y": 8
+                "y": 12
             },
             "id": 25,
             "options": {
@@ -2588,7 +2662,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 6,
-                "y": 8
+                "y": 12
             },
             "id": 26,
             "options": {
@@ -2670,7 +2744,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 9,
-                "y": 8
+                "y": 12
             },
             "id": 29,
             "options": {
@@ -2752,7 +2826,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 12,
-                "y": 8
+                "y": 12
             },
             "id": 31,
             "options": {
@@ -2834,7 +2908,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 15,
-                "y": 8
+                "y": 12
             },
             "id": 32,
             "options": {
@@ -2916,7 +2990,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 18,
-                "y": 8
+                "y": 12
             },
             "id": 33,
             "options": {
@@ -2998,7 +3072,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 21,
-                "y": 8
+                "y": 12
             },
             "id": 34,
             "options": {
@@ -3080,7 +3154,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 0,
-                "y": 14
+                "y": 18
             },
             "id": 24,
             "options": {
@@ -3162,7 +3236,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 3,
-                "y": 14
+                "y": 18
             },
             "id": 28,
             "options": {
@@ -3244,7 +3318,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 6,
-                "y": 14
+                "y": 18
             },
             "id": 27,
             "options": {
@@ -3326,7 +3400,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 9,
-                "y": 14
+                "y": 18
             },
             "id": 30,
             "options": {
@@ -3408,7 +3482,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 12,
-                "y": 14
+                "y": 18
             },
             "id": 35,
             "options": {
@@ -3490,7 +3564,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 15,
-                "y": 14
+                "y": 18
             },
             "id": 36,
             "options": {
@@ -3572,7 +3646,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 18,
-                "y": 14
+                "y": 18
             },
             "id": 38,
             "options": {
@@ -3654,7 +3728,7 @@
                 "h": 6,
                 "w": 3,
                 "x": 21,
-                "y": 14
+                "y": 18
             },
             "id": 37,
             "options": {
@@ -3736,7 +3810,7 @@
                 "h": 3,
                 "w": 12,
                 "x": 0,
-                "y": 20
+                "y": 24
             },
             "id": 40,
             "options": {
@@ -3818,7 +3892,7 @@
                 "h": 3,
                 "w": 12,
                 "x": 12,
-                "y": 20
+                "y": 24
             },
             "id": 39,
             "options": {
@@ -3924,7 +3998,7 @@
                 "h": 10,
                 "w": 24,
                 "x": 0,
-                "y": 23
+                "y": 27
             },
             "id": 2,
             "options": {
@@ -3983,6 +4057,174 @@
             ],
             "title": "Resource consumption",
             "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "name"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 73
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "ip"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 98
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "mac"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 157
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "model"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 120
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "firmwareVersion"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 232
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 14,
+                "x": 0,
+                "y": 37
+            },
+            "id": 22,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "exemplar": false,
+                    "expr": "device_info{deviceType=\"Switch\"}",
+                    "format": "table",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "A",
+                    "useBackend": false
+                }
+            ],
+            "title": "Devices",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true,
+                            "__name__": true,
+                            "instance": true,
+                            "job": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "Time": 0,
+                            "Value": 10,
+                            "__name__": 1,
+                            "deviceType": 7,
+                            "firmwareVersion": 6,
+                            "instance": 8,
+                            "ip": 4,
+                            "job": 9,
+                            "mac": 3,
+                            "model": 5,
+                            "name": 2
+                        },
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "table"
         }
     ],
     "schemaVersion": 39,
@@ -4008,6 +4250,6 @@
     "timezone": "browser",
     "title": "Switch",
     "uid": "advqgazfw4xs0c",
-    "version": 2,
+    "version": 3,
     "weekStart": ""
 }
