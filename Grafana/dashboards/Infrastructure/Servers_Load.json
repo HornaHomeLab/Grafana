@@ -18,7 +18,6 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 2,
     "links": [],
     "panels": [
         {
@@ -76,7 +75,8 @@
                                 "value": 80
                             }
                         ]
-                    }
+                    },
+                    "unit": "celsius"
                 },
                 "overrides": []
             },
@@ -89,9 +89,14 @@
             "id": 2,
             "options": {
                 "legend": {
-                    "calcs": [],
-                    "displayMode": "list",
-                    "placement": "bottom",
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
                     "showLegend": true
                 },
                 "tooltip": {
@@ -192,7 +197,8 @@
                                 "value": 80
                             }
                         ]
-                    }
+                    },
+                    "unit": "percent"
                 },
                 "overrides": []
             },
@@ -205,8 +211,13 @@
             "id": 1,
             "options": {
                 "legend": {
-                    "calcs": [],
-                    "displayMode": "list",
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
                     "placement": "bottom",
                     "showLegend": true
                 },
@@ -250,7 +261,7 @@
                     "useBackend": false
                 }
             ],
-            "title": "CPU Load %",
+            "title": "CPU Load",
             "type": "timeseries"
         },
         {
@@ -308,7 +319,8 @@
                                 "value": 80
                             }
                         ]
-                    }
+                    },
+                    "unit": "percent"
                 },
                 "overrides": []
             },
@@ -321,8 +333,13 @@
             "id": 3,
             "options": {
                 "legend": {
-                    "calcs": [],
-                    "displayMode": "list",
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
                     "placement": "bottom",
                     "showLegend": true
                 },
@@ -366,7 +383,7 @@
                     "useBackend": false
                 }
             ],
-            "title": "RAM Usage %",
+            "title": "RAM Usage",
             "type": "timeseries"
         },
         {
@@ -424,7 +441,8 @@
                                 "value": 80
                             }
                         ]
-                    }
+                    },
+                    "unit": "percent"
                 },
                 "overrides": []
             },
@@ -437,8 +455,13 @@
             "id": 4,
             "options": {
                 "legend": {
-                    "calcs": [],
-                    "displayMode": "list",
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
                     "placement": "bottom",
                     "showLegend": true
                 },
@@ -459,7 +482,7 @@
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
-                    "legendFormat": "{{job}}",
+                    "legendFormat": "Server-Core",
                     "range": true,
                     "refId": "Server-Core",
                     "useBackend": false
@@ -540,7 +563,8 @@
                                 "value": 80
                             }
                         ]
-                    }
+                    },
+                    "unit": "percent"
                 },
                 "overrides": []
             },
@@ -553,8 +577,13 @@
             "id": 5,
             "options": {
                 "legend": {
-                    "calcs": [],
-                    "displayMode": "list",
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
                     "placement": "bottom",
                     "showLegend": true
                 },
@@ -598,7 +627,7 @@
                     "useBackend": false
                 }
             ],
-            "title": "Network Load %",
+            "title": "Network Load ",
             "type": "timeseries"
         }
     ],
