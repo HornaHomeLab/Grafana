@@ -148,7 +148,7 @@
                         "uid": "PD650906C61C03078"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(radio_rx_sum[$increase_interval]) + increase(radio_tx_sum[$increase_interval])) /8",
+                    "expr": "sum(rate(radio_rx_sum[$increase_interval]) + rate(radio_tx_sum[$increase_interval])) /8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -548,7 +548,7 @@
                         "uid": "PD650906C61C03078"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(radio_rx_sum{frequency=\"5 GHz\"}[$increase_interval]) + increase(radio_tx_sum{frequency=\"5 GHz\"}[$increase_interval])) /8",
+                    "expr": "sum(rate(radio_rx_sum{frequency=\"5 GHz\"}[$increase_interval]) + rate(radio_tx_sum{frequency=\"5 GHz\"}[$increase_interval])) /8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -614,7 +614,7 @@
                         "uid": "PD650906C61C03078"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(radio_rx_sum{frequency=\"2.4 GHz\"}[$increase_interval]) + increase(radio_tx_sum{frequency=\"2.4 GHz\"}[$increase_interval]))/8",
+                    "expr": "sum(rate(radio_rx_sum{frequency=\"2.4 GHz\"}[$increase_interval]) + rate(radio_tx_sum{frequency=\"2.4 GHz\"}[$increase_interval]))/8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -715,7 +715,7 @@
                         "uid": "PD650906C61C03078"
                     },
                     "editorMode": "code",
-                    "expr": "increase(radio_tx_sum[$increase_interval])/8",
+                    "expr": "rate(radio_tx_sum[$increase_interval])/8",
                     "instant": false,
                     "legendFormat": "{{name}}-{{frequency}}",
                     "range": true,
@@ -816,7 +816,7 @@
                         "uid": "PD650906C61C03078"
                     },
                     "editorMode": "code",
-                    "expr": "increase(radio_rx_sum[$increase_interval]) /8",
+                    "expr": "rate(radio_rx_sum[$increase_interval]) /8",
                     "instant": false,
                     "legendFormat": "{{name}}-{{frequency}}",
                     "range": true,
@@ -1293,7 +1293,7 @@
                         "uid": "PD650906C61C03078"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(radio_rx_sum[$increase_interval]) + increase(radio_tx_sum[$increase_interval]))/8",
+                    "expr": "sum(rate(radio_rx_sum[$increase_interval]) + rate(radio_tx_sum[$increase_interval]))/8",
                     "instant": false,
                     "legendFormat": "Radio Throughput",
                     "range": true,
@@ -1327,6 +1327,6 @@
     "timezone": "browser",
     "title": "AccessPoint",
     "uid": "bdwa3qd4rwidce",
-    "version": 3,
+    "version": 4,
     "weekStart": ""
 }
