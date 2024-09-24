@@ -1,5 +1,5 @@
 INSERT INTO Actions(Name,Endpoint_url,Method)
-VALUES('SpeedTest','http://apps.Horna.local:8000/runOnDemand', 'Post');
+VALUES('SpeedTest','http://apps.Horna.local:8000/SpeedTest', 'Post');
 
 INSERT INTO Actions(Name,Endpoint_url,Method)
 VALUES('FundQuotation','http://apps.Horna.local:5500/FundQuotation', 'Put');
