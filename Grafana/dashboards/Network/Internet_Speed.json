@@ -362,7 +362,7 @@
                     "refId": "A"
                 }
             ],
-            "title": "Number of hops",
+            "title": "Number of Traceroute hops",
             "type": "timeseries"
         },
         {
