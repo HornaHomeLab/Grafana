@@ -23,72 +23,49 @@
     "panels": [
         {
             "datasource": {
-                "type": "grafana-postgresql-datasource",
-                "uid": "PDF83BE666DDDEFB8"
-            },
-            "gridPos": {
-                "h": 3,
-                "w": 24,
-                "x": 0,
-                "y": 0
-            },
-            "id": 10,
-            "options": {
-                "buttons": [
-                    {
-                        "datasource": {
-                            "type": "grafana-postgresql-datasource",
-                            "uid": "PDF83BE666DDDEFB8"
-                        },
-                        "query": "{\n  \"rawSql\": \"CALL run_speedtest();\",\n  \"format\": \"table\"\n}",
-                        "text": "Run SpeedTest"
-                    }
-                ],
-                "orientation": "vertical"
-            },
-            "title": "Controls",
-            "type": "speakyourcode-button-panel"
-        },
-        {
-            "datasource": {
-                "type": "grafana-postgresql-datasource",
-                "uid": "PDF83BE666DDDEFB8"
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
             },
             "fieldConfig": {
                 "defaults": {
                     "color": {
-                        "mode": "thresholds"
+                        "mode": "palette-classic"
                     },
-                    "decimals": 2,
-                    "mappings": [
-                        {
-                            "options": {
-                                "-10": {
-                                    "color": "dark-green",
-                                    "index": 0,
-                                    "text": "Success"
-                                },
-                                "-11": {
-                                    "color": "red",
-                                    "index": 1,
-                                    "text": "Failure"
-                                },
-                                "-12": {
-                                    "color": "orange",
-                                    "index": 2,
-                                    "text": "Processing"
-                                },
-                                "-13": {
-                                    "color": "yellow",
-                                    "index": 3,
-                                    "text": "No data"
-                                }
-                            },
-                            "type": "value"
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
                         }
-                    ],
-                    "max": 119,
-                    "min": 0,
+                    },
+                    "decimals": 1,
+                    "fieldMinMax": true,
+                    "mappings": [],
                     "thresholds": {
                         "mode": "absolute",
                         "steps": [
@@ -97,73 +74,60 @@
                                 "value": null
                             },
                             {
-                                "color": "yellow",
-                                "value": 100
+                                "color": "#EAB839",
+                                "value": 10
+                            },
+                            {
+                                "color": "red",
+                                "value": 20
                             }
                         ]
                     },
-                    "unit": "%"
+                    "unit": "percent"
                 },
                 "overrides": []
             },
             "gridPos": {
-                "h": 3,
+                "h": 4,
                 "w": 24,
                 "x": 0,
-                "y": 3
+                "y": 0
             },
-            "id": 11,
+            "id": 15,
             "options": {
-                "displayMode": "gradient",
-                "maxVizHeight": 300,
-                "minVizHeight": 16,
-                "minVizWidth": 8,
-                "namePlacement": "auto",
-                "orientation": "horizontal",
-                "reduceOptions": {
+                "legend": {
                     "calcs": [
-                        "lastNotNull"
+                        "min",
+                        "max",
+                        "mean",
+                        "last"
                     ],
-                    "fields": "",
-                    "values": false
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
                 },
-                "showUnfilled": true,
-                "sizing": "auto",
-                "valueMode": "color"
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
             },
             "pluginVersion": "11.1.4",
             "targets": [
                 {
                     "datasource": {
-                        "type": "grafana-postgresql-datasource",
-                        "uid": "PDF83BE666DDDEFB8"
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
                     },
                     "editorMode": "code",
-                    "format": "table",
-                    "rawQuery": true,
-                    "rawSql": "\nSELECT get_action_completion_status(get_action_id('SpeedTest'));",
-                    "refId": "A",
-                    "sql": {
-                        "columns": [
-                            {
-                                "parameters": [],
-                                "type": "function"
-                            }
-                        ],
-                        "groupBy": [
-                            {
-                                "property": {
-                                    "type": "string"
-                                },
-                                "type": "groupBy"
-                            }
-                        ],
-                        "limit": 50
-                    }
+                    "expr": "ping_loss",
+                    "instant": false,
+                    "legendFormat": "{{ip}}",
+                    "range": true,
+                    "refId": "A"
                 }
             ],
-            "title": "Completion status",
-            "type": "bargauge"
+            "title": "Ping packet loss",
+            "type": "timeseries"
         },
         {
             "datasource": {
@@ -229,7 +193,7 @@
                 "h": 9,
                 "w": 12,
                 "x": 0,
-                "y": 6
+                "y": 4
             },
             "id": 13,
             "options": {
@@ -329,7 +293,7 @@
                 "h": 9,
                 "w": 12,
                 "x": 12,
-                "y": 6
+                "y": 4
             },
             "id": 14,
             "options": {
@@ -399,7 +363,7 @@
                 "h": 8,
                 "w": 4,
                 "x": 0,
-                "y": 15
+                "y": 13
             },
             "id": 5,
             "options": {
@@ -477,7 +441,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 4,
-                "y": 15
+                "y": 13
             },
             "id": 4,
             "options": {
@@ -556,7 +520,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 9,
-                "y": 15
+                "y": 13
             },
             "id": 1,
             "options": {
@@ -636,7 +600,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 14,
-                "y": 15
+                "y": 13
             },
             "id": 2,
             "options": {
@@ -716,7 +680,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 19,
-                "y": 15
+                "y": 13
             },
             "id": 3,
             "options": {
@@ -756,6 +720,150 @@
             ],
             "title": "Upload Speed",
             "type": "gauge"
+        },
+        {
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "PDF83BE666DDDEFB8"
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 24,
+                "x": 0,
+                "y": 21
+            },
+            "id": 10,
+            "options": {
+                "buttons": [
+                    {
+                        "datasource": {
+                            "type": "grafana-postgresql-datasource",
+                            "uid": "PDF83BE666DDDEFB8"
+                        },
+                        "query": "{\n  \"rawSql\": \"CALL run_speedtest();\",\n  \"format\": \"table\"\n}",
+                        "text": "Run SpeedTest"
+                    }
+                ],
+                "orientation": "vertical"
+            },
+            "title": "Controls",
+            "type": "speakyourcode-button-panel"
+        },
+        {
+            "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "PDF83BE666DDDEFB8"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "decimals": 2,
+                    "mappings": [
+                        {
+                            "options": {
+                                "-10": {
+                                    "color": "dark-green",
+                                    "index": 0,
+                                    "text": "Success"
+                                },
+                                "-11": {
+                                    "color": "red",
+                                    "index": 1,
+                                    "text": "Failure"
+                                },
+                                "-12": {
+                                    "color": "orange",
+                                    "index": 2,
+                                    "text": "Processing"
+                                },
+                                "-13": {
+                                    "color": "yellow",
+                                    "index": 3,
+                                    "text": "No data"
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "max": 119,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 100
+                            }
+                        ]
+                    },
+                    "unit": "%"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 24,
+                "x": 0,
+                "y": 24
+            },
+            "id": 11,
+            "options": {
+                "displayMode": "gradient",
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "grafana-postgresql-datasource",
+                        "uid": "PDF83BE666DDDEFB8"
+                    },
+                    "editorMode": "code",
+                    "format": "table",
+                    "rawQuery": true,
+                    "rawSql": "\nSELECT get_action_completion_status(get_action_id('SpeedTest'));",
+                    "refId": "A",
+                    "sql": {
+                        "columns": [
+                            {
+                                "parameters": [],
+                                "type": "function"
+                            }
+                        ],
+                        "groupBy": [
+                            {
+                                "property": {
+                                    "type": "string"
+                                },
+                                "type": "groupBy"
+                            }
+                        ],
+                        "limit": 50
+                    }
+                }
+            ],
+            "title": "Completion status",
+            "type": "bargauge"
         },
         {
             "datasource": {
@@ -819,7 +927,7 @@
                 "h": 8,
                 "w": 24,
                 "x": 0,
-                "y": 23
+                "y": 27
             },
             "id": 8,
             "options": {
@@ -919,7 +1027,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 31
+                "y": 35
             },
             "id": 6,
             "options": {
@@ -1036,7 +1144,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 31
+                "y": 35
             },
             "id": 7,
             "options": {
@@ -1175,7 +1283,7 @@
                 "h": 8,
                 "w": 24,
                 "x": 0,
-                "y": 39
+                "y": 43
             },
             "id": 12,
             "options": {
@@ -1246,6 +1354,138 @@
                 }
             ],
             "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "url"
+                        },
+                        "properties": []
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Time (first)"
+                        },
+                        "properties": []
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Time (lastNotNull)"
+                        },
+                        "properties": []
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 15,
+                "w": 24,
+                "x": 0,
+                "y": 51
+            },
+            "id": 17,
+            "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": true,
+                "showTime": true,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "editorMode": "code",
+                    "expr": "count by (url) (result_details_info)\n  * on() group_left(country, host, ip, location, name, port) server_details_info",
+                    "format": "table",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "SpeedTests Details",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Value": true,
+                            "url": false
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "Time": 0,
+                            "Value": 8,
+                            "country": 6,
+                            "host": 1,
+                            "ip": 2,
+                            "location": 5,
+                            "name": 4,
+                            "port": 3,
+                            "url": 7
+                        },
+                        "renameByName": {}
+                    }
+                },
+                {
+                    "id": "groupBy",
+                    "options": {
+                        "fields": {
+                            "Time": {
+                                "aggregations": [
+                                    "first"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "country": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "host": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "ip": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "location": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "name": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "port": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "url": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            }
+                        }
+                    }
+                }
+            ],
+            "type": "logs"
         }
     ],
     "refresh": "30s",
@@ -1255,7 +1495,7 @@
         "list": []
     },
     "time": {
-        "from": "now-3h",
+        "from": "now-6h",
         "to": "now"
     },
     "timepicker": {},
