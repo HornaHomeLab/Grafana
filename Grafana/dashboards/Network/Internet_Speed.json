@@ -1252,19 +1252,7 @@
     "schemaVersion": 39,
     "tags": [],
     "templating": {
-        "list": [
-            {
-                "datasource": {
-                    "type": "prometheus",
-                    "uid": "PD650906C61C03078"
-                },
-                "filters": [],
-                "hide": 0,
-                "name": "Filters",
-                "skipUrlSync": false,
-                "type": "adhoc"
-            }
-        ]
+        "list": []
     },
     "time": {
         "from": "now-3h",
