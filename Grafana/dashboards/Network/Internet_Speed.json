@@ -173,6 +173,206 @@
             "fieldConfig": {
                 "defaults": {
                     "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "ms"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 12,
+                "x": 0,
+                "y": 6
+            },
+            "id": 13,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "last"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "editorMode": "code",
+                    "expr": "ping_avg_latency",
+                    "instant": false,
+                    "legendFormat": "{{ip}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Average Ping latency",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 12,
+                "x": 12,
+                "y": 6
+            },
+            "id": 14,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "last"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "editorMode": "code",
+                    "expr": "tracert_hops_count",
+                    "instant": false,
+                    "legendFormat": "{{ip}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Number of hops",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
                         "mode": "thresholds"
                     },
                     "decimals": 1,
@@ -199,7 +399,7 @@
                 "h": 8,
                 "w": 4,
                 "x": 0,
-                "y": 6
+                "y": 15
             },
             "id": 5,
             "options": {
@@ -277,7 +477,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 4,
-                "y": 6
+                "y": 15
             },
             "id": 4,
             "options": {
@@ -356,7 +556,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 9,
-                "y": 6
+                "y": 15
             },
             "id": 1,
             "options": {
@@ -436,7 +636,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 14,
-                "y": 6
+                "y": 15
             },
             "id": 2,
             "options": {
@@ -516,7 +716,7 @@
                 "h": 8,
                 "w": 5,
                 "x": 19,
-                "y": 6
+                "y": 15
             },
             "id": 3,
             "options": {
@@ -619,7 +819,7 @@
                 "h": 8,
                 "w": 24,
                 "x": 0,
-                "y": 14
+                "y": 23
             },
             "id": 8,
             "options": {
@@ -702,7 +902,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -718,7 +919,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 22
+                "y": 31
             },
             "id": 6,
             "options": {
@@ -818,7 +1019,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -834,7 +1036,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 22
+                "y": 31
             },
             "id": 7,
             "options": {
@@ -886,22 +1088,192 @@
             ],
             "title": "Transfer Latency",
             "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "PD650906C61C03078"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "filterable": false,
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "url"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 574
+                            },
+                            {
+                                "id": "links",
+                                "value": [
+                                    {
+                                        "targetBlank": true,
+                                        "title": "${__value.raw}",
+                                        "url": "${__value.raw}"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Time (first)"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Start time"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Time (lastNotNull)"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "End time"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 24,
+                "x": 0,
+                "y": 39
+            },
+            "id": 12,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "End time"
+                    }
+                ]
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "editorMode": "code",
+                    "expr": "count by (url) (result_details_info)",
+                    "format": "table",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "SpeedTests",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Value": true,
+                            "url": false
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {}
+                    }
+                },
+                {
+                    "id": "groupBy",
+                    "options": {
+                        "fields": {
+                            "Time": {
+                                "aggregations": [
+                                    "first",
+                                    "lastNotNull"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "url": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            }
+                        }
+                    }
+                }
+            ],
+            "type": "table"
         }
     ],
-    "refresh": "5s",
+    "refresh": "30s",
     "schemaVersion": 39,
     "tags": [],
     "templating": {
-        "list": []
+        "list": [
+            {
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "PD650906C61C03078"
+                },
+                "filters": [],
+                "hide": 0,
+                "name": "Filters",
+                "skipUrlSync": false,
+                "type": "adhoc"
+            }
+        ]
     },
     "time": {
-        "from": "now-12h",
+        "from": "now-3h",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
     "title": "Internet Speed",
     "uid": "cdt7wsc634lc0b",
-    "version": 2,
+    "version": 3,
     "weekStart": ""
 }
