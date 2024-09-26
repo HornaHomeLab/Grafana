@@ -1417,16 +1417,68 @@
                     "legendFormat": "__auto",
                     "range": true,
                     "refId": "A"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "editorMode": "code",
+                    "expr": "download_bandwidth / 1000000",
+                    "format": "table",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "Download_speed"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "editorMode": "code",
+                    "expr": "upload_bandwidth / 1000000",
+                    "format": "table",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "upload_speed"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "PD650906C61C03078"
+                    },
+                    "editorMode": "code",
+                    "expr": "ping_no_workload_latency",
+                    "format": "table",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "Ping"
                 }
             ],
             "title": "SpeedTests Details",
             "transformations": [
                 {
+                    "id": "joinByField",
+                    "options": {
+                        "byField": "Time",
+                        "mode": "outer"
+                    }
+                },
+                {
                     "id": "organize",
                     "options": {
                         "excludeByName": {
                             "Value": true,
-                            "url": false
+                            "Value #B": false,
+                            "Value 2": false,
+                            "url": false,
+                            "{instance=\"Apps.Horna.local:8000\", job=\"SpeedTest\"}": false
                         },
                         "includeByName": {},
                         "indexByName": {
@@ -1440,7 +1492,12 @@
                             "port": 3,
                             "url": 7
                         },
-                        "renameByName": {}
+                        "renameByName": {
+                            "Value #B": "download_bandwidth",
+                            "Value #Download_speed": "download_bandwidth",
+                            "Value #Ping": "ping_latency",
+                            "Value #upload_speed": "upload_bandwidth"
+                        }
                     }
                 },
                 {
@@ -1453,7 +1510,19 @@
                                 ],
                                 "operation": "aggregate"
                             },
+                            "Value": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "Value #B": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
                             "country": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "download_bandwidth": {
                                 "aggregations": [],
                                 "operation": "groupby"
                             },
@@ -1473,7 +1542,15 @@
                                 "aggregations": [],
                                 "operation": "groupby"
                             },
+                            "ping_latency": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
                             "port": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "upload_bandwidth": {
                                 "aggregations": [],
                                 "operation": "groupby"
                             },
@@ -1502,6 +1579,6 @@
     "timezone": "browser",
     "title": "Internet Speed",
     "uid": "cdt7wsc634lc0b",
-    "version": 3,
+    "version": 4,
     "weekStart": ""
 }
