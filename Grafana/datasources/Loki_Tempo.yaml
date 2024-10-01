@@ -12,9 +12,9 @@ datasources:
         - datasourceUid: bdzfk1jvx3cowe
           matcherRegex: '"trace_id"\s*:\s*"([a-f0-9]{32})"'
           name: trace_id
-          url: '${__value.raw}'
+          url: '$${__value.raw}'
           
         - datasourceUid: bdzfk1jvx3cowe
           matcherRegex: '"span_id"\s*:\s*"([a-f0-9]{16})"'
           name: span_id
-          url: '${__value.raw}'
+          url: '$${__value.raw}'
