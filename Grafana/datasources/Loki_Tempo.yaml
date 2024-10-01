@@ -7,14 +7,14 @@ datasources:
     uid: ddzk98lamkwlcf
     url: http://dockerserver.horna.local:3111
     jsonData:
-    derivedFields:
-    - datasourceUid: bdzfk1jvx3cowe
-      matcherRegex: '"trace_id"\s*:\s*"([a-f0-9]{32})"'
-      name: trace_id
-      internalLink: true
-      url: ${__value.raw}
-    - datasourceUid: bdzfk1jvx3cowe
-      matcherRegex: '"span_id"\s*:\s*"([a-f0-9]{16})"'
-      name: span_id
-      internalLink: true
-      url: ${__value.raw}
+      maxLines: 1000
+      derivedFields:
+        - datasourceUid: bdzfk1jvx3cowe
+          matcherRegex: '"trace_id"\s*:\s*"([a-f0-9]{32})"'
+          name: trace_id
+          url: '${__value.raw}'
+          
+        - datasourceUid: bdzfk1jvx3cowe
+          matcherRegex: '"span_id"\s*:\s*"([a-f0-9]{16})"'
+          name: span_id
+          url: '${__value.raw}'
