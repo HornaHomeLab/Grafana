@@ -1,2 +1,2 @@
 # Grafana
-##### version: 1.1.7
+##### version: 2.0.0
