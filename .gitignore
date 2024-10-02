@@ -1,3 +1,4 @@
 APP_DATA
 APP_LOG
 .DS_Store
+/Grafana/datasources/.env
