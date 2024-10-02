@@ -5,7 +5,7 @@ datasources:
     type: loki
     access: proxy
     uid: ddzk98lamkwlcf
-    url: http://dockerserver.horna.local:3111
+    url: http://$SELF_HOSTNAME:3111
     jsonData:
       maxLines: 100
       derivedFields:

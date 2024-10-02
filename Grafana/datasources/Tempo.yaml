@@ -5,7 +5,7 @@ datasources:
     type: tempo
     uid: bdzfk1jvx3cowe
     access: proxy
-    url: http://$SELF_HOSTNAME.horna.local:3200
+    url: http://$SELF_HOSTNAME:3200
     isDefault: false
     version: 1
     editable: false
