@@ -5,7 +5,7 @@ datasources:
     type: prometheus
     access: proxy
     uid: adzk9jmof241se
-    url: http://$SELF_HOSTNAME:$T_PROMETHEUS_PORT
+    url: http://$SELF_HOSTNAME.horna.local:$T_PROMETHEUS_PORT
     jsonData:
       httpMethod: POST
       manageAlerts: true
