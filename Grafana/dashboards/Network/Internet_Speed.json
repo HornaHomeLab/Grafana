@@ -390,7 +390,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "builder",
-                    "expr": "packet_loss * 100",
+                    "expr": "packet_loss",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -950,7 +950,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "builder",
-                    "expr": "packet_loss{job=\"SpeedTest\"} * 100",
+                    "expr": "packet_loss{job=\"SpeedTest\"}",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -1579,6 +1579,6 @@
     "timezone": "browser",
     "title": "Internet Speed",
     "uid": "cdt7wsc634lc0b",
-    "version": 4,
+    "version": 1,
     "weekStart": ""
 }
