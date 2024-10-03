@@ -1,0 +1,1398 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 20,
+    "links": [],
+    "panels": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "adzk9jmof241se"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percentunit"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 0
+            },
+            "id": 7,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": false
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "adzk9jmof241se"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(process_cpu_seconds_total{job=\"$service_name\"}[5m])",
+                    "instant": false,
+                    "legendFormat": "value",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "CPU time",
+            "transparent": true,
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "adzk9jmof241se"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 0
+            },
+            "id": 8,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": false
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "adzk9jmof241se"
+                    },
+                    "editorMode": "code",
+                    "expr": "process_resident_memory_bytes{job=\"$service_name\"}",
+                    "instant": false,
+                    "legendFormat": "{{job}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Memory Usage",
+            "transparent": true,
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "adzk9jmof241se"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "normal"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 12,
+                "x": 0,
+                "y": 8
+            },
+            "id": 5,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "adzk9jmof241se"
+                    },
+                    "editorMode": "code",
+                    "expr": "increase(http_requests_total{job=\"$service_name\"}[$interval])",
+                    "format": "time_series",
+                    "instant": false,
+                    "legendFormat": "{{handler}} {{status}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Request count $interval",
+            "transparent": true,
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "adzk9jmof241se"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "s"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 12,
+                "x": 12,
+                "y": 8
+            },
+            "id": 6,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "adzk9jmof241se"
+                    },
+                    "editorMode": "code",
+                    "expr": "(http_request_duration_seconds_sum{job=\"$service_name\"} / http_request_duration_seconds_count{job=\"$service_name\"}) \n",
+                    "instant": false,
+                    "legendFormat": "{{method}} {{handler}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Request duration",
+            "transparent": true,
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "tempo",
+                "uid": "bdzfk1jvx3cowe"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 500000000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "percentage",
+                        "steps": [
+                            {
+                                "color": "purple",
+                                "value": null
+                            },
+                            {
+                                "color": "blue",
+                                "value": 10
+                            },
+                            {
+                                "color": "green",
+                                "value": 20
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 50
+                            },
+                            {
+                                "color": "orange",
+                                "value": 75
+                            },
+                            {
+                                "color": "red",
+                                "value": 85
+                            }
+                        ]
+                    },
+                    "unit": "ns"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 0,
+                "y": 17
+            },
+            "id": 16,
+            "options": {
+                "displayMode": "basic",
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "top",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [],
+                    "fields": "/^duration \\(mean\\)$/",
+                    "values": true
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "tempo",
+                        "uid": "bdzfk1jvx3cowe"
+                    },
+                    "filters": [
+                        {
+                            "id": "65b5c2da",
+                            "operator": "=",
+                            "scope": "span"
+                        },
+                        {
+                            "id": "service-name",
+                            "operator": "=",
+                            "scope": "resource",
+                            "tag": "service.name",
+                            "value": [
+                                "$service_name"
+                            ],
+                            "valueType": "string"
+                        },
+                        {
+                            "id": "span-name",
+                            "operator": "=",
+                            "scope": "span",
+                            "tag": "name",
+                            "value": [],
+                            "valueType": "string"
+                        },
+                        {
+                            "id": "status",
+                            "operator": "=",
+                            "scope": "intrinsic",
+                            "tag": "status",
+                            "valueType": "keyword"
+                        }
+                    ],
+                    "limit": 20,
+                    "query": "{resource.service.name=\"$service_name\" && name=~\" /*\"}",
+                    "queryType": "traceql",
+                    "refId": "A",
+                    "tableType": "spans"
+                }
+            ],
+            "transformations": [
+                {
+                    "id": "groupBy",
+                    "options": {
+                        "fields": {
+                            "Duration": {
+                                "aggregations": [
+                                    "lastNotNull"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Name": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "Trace Name": {
+                                "aggregations": []
+                            },
+                            "Trace Service": {
+                                "aggregations": []
+                            },
+                            "duration": {
+                                "aggregations": [
+                                    "mean"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "name": {
+                                "aggregations": []
+                            },
+                            "traceName": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            }
+                        }
+                    }
+                }
+            ],
+            "transparent": true,
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "tempo",
+                "uid": "bdzfk1jvx3cowe"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 25000000000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "percentage",
+                        "steps": [
+                            {
+                                "color": "purple",
+                                "value": null
+                            },
+                            {
+                                "color": "blue",
+                                "value": 10
+                            },
+                            {
+                                "color": "green",
+                                "value": 20
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 50
+                            },
+                            {
+                                "color": "orange",
+                                "value": 75
+                            },
+                            {
+                                "color": "red",
+                                "value": 85
+                            }
+                        ]
+                    },
+                    "unit": "ns"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 4,
+                "y": 17
+            },
+            "id": 13,
+            "options": {
+                "displayMode": "basic",
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "top",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [],
+                    "fields": "/^duration \\(mean\\)$/",
+                    "values": true
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "tempo",
+                        "uid": "bdzfk1jvx3cowe"
+                    },
+                    "filters": [
+                        {
+                            "id": "65b5c2da",
+                            "operator": "=",
+                            "scope": "span"
+                        },
+                        {
+                            "id": "service-name",
+                            "operator": "=",
+                            "scope": "resource",
+                            "tag": "service.name",
+                            "value": [
+                                "$service_name"
+                            ],
+                            "valueType": "string"
+                        },
+                        {
+                            "id": "span-name",
+                            "operator": "=",
+                            "scope": "span",
+                            "tag": "name",
+                            "value": [
+                                "perform"
+                            ]
+                        },
+                        {
+                            "id": "status",
+                            "operator": "=",
+                            "scope": "intrinsic",
+                            "tag": "status",
+                            "valueType": "keyword"
+                        }
+                    ],
+                    "limit": 20,
+                    "query": "{resource.service.name=\"$service_name\" && name=~\"perform\"}",
+                    "queryType": "traceql",
+                    "refId": "A",
+                    "tableType": "spans"
+                }
+            ],
+            "transformations": [
+                {
+                    "id": "groupBy",
+                    "options": {
+                        "fields": {
+                            "Duration": {
+                                "aggregations": [
+                                    "lastNotNull"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Name": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "Trace Name": {
+                                "aggregations": []
+                            },
+                            "Trace Service": {
+                                "aggregations": []
+                            },
+                            "duration": {
+                                "aggregations": [
+                                    "mean"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "name": {
+                                "aggregations": []
+                            },
+                            "traceName": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            }
+                        }
+                    }
+                }
+            ],
+            "transparent": true,
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "tempo",
+                "uid": "bdzfk1jvx3cowe"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 25000000000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "percentage",
+                        "steps": [
+                            {
+                                "color": "purple",
+                                "value": null
+                            },
+                            {
+                                "color": "blue",
+                                "value": 10
+                            },
+                            {
+                                "color": "green",
+                                "value": 20
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 50
+                            },
+                            {
+                                "color": "orange",
+                                "value": 75
+                            },
+                            {
+                                "color": "red",
+                                "value": 85
+                            }
+                        ]
+                    },
+                    "unit": "ns"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 6,
+                "x": 8,
+                "y": 17
+            },
+            "id": 1,
+            "options": {
+                "displayMode": "basic",
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "top",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [],
+                    "fields": "/^duration \\(mean\\)$/",
+                    "values": true
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "tempo",
+                        "uid": "bdzfk1jvx3cowe"
+                    },
+                    "filters": [
+                        {
+                            "id": "65b5c2da",
+                            "operator": "=",
+                            "scope": "span"
+                        },
+                        {
+                            "id": "service-name",
+                            "operator": "=",
+                            "scope": "resource",
+                            "tag": "service.name",
+                            "value": [
+                                "$service_name"
+                            ],
+                            "valueType": "string"
+                        },
+                        {
+                            "id": "span-name",
+                            "operator": "=~",
+                            "scope": "span",
+                            "tag": "name",
+                            "value": [
+                                "PrometheusMetrics"
+                            ]
+                        },
+                        {
+                            "id": "status",
+                            "operator": "=",
+                            "scope": "intrinsic",
+                            "tag": "status",
+                            "valueType": "keyword"
+                        }
+                    ],
+                    "limit": 20,
+                    "query": "{resource.service.name=\"$service_name\" && name=\"TraceRoute.run\"}",
+                    "queryType": "traceql",
+                    "refId": "A",
+                    "tableType": "spans"
+                }
+            ],
+            "title": "TraceRoute duration",
+            "transformations": [
+                {
+                    "id": "groupBy",
+                    "options": {
+                        "fields": {
+                            "Duration": {
+                                "aggregations": [
+                                    "lastNotNull"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Name": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "Trace Name": {
+                                "aggregations": []
+                            },
+                            "Trace Service": {
+                                "aggregations": []
+                            },
+                            "duration": {
+                                "aggregations": [
+                                    "mean"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "name": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            }
+                        }
+                    }
+                }
+            ],
+            "transparent": true,
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "tempo",
+                "uid": "bdzfk1jvx3cowe"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 25000000000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "percentage",
+                        "steps": [
+                            {
+                                "color": "purple",
+                                "value": null
+                            },
+                            {
+                                "color": "blue",
+                                "value": 10
+                            },
+                            {
+                                "color": "green",
+                                "value": 20
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 50
+                            },
+                            {
+                                "color": "orange",
+                                "value": 75
+                            },
+                            {
+                                "color": "red",
+                                "value": 85
+                            }
+                        ]
+                    },
+                    "unit": "ns"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 5,
+                "x": 14,
+                "y": 17
+            },
+            "id": 10,
+            "options": {
+                "displayMode": "basic",
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "top",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [],
+                    "fields": "/^duration \\(mean\\)$/",
+                    "values": true
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "tempo",
+                        "uid": "bdzfk1jvx3cowe"
+                    },
+                    "filters": [
+                        {
+                            "id": "65b5c2da",
+                            "operator": "=",
+                            "scope": "span"
+                        },
+                        {
+                            "id": "service-name",
+                            "operator": "=",
+                            "scope": "resource",
+                            "tag": "service.name",
+                            "value": [
+                                "Omada_Exporter"
+                            ],
+                            "valueType": "string"
+                        },
+                        {
+                            "id": "span-name",
+                            "operator": "=~",
+                            "scope": "span",
+                            "tag": "name",
+                            "value": [
+                                "Prometheus.*"
+                            ],
+                            "valueType": "string"
+                        },
+                        {
+                            "id": "status",
+                            "operator": "=",
+                            "scope": "intrinsic",
+                            "tag": "status",
+                            "valueType": "keyword"
+                        }
+                    ],
+                    "limit": 20,
+                    "query": "{resource.service.name=\"$service_name\" && name=\"Ping.run\"}",
+                    "queryType": "traceql",
+                    "refId": "A",
+                    "tableType": "spans"
+                }
+            ],
+            "title": "Ping duration",
+            "transformations": [
+                {
+                    "id": "groupBy",
+                    "options": {
+                        "fields": {
+                            "Duration": {
+                                "aggregations": [
+                                    "lastNotNull"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Name": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "Trace Name": {
+                                "aggregations": []
+                            },
+                            "Trace Service": {
+                                "aggregations": []
+                            },
+                            "duration": {
+                                "aggregations": [
+                                    "mean"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "name": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            }
+                        }
+                    }
+                }
+            ],
+            "transparent": true,
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "tempo",
+                "uid": "bdzfk1jvx3cowe"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 25000000000,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "percentage",
+                        "steps": [
+                            {
+                                "color": "purple",
+                                "value": null
+                            },
+                            {
+                                "color": "blue",
+                                "value": 10
+                            },
+                            {
+                                "color": "green",
+                                "value": 20
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 50
+                            },
+                            {
+                                "color": "orange",
+                                "value": 75
+                            },
+                            {
+                                "color": "red",
+                                "value": 85
+                            }
+                        ]
+                    },
+                    "unit": "ns"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 5,
+                "x": 19,
+                "y": 17
+            },
+            "id": 12,
+            "options": {
+                "displayMode": "basic",
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "top",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [],
+                    "fields": "/^duration \\(mean\\)$/",
+                    "values": true
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "tempo",
+                        "uid": "bdzfk1jvx3cowe"
+                    },
+                    "filters": [
+                        {
+                            "id": "65b5c2da",
+                            "operator": "=",
+                            "scope": "span"
+                        },
+                        {
+                            "id": "service-name",
+                            "operator": "=",
+                            "scope": "resource",
+                            "tag": "service.name",
+                            "value": [
+                                "Omada_Exporter"
+                            ],
+                            "valueType": "string"
+                        },
+                        {
+                            "id": "span-name",
+                            "operator": "=~",
+                            "scope": "span",
+                            "tag": "name",
+                            "value": [
+                                "Prometheus.*"
+                            ],
+                            "valueType": "string"
+                        },
+                        {
+                            "id": "status",
+                            "operator": "=",
+                            "scope": "intrinsic",
+                            "tag": "status",
+                            "valueType": "keyword"
+                        }
+                    ],
+                    "limit": 20,
+                    "query": "{resource.service.name=\"$service_name\" && name=\"SpeedTest.perform_speed_test\"}",
+                    "queryType": "traceql",
+                    "refId": "A",
+                    "tableType": "spans"
+                }
+            ],
+            "title": "SpeedTest by Ookla duration",
+            "transformations": [
+                {
+                    "id": "groupBy",
+                    "options": {
+                        "fields": {
+                            "Duration": {
+                                "aggregations": [
+                                    "lastNotNull"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "Name": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            },
+                            "Trace Name": {
+                                "aggregations": []
+                            },
+                            "Trace Service": {
+                                "aggregations": []
+                            },
+                            "duration": {
+                                "aggregations": [
+                                    "mean"
+                                ],
+                                "operation": "aggregate"
+                            },
+                            "name": {
+                                "aggregations": [],
+                                "operation": "groupby"
+                            }
+                        }
+                    }
+                }
+            ],
+            "transparent": true,
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "tempo",
+                "uid": "bdzfk1jvx3cowe"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto",
+                            "wrapText": false
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Name"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 201
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Trace ID"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 351
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 21,
+                "w": 10,
+                "x": 0,
+                "y": 22
+            },
+            "id": 14,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "tempo",
+                        "uid": "bdzfk1jvx3cowe"
+                    },
+                    "filters": [
+                        {
+                            "id": "26d815b2",
+                            "operator": "=",
+                            "scope": "span"
+                        }
+                    ],
+                    "limit": 20,
+                    "query": "{resource.service.name=\"Omada_Exporter\"}",
+                    "queryType": "traceql",
+                    "refId": "A",
+                    "spss": 50,
+                    "tableType": "traces"
+                }
+            ],
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Service": true,
+                            "Trace Service": true,
+                            "nested": true,
+                            "service.name": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "Duration": 3,
+                            "Name": 1,
+                            "Service": 4,
+                            "Start time": 0,
+                            "Trace ID": 2,
+                            "nested": 5
+                        },
+                        "renameByName": {}
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "ddzk98lamkwlcf"
+            },
+            "gridPos": {
+                "h": 21,
+                "w": 14,
+                "x": 10,
+                "y": 22
+            },
+            "id": 15,
+            "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "ddzk98lamkwlcf"
+                    },
+                    "editorMode": "builder",
+                    "expr": "{service_name=\"$service_name\"} | json message=\"message\", function=\"function\", module=\"module\", level=\"level\"",
+                    "legendFormat": "",
+                    "queryType": "range",
+                    "refId": "A"
+                }
+            ],
+            "type": "logs"
+        }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "hide": 2,
+                "name": "interval",
+                "query": "5m",
+                "skipUrlSync": false,
+                "type": "constant"
+            },
+            {
+                "hide": 2,
+                "name": "service_name",
+                "query": "SpeedTest_Exporter",
+                "skipUrlSync": false,
+                "type": "constant"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-1h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "SpeedTest_Exporter Performance",
+    "uid": "adzs2smz5qf40e",
+    "version": 1,
+    "weekStart": ""
+}
