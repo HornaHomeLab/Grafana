@@ -18,7 +18,6 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 14,
     "links": [],
     "panels": [
         {
@@ -1289,7 +1288,7 @@
                         }
                     ],
                     "limit": 20,
-                    "query": "{resource.service.name=\"Omada_Exporter\"}",
+                    "query": "{resource.service.name=\"$service_name\"}",
                     "queryType": "traceql",
                     "refId": "A",
                     "spss": 50,
