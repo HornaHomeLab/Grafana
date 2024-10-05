@@ -1,0 +1,327 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 22,
+    "links": [],
+    "panels": [
+        {
+            "datasource": {
+                "type": "tempo",
+                "uid": "bdzfk1jvx3cowe"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Service"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 156
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Trace ID"
+                        },
+                        "properties": [
+                            {
+                                "id": "links"
+                            },
+                            {
+                                "id": "custom.width",
+                                "value": 286
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 12,
+                "x": 0,
+                "y": 0
+            },
+            "id": 4,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": false,
+                        "displayName": "Start time"
+                    }
+                ]
+            },
+            "pluginVersion": "11.1.4",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "tempo",
+                        "uid": "bdzfk1jvx3cowe"
+                    },
+                    "filters": [
+                        {
+                            "id": "a6ce7b04",
+                            "operator": "=",
+                            "scope": "span"
+                        },
+                        {
+                            "id": "service-name",
+                            "operator": "=",
+                            "scope": "resource",
+                            "tag": "service.name",
+                            "value": [
+                                "$Service_name"
+                            ],
+                            "valueType": "string"
+                        }
+                    ],
+                    "limit": 20,
+                    "queryType": "traceqlSearch",
+                    "refId": "A",
+                    "tableType": "traces"
+                }
+            ],
+            "title": "Panel Title",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "nested": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "Duration": 4,
+                            "Name": 3,
+                            "Service": 1,
+                            "Start time": 2,
+                            "Trace ID": 0,
+                            "nested": 5
+                        },
+                        "renameByName": {
+                            "Trace ID": ""
+                        }
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "loki",
+                "uid": "ddzk98lamkwlcf"
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 12,
+                "x": 12,
+                "y": 0
+            },
+            "id": 3,
+            "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "loki",
+                        "uid": "ddzk98lamkwlcf"
+                    },
+                    "editorMode": "code",
+                    "expr": "{service_name=\"$Service_name\"} |=\"$Trace_ID\"",
+                    "queryType": "range",
+                    "refId": "A"
+                }
+            ],
+            "type": "logs"
+        },
+        {
+            "datasource": {
+                "type": "tempo",
+                "uid": "bdzfk1jvx3cowe"
+            },
+            "gridPos": {
+                "h": 31,
+                "w": 12,
+                "x": 0,
+                "y": 11
+            },
+            "id": 1,
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "tempo",
+                        "uid": "bdzfk1jvx3cowe"
+                    },
+                    "limit": 20,
+                    "query": "$Trace_ID",
+                    "queryType": "traceql",
+                    "refId": "A",
+                    "tableType": "traces"
+                }
+            ],
+            "type": "traces"
+        },
+        {
+            "datasource": {
+                "type": "tempo",
+                "uid": "bdzfk1jvx3cowe"
+            },
+            "gridPos": {
+                "h": 31,
+                "w": 12,
+                "x": 12,
+                "y": 11
+            },
+            "id": 2,
+            "options": {
+                "edges": {},
+                "nodes": {
+                    "arcs": []
+                }
+            },
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "tempo",
+                        "uid": "bdzfk1jvx3cowe"
+                    },
+                    "limit": 20,
+                    "query": "$Trace_ID",
+                    "queryType": "traceql",
+                    "refId": "A",
+                    "tableType": "traces"
+                }
+            ],
+            "type": "nodeGraph"
+        }
+    ],
+    "refresh": "",
+    "schemaVersion": 39,
+    "tags": [],
+    "templating": {
+        "list": [
+            {
+                "allValue": "",
+                "current": {
+                    "selected": false,
+                    "text": "All",
+                    "value": "$__all"
+                },
+                "datasource": {
+                    "type": "tempo",
+                    "uid": "bdzfk1jvx3cowe"
+                },
+                "definition": "",
+                "hide": 0,
+                "includeAll": true,
+                "multi": false,
+                "name": "Service_name",
+                "options": [],
+                "query": {
+                    "label": "service.name",
+                    "refId": "TempoDatasourceVariableQueryEditor-VariableQuery",
+                    "type": 1
+                },
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
+            },
+            {
+                "current": {
+                    "selected": false,
+                    "text": "",
+                    "value": ""
+                },
+                "hide": 0,
+                "name": "Trace_ID",
+                "options": [
+                    {
+                        "selected": true,
+                        "text": "",
+                        "value": ""
+                    }
+                ],
+                "query": "",
+                "skipUrlSync": false,
+                "type": "textbox"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-30m",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Trace Explorer",
+    "uid": "fdzuyabc5j400f",
+    "version": 1,
+    "weekStart": ""
+}
