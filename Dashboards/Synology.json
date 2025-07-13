@@ -1,0 +1,4868 @@
+{
+    "annotations": {
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 8,
+    "links": [],
+    "panels": [
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 110,
+                    "min": 10,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "orange",
+                                "value": 80
+                            },
+                            {
+                                "color": "red",
+                                "value": 90
+                            }
+                        ]
+                    },
+                    "unit": "celsius"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 0,
+                "y": 0
+            },
+            "id": 2,
+            "options": {
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto"
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "temperature{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "time_series",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "SysTemp"
+                }
+            ],
+            "title": "System Temperature",
+            "type": "gauge"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 1,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 0.7
+                            },
+                            {
+                                "color": "red",
+                                "value": 0.8
+                            }
+                        ]
+                    },
+                    "unit": "percentunit"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 3,
+                "x": 3,
+                "y": 0
+            },
+            "id": 6,
+            "options": {
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto"
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "(sum(raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}) - sum(raidFreeSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}))/sum(raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"})",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Used Space",
+            "type": "gauge"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "purple"
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 4,
+                "x": 6,
+                "y": 0
+            },
+            "id": 5,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "sum(raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"})",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Storage Size",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1": {
+                                    "color": "green",
+                                    "index": 0,
+                                    "text": "Normal"
+                                },
+                                "2": {
+                                    "color": "blue",
+                                    "index": 1,
+                                    "text": "Initialized"
+                                },
+                                "3": {
+                                    "color": "yellow",
+                                    "index": 2,
+                                    "text": "Not Initialized"
+                                },
+                                "4": {
+                                    "color": "red",
+                                    "index": 3,
+                                    "text": "System Partition Failed"
+                                },
+                                "5": {
+                                    "color": "orange",
+                                    "index": 4,
+                                    "text": "Crashed"
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 9,
+                "x": 10,
+                "y": 0
+            },
+            "id": 3,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "diskStatus{job=~'$prometheusJobName',instance=~'$device'}",
+                    "instant": false,
+                    "legendFormat": "{{diskID}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Disk Status",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "1": {
+                                    "color": "blue",
+                                    "index": 20,
+                                    "text": "Normal"
+                                },
+                                "2": {
+                                    "color": "yellow",
+                                    "index": 19,
+                                    "text": "Repairing"
+                                },
+                                "3": {
+                                    "color": "purple",
+                                    "index": 18,
+                                    "text": "Migrating"
+                                },
+                                "4": {
+                                    "color": "purple",
+                                    "index": 17,
+                                    "text": "Expanding"
+                                },
+                                "5": {
+                                    "color": "purple",
+                                    "index": 16,
+                                    "text": "Deleting"
+                                },
+                                "6": {
+                                    "color": "purple",
+                                    "index": 15,
+                                    "text": "Creating"
+                                },
+                                "7": {
+                                    "color": "purple",
+                                    "index": 14,
+                                    "text": "Syncing"
+                                },
+                                "8": {
+                                    "color": "yellow",
+                                    "index": 13,
+                                    "text": "Parity Checking"
+                                },
+                                "9": {
+                                    "color": "purple",
+                                    "index": 12,
+                                    "text": "Assembling"
+                                },
+                                "10": {
+                                    "color": "purple",
+                                    "index": 11,
+                                    "text": "Canceling"
+                                },
+                                "11": {
+                                    "color": "orange",
+                                    "index": 10,
+                                    "text": "Degraded"
+                                },
+                                "12": {
+                                    "color": "red",
+                                    "index": 9,
+                                    "text": "Crashed"
+                                },
+                                "13": {
+                                    "color": "blue",
+                                    "index": 8,
+                                    "text": "Data Scrubbing"
+                                },
+                                "14": {
+                                    "index": 7,
+                                    "text": "Deploying"
+                                },
+                                "15": {
+                                    "index": 6,
+                                    "text": "UnDeploying"
+                                },
+                                "16": {
+                                    "index": 5,
+                                    "text": "Mount Cache"
+                                },
+                                "17": {
+                                    "index": 4,
+                                    "text": "Unmount Cache"
+                                },
+                                "18": {
+                                    "color": "orange",
+                                    "index": 3,
+                                    "text": "Expanding Unfinished SHR"
+                                },
+                                "19": {
+                                    "index": 2,
+                                    "text": "Convert SHR To Pool"
+                                },
+                                "21": {
+                                    "color": "red",
+                                    "index": 1,
+                                    "text": "Unknown Status"
+                                },
+                                "20 ": {
+                                    "color": "purple",
+                                    "index": 0,
+                                    "text": "Migrate SHR1 To SHR2"
+                                }
+                            },
+                            "type": "value"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 5,
+                "x": 19,
+                "y": 0
+            },
+            "id": 4,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "raidStatus{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}",
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "RAID Status",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byRegexp",
+                            "options": "^.*Status$"
+                        },
+                        "properties": [
+                            {
+                                "id": "mappings",
+                                "value": [
+                                    {
+                                        "options": {
+                                            "1": {
+                                                "color": "green",
+                                                "index": 0,
+                                                "text": "Normal"
+                                            },
+                                            "2": {
+                                                "color": "red",
+                                                "index": 1,
+                                                "text": "FAILED"
+                                            }
+                                        },
+                                        "type": "value"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "custom.cellOptions",
+                                "value": {
+                                    "type": "color-text"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Upgrades"
+                        },
+                        "properties": [
+                            {
+                                "id": "mappings",
+                                "value": [
+                                    {
+                                        "options": {
+                                            "1": {
+                                                "color": "yellow",
+                                                "index": 0,
+                                                "text": "Update Available"
+                                            },
+                                            "2": {
+                                                "color": "green",
+                                                "index": 1,
+                                                "text": "Up to Date"
+                                            },
+                                            "3": {
+                                                "color": "orange",
+                                                "index": 2,
+                                                "text": "Connecting"
+                                            },
+                                            "4": {
+                                                "color": "red",
+                                                "index": 3,
+                                                "text": "Disconnected"
+                                            },
+                                            "5": {
+                                                "color": "red",
+                                                "index": 4,
+                                                "text": "Others"
+                                            }
+                                        },
+                                        "type": "value"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "custom.cellOptions",
+                                "value": {
+                                    "type": "color-text"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Memory"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "deckbytes"
+                            },
+                            {
+                                "id": "decimals",
+                                "value": 0
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Uptime"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "s"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 3,
+                "w": 24,
+                "x": 0,
+                "y": 6
+            },
+            "id": 1,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "modelName{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Model"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "version{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "DSM Version"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "serialNumber{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Serial Number"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "memTotalReal{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Memory"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "systemStatus{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "System Status"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "powerStatus{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Power Status"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "upgradeAvailable{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Upgrades"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "cpuFanStatus{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "CPU Fan"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "sysUpTime{job=~'$prometheusJobName',instance=~'$device'}/100",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Uptime"
+                }
+            ],
+            "title": "",
+            "transformations": [
+                {
+                    "id": "joinByField",
+                    "options": {
+                        "byField": "Time",
+                        "mode": "outer"
+                    }
+                },
+                {
+                    "id": "filterFieldsByName",
+                    "options": {
+                        "include": {
+                            "names": [
+                                "modelName",
+                                "version",
+                                "serialNumber",
+                                "Value #Memory",
+                                "Value #System Status",
+                                "Value #Power Status",
+                                "Value #Upgrades",
+                                "Value #CPU Fan",
+                                "Value #Uptime",
+                                "Value #Drives"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value #DSM Version": true,
+                            "Value #Model": true,
+                            "__name__ 1": true,
+                            "__name__ 2": true,
+                            "instance 1": true,
+                            "instance 2": true,
+                            "job 1": true,
+                            "job 2": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "Value #CPU Fan": 6,
+                            "Value #Memory": 2,
+                            "Value #Power Status": 7,
+                            "Value #System Status": 5,
+                            "Value #Upgrades": 4,
+                            "modelName": 0,
+                            "serialNumber": 1,
+                            "version": 3
+                        },
+                        "renameByName": {
+                            "Value #CPU Fan": "CPU Fan Status",
+                            "Value #Drives": "Drives",
+                            "Value #Memory": "Memory",
+                            "Value #Power Status": "Power Status",
+                            "Value #System Status": "System Status",
+                            "Value #Upgrades": "Upgrades",
+                            "Value #Uptime": "Uptime",
+                            "modelName": "Model",
+                            "serialNumber": "Serial Number",
+                            "version": "DSM Version"
+                        }
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Status"
+                        },
+                        "properties": [
+                            {
+                                "id": "mappings",
+                                "value": [
+                                    {
+                                        "options": {
+                                            "1": {
+                                                "color": "green",
+                                                "index": 0,
+                                                "text": "Normal"
+                                            },
+                                            "2": {
+                                                "color": "blue",
+                                                "index": 1,
+                                                "text": "Initialized"
+                                            },
+                                            "3": {
+                                                "color": "purple",
+                                                "index": 2,
+                                                "text": "Not Initialized"
+                                            },
+                                            "4": {
+                                                "color": "orange",
+                                                "index": 3,
+                                                "text": "System Partition Failed"
+                                            },
+                                            "5": {
+                                                "color": "red",
+                                                "index": 4,
+                                                "text": "Crashed"
+                                            }
+                                        },
+                                        "type": "value"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "custom.cellOptions",
+                                "value": {
+                                    "type": "color-text"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Temperature"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "celsius"
+                            },
+                            {
+                                "id": "custom.cellOptions",
+                                "value": {
+                                    "mode": "gradient",
+                                    "type": "gauge",
+                                    "valueDisplayMode": "text"
+                                }
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green"
+                                        },
+                                        {
+                                            "color": "yellow",
+                                            "value": 50
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 75
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": "max",
+                                "value": 80
+                            },
+                            {
+                                "id": "min",
+                                "value": 20
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 15,
+                "x": 0,
+                "y": 9
+            },
+            "id": 7,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "diskStatus{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Status"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "diskModel{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Model"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "diskTemperature{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Temperature"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "diskType{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Type"
+                }
+            ],
+            "title": "Disks",
+            "transformations": [
+                {
+                    "id": "joinByField",
+                    "options": {
+                        "byField": "diskID",
+                        "mode": "outer"
+                    }
+                },
+                {
+                    "id": "filterFieldsByName",
+                    "options": {
+                        "include": {
+                            "names": [
+                                "diskID",
+                                "Value #Status",
+                                "diskModel",
+                                "Value #Temperature",
+                                "diskType"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {},
+                        "includeByName": {},
+                        "indexByName": {
+                            "Value #Status": 3,
+                            "Value #Temperature": 4,
+                            "diskID": 0,
+                            "diskModel": 2,
+                            "diskType": 1
+                        },
+                        "renameByName": {
+                            "Value #Status": "Status",
+                            "Value #Temperature": "Temperature",
+                            "Value #Type": "Type",
+                            "diskID": "Disk ID",
+                            "diskID 1": "Disk ID",
+                            "diskModel": "Model",
+                            "diskType": "Type"
+                        }
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 1,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 0.7
+                            },
+                            {
+                                "color": "red",
+                                "value": 0.8
+                            }
+                        ]
+                    },
+                    "unit": "percentunit"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 7,
+                "w": 9,
+                "x": 15,
+                "y": 9
+            },
+            "id": 8,
+            "options": {
+                "displayMode": "gradient",
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": false
+                },
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "(raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"} - raidFreeSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"})/raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}",
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Used Space",
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "celsius"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 24,
+                "x": 0,
+                "y": 16
+            },
+            "id": 39,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "median",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "temperature{job=~'$prometheusJobName',instance=~'$device'}",
+                    "instant": false,
+                    "legendFormat": "System",
+                    "range": true,
+                    "refId": "System"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "diskTemperature{job=~'$prometheusJobName',instance=~'$device'}",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{diskID}}",
+                    "range": true,
+                    "refId": "Disk"
+                }
+            ],
+            "title": "Temperature",
+            "type": "timeseries"
+        },
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 24
+            },
+            "id": 13,
+            "panels": [],
+            "title": "Computing Power",
+            "type": "row"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "normal"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "System"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "User"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "green",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 25
+            },
+            "id": 9,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "median",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "ssCpuSystem{job=~'$prometheusJobName',instance=~'$device'}",
+                    "instant": false,
+                    "legendFormat": "System",
+                    "range": true,
+                    "refId": "System"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "ssCpuUser{job=~'$prometheusJobName',instance=~'$device'}",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "User",
+                    "range": true,
+                    "refId": "User"
+                }
+            ],
+            "title": "CPU Utilization ",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 30,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "normal"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            }
+                        ]
+                    },
+                    "unit": "percentunit"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "System"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "User"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "green",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Used"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "orange",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 25
+            },
+            "id": 11,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "median",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "(memTotalReal{job=~'$prometheusJobName',instance=~'$device'} - (memAvailReal{job=~'$prometheusJobName',instance=~'$device'} + memCached{job=~'$prometheusJobName',instance=~'$device'} + memBuffer{job=~'$prometheusJobName',instance=~'$device'})) / memTotalReal{job=~'$prometheusJobName',instance=~'$device'}",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "Used",
+                    "range": true,
+                    "refId": "Used"
+                }
+            ],
+            "title": "Memory Utilization ",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 33
+            },
+            "id": 12,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "laLoadInt{job=~'$prometheusJobName',instance=~'$device'}/100",
+                    "instant": false,
+                    "legendFormat": "{{laNames}}",
+                    "range": true,
+                    "refId": "Load"
+                }
+            ],
+            "title": "CPU Load",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "normal"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "deckbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 33
+            },
+            "id": 10,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "memTotalReal{job=~'$prometheusJobName',instance=~'$device'} - (memShared{job=~'$prometheusJobName',instance=~'$device'} + memCached{job=~'$prometheusJobName',instance=~'$device'} + memBuffer{job=~'$prometheusJobName',instance=~'$device'} + memAvailReal{job=~'$prometheusJobName',instance=~'$device'})",
+                    "instant": false,
+                    "legendFormat": "Reserved",
+                    "range": true,
+                    "refId": "Reserved"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "memBuffer{job=~'$prometheusJobName',instance=~'$device'}",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "Buffer",
+                    "range": true,
+                    "refId": "Buffer"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "memCached{job=~'$prometheusJobName',instance=~'$device'}",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "Cached",
+                    "range": true,
+                    "refId": "Cached"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "memShared{job=~'$prometheusJobName',instance=~'$device'}",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "Shared",
+                    "range": true,
+                    "refId": "Shared"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "memAvailReal{job=~'$prometheusJobName',instance=~'$device'}",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "Free",
+                    "range": true,
+                    "refId": "Free"
+                }
+            ],
+            "title": "Memory",
+            "type": "timeseries"
+        },
+        {
+            "collapsed": true,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 41
+            },
+            "id": 20,
+            "panels": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "thresholds"
+                            },
+                            "custom": {
+                                "align": "auto",
+                                "cellOptions": {
+                                    "type": "auto"
+                                },
+                                "inspect": false
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green"
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            }
+                        },
+                        "overrides": [
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "Speed"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "unit",
+                                        "value": "bps"
+                                    }
+                                ]
+                            },
+                            {
+                                "matcher": {
+                                    "id": "byName",
+                                    "options": "Status"
+                                },
+                                "properties": [
+                                    {
+                                        "id": "mappings",
+                                        "value": [
+                                            {
+                                                "options": {
+                                                    "1": {
+                                                        "color": "green",
+                                                        "index": 0,
+                                                        "text": "UP"
+                                                    },
+                                                    "2": {
+                                                        "color": "red",
+                                                        "index": 1,
+                                                        "text": "DOWN"
+                                                    },
+                                                    "3": {
+                                                        "color": "blue",
+                                                        "index": 2,
+                                                        "text": "Testing"
+                                                    },
+                                                    "4": {
+                                                        "color": "orange",
+                                                        "index": 3,
+                                                        "text": "Unknown"
+                                                    },
+                                                    "5": {
+                                                        "color": "yellow",
+                                                        "index": 4,
+                                                        "text": "Dormant"
+                                                    },
+                                                    "6": {
+                                                        "color": "orange",
+                                                        "index": 5,
+                                                        "text": "Not present"
+                                                    },
+                                                    "7": {
+                                                        "color": "red",
+                                                        "index": 6,
+                                                        "text": "Lower layer down"
+                                                    }
+                                                },
+                                                "type": "value"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": "custom.cellOptions",
+                                        "value": {
+                                            "type": "color-text"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "gridPos": {
+                        "h": 5,
+                        "w": 9,
+                        "x": 0,
+                        "y": 136
+                    },
+                    "id": 19,
+                    "options": {
+                        "cellHeight": "sm",
+                        "footer": {
+                            "countRows": false,
+                            "fields": "",
+                            "reducer": [
+                                "sum"
+                            ],
+                            "show": false
+                        },
+                        "showHeader": true
+                    },
+                    "pluginVersion": "12.0.1",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "prometheus-DSM"
+                            },
+                            "editorMode": "code",
+                            "exemplar": false,
+                            "expr": "ifPhysAddress{job=~'$prometheusJobName',instance=~'$device', ifName=~\"eth[0-9]+$\"}",
+                            "format": "table",
+                            "instant": true,
+                            "legendFormat": "__auto",
+                            "range": false,
+                            "refId": "MacAddr"
+                        },
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "prometheus-DSM"
+                            },
+                            "editorMode": "code",
+                            "exemplar": false,
+                            "expr": "ifOperStatus{job=~'$prometheusJobName',instance=~'$device', ifName=~\"eth[0-9]+$\"}",
+                            "format": "table",
+                            "hide": false,
+                            "instant": true,
+                            "legendFormat": "__auto",
+                            "range": false,
+                            "refId": "Status"
+                        },
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "prometheus-DSM"
+                            },
+                            "editorMode": "code",
+                            "exemplar": false,
+                            "expr": "ifSpeed{job=~'$prometheusJobName',instance=~'$device', ifName=~\"eth[0-9]+$\"}",
+                            "format": "table",
+                            "hide": false,
+                            "instant": true,
+                            "legendFormat": "__auto",
+                            "range": false,
+                            "refId": "Speed"
+                        },
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "prometheus-DSM"
+                            },
+                            "editorMode": "code",
+                            "expr": "",
+                            "hide": false,
+                            "instant": false,
+                            "legendFormat": "__auto",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Interface",
+                    "transformations": [
+                        {
+                            "id": "joinByField",
+                            "options": {
+                                "byField": "ifName",
+                                "mode": "outer"
+                            }
+                        },
+                        {
+                            "id": "filterFieldsByName",
+                            "options": {
+                                "include": {
+                                    "names": [
+                                        "ifName",
+                                        "ifPhysAddress",
+                                        "Value #Status",
+                                        "Value #Speed"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "id": "organize",
+                            "options": {
+                                "excludeByName": {},
+                                "includeByName": {},
+                                "indexByName": {},
+                                "renameByName": {
+                                    "Value #Speed": "Speed",
+                                    "Value #Status": "Status",
+                                    "ifName": "Port",
+                                    "ifPhysAddress": "MAC Address"
+                                }
+                            }
+                        }
+                    ],
+                    "type": "table"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green"
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            },
+                            "unit": "percentunit"
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 5,
+                        "w": 15,
+                        "x": 9,
+                        "y": 136
+                    },
+                    "id": 22,
+                    "options": {
+                        "legend": {
+                            "calcs": [],
+                            "displayMode": "list",
+                            "placement": "bottom",
+                            "showLegend": false
+                        },
+                        "tooltip": {
+                            "hideZeros": false,
+                            "mode": "multi",
+                            "sort": "desc"
+                        }
+                    },
+                    "pluginVersion": "12.0.1",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "prometheus-DSM"
+                            },
+                            "editorMode": "code",
+                            "expr": "((rate(ifHCInOctets{job=~'$prometheusJobName',instance=~'$device', ifName=~\"eth[0-9]+$\"}[$__rate_interval])*8) + (rate(ifHCOutOctets{job=~'$prometheusJobName',instance=~'$device', ifName=~\"eth[0-9]+$\"}[$__rate_interval])*8))/ifSpeed{job=~'$prometheusJobName',instance=~'$device', ifName=~\"eth[0-9]+$\"}",
+                            "instant": false,
+                            "legendFormat": "{{ifName}}",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Network Load",
+                    "type": "timeseries"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green"
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            },
+                            "unit": "bps"
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 9,
+                        "w": 12,
+                        "x": 0,
+                        "y": 141
+                    },
+                    "id": 21,
+                    "options": {
+                        "legend": {
+                            "calcs": [
+                                "min",
+                                "max",
+                                "mean",
+                                "lastNotNull"
+                            ],
+                            "displayMode": "table",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "hideZeros": false,
+                            "mode": "multi",
+                            "sort": "desc"
+                        }
+                    },
+                    "pluginVersion": "12.0.1",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "prometheus-DSM"
+                            },
+                            "editorMode": "code",
+                            "expr": "rate(ifHCInOctets{job=~'$prometheusJobName',instance=~'$device', ifName=~\"eth[0-9]+$\"}[$__rate_interval])*8",
+                            "instant": false,
+                            "legendFormat": "{{ifName}}",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Traffic In",
+                    "type": "timeseries"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "fieldConfig": {
+                        "defaults": {
+                            "color": {
+                                "mode": "palette-classic"
+                            },
+                            "custom": {
+                                "axisBorderShow": false,
+                                "axisCenteredZero": false,
+                                "axisColorMode": "text",
+                                "axisLabel": "",
+                                "axisPlacement": "auto",
+                                "barAlignment": 0,
+                                "barWidthFactor": 0.6,
+                                "drawStyle": "line",
+                                "fillOpacity": 0,
+                                "gradientMode": "none",
+                                "hideFrom": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": false
+                                },
+                                "insertNulls": false,
+                                "lineInterpolation": "linear",
+                                "lineWidth": 1,
+                                "pointSize": 5,
+                                "scaleDistribution": {
+                                    "type": "linear"
+                                },
+                                "showPoints": "auto",
+                                "spanNulls": false,
+                                "stacking": {
+                                    "group": "A",
+                                    "mode": "none"
+                                },
+                                "thresholdsStyle": {
+                                    "mode": "off"
+                                }
+                            },
+                            "mappings": [],
+                            "thresholds": {
+                                "mode": "absolute",
+                                "steps": [
+                                    {
+                                        "color": "green"
+                                    },
+                                    {
+                                        "color": "red",
+                                        "value": 80
+                                    }
+                                ]
+                            },
+                            "unit": "bps"
+                        },
+                        "overrides": []
+                    },
+                    "gridPos": {
+                        "h": 9,
+                        "w": 12,
+                        "x": 12,
+                        "y": 141
+                    },
+                    "id": 23,
+                    "options": {
+                        "legend": {
+                            "calcs": [
+                                "min",
+                                "max",
+                                "mean",
+                                "lastNotNull"
+                            ],
+                            "displayMode": "table",
+                            "placement": "bottom",
+                            "showLegend": true
+                        },
+                        "tooltip": {
+                            "hideZeros": false,
+                            "mode": "multi",
+                            "sort": "desc"
+                        }
+                    },
+                    "pluginVersion": "12.0.1",
+                    "targets": [
+                        {
+                            "datasource": {
+                                "type": "prometheus",
+                                "uid": "prometheus-DSM"
+                            },
+                            "editorMode": "code",
+                            "expr": "rate(ifHCOutOctets{job=~'$prometheusJobName',instance=~'$device', ifName=~\"eth[0-9]+$\"}[$__rate_interval])*8",
+                            "instant": false,
+                            "legendFormat": "{{ifName}}",
+                            "range": true,
+                            "refId": "A"
+                        }
+                    ],
+                    "title": "Traffic Out",
+                    "type": "timeseries"
+                }
+            ],
+            "title": "Network",
+            "type": "row"
+        },
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 42
+            },
+            "id": 25,
+            "panels": [],
+            "title": "Storage Pools",
+            "type": "row"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineStyle": {
+                            "dash": [
+                                10,
+                                10
+                            ],
+                            "fill": "dash"
+                        },
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percentunit"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 2"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 43
+            },
+            "id": 38,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "(raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"} - raidFreeSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"})/raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}",
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Used Space",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "auto",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Used Percentage"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.cellOptions",
+                                "value": {
+                                    "mode": "lcd",
+                                    "type": "gauge",
+                                    "valueDisplayMode": "text"
+                                }
+                            },
+                            {
+                                "id": "unit",
+                                "value": "percentunit"
+                            },
+                            {
+                                "id": "max",
+                                "value": 1
+                            },
+                            {
+                                "id": "min",
+                                "value": 0
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "green"
+                                        },
+                                        {
+                                            "color": "yellow",
+                                            "value": 0.75
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 0.8
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 0.85
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byRegexp",
+                            "options": "/.*Speed.*/"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "Bps"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byRegexp",
+                            "options": "/.*IOPS.*/"
+                        },
+                        "properties": [
+                            {
+                                "id": "unit",
+                                "value": "iops"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 24,
+                "x": 0,
+                "y": 49
+            },
+            "id": 24,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "raidFreeSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}",
+                    "format": "table",
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "FreeSpace"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"} -raidFreeSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Used"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Total"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "(raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"} -raidFreeSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}) / raidTotalSize{job=~'$prometheusJobName',instance=~'$device', raidName=~\"Volume [0-9]+$\"}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "UsedPercent"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "(rate(spaceIONReadX{job=~'$prometheusJobName',instance=~'$device'}[$__rate_interval]) + rate(spaceIONWrittenX{job=~'$prometheusJobName',instance=~'$device'}[$__rate_interval]))\n  * $joinRaidNameToSpacePool",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "Speed"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": false,
+                    "expr": "(rate(spaceIOReads{job=~'$prometheusJobName',instance=~'$device'}[$__rate_interval])\n+ rate(spaceIOWrites{job=~'$prometheusJobName',instance=~'$device'}[$__rate_interval]))\n  * $joinRaidNameToSpacePool",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "legendFormat": "__auto",
+                    "range": false,
+                    "refId": "IOPS"
+                }
+            ],
+            "title": "Pools",
+            "transformations": [
+                {
+                    "id": "joinByField",
+                    "options": {
+                        "byField": "raidName",
+                        "mode": "inner"
+                    }
+                },
+                {
+                    "id": "filterFieldsByName",
+                    "options": {
+                        "include": {
+                            "names": [
+                                "raidName",
+                                "Value #FreeSpace",
+                                "Value #Used",
+                                "Value #Total",
+                                "Value #UsedPercent",
+                                "Value #Speed",
+                                "Value #IOPS",
+                                "spaceIODevice 1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Value #Total": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "Value #FreeSpace": 4,
+                            "Value #IOPS": 7,
+                            "Value #Speed": 6,
+                            "Value #Total": 2,
+                            "Value #Used": 3,
+                            "Value #UsedPercent": 5,
+                            "raidName": 0,
+                            "spaceIODevice 1": 1
+                        },
+                        "renameByName": {
+                            "Value #FreeSpace": "Free Space",
+                            "Value #IOPS": "Throughput IOPS",
+                            "Value #ReadSpeed": "Throughput Speed",
+                            "Value #Speed": "Throughput Speed",
+                            "Value #Total": "Total",
+                            "Value #Used": "Used Space",
+                            "Value #UsedPercent": "Used Percentage",
+                            "raidName": "Raid Name",
+                            "spaceIODevice": "Space Name",
+                            "spaceIODevice 1": "Space Name"
+                        }
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 5,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "smooth",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 2"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 14,
+                "w": 6,
+                "x": 0,
+                "y": 54
+            },
+            "id": 34,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "median",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "spaceIOLA\n* $joinRaidNameToSpacePool",
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Space Load",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 5,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 2"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 14,
+                "w": 6,
+                "x": 6,
+                "y": 54
+            },
+            "id": 31,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "median",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "spaceIOLA1\n* $joinRaidNameToSpacePool",
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Space Load 1",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 5,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 2"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 14,
+                "w": 6,
+                "x": 12,
+                "y": 54
+            },
+            "id": 32,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "median",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "spaceIOLA5\n* $joinRaidNameToSpacePool",
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Space Load 5",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 5,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 2"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 14,
+                "w": 6,
+                "x": 18,
+                "y": 54
+            },
+            "id": 33,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "median",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "spaceIOLA15\n* $joinRaidNameToSpacePool",
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Space Load 15",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "dm-1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "dm-4"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 2"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 0,
+                "y": 68
+            },
+            "id": 28,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true,
+                    "sortBy": "Name",
+                    "sortDesc": false
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(spaceIOReads{job=~'$prometheusJobName',instance=~'$device'}[$__rate_interval])\n  * $joinRaidNameToSpacePool",
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "I/O Reads",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 2"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 12,
+                "y": 68
+            },
+            "id": 15,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true,
+                    "sortBy": "Name",
+                    "sortDesc": false
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(spaceIOWrites{job=~'$prometheusJobName',instance=~'$device'}[$__rate_interval])\n  * $joinRaidNameToSpacePool",
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "I/O Writes",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 2"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 0,
+                "y": 78
+            },
+            "id": 17,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "max",
+                        "mean"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true,
+                    "sortBy": "Name",
+                    "sortDesc": false
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(spaceIONReadX{job=~'$prometheusJobName',instance=~'$device'}[$__rate_interval])\n  * $joinRaidNameToSpacePool",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "Load"
+                }
+            ],
+            "title": "Read throughput",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 1"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "purple",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Volume 2"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "blue",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 12,
+                "y": 78
+            },
+            "id": 27,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "max",
+                        "mean"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true,
+                    "sortBy": "Name",
+                    "sortDesc": false
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(spaceIONWrittenX{job=~'$prometheusJobName',instance=~'$device'}[$__rate_interval])\n  * $joinRaidNameToSpacePool",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{raidName}}",
+                    "range": true,
+                    "refId": "Load"
+                }
+            ],
+            "title": "Write throughput",
+            "type": "timeseries"
+        },
+        {
+            "collapsed": false,
+            "gridPos": {
+                "h": 1,
+                "w": 24,
+                "x": 0,
+                "y": 88
+            },
+            "id": 16,
+            "panels": [],
+            "title": "Storage Devices",
+            "type": "row"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "description": "",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "custom": {
+                        "align": "center",
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "filterable": false,
+                        "inspect": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "dark-red"
+                            }
+                        ]
+                    }
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "SMART Test"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.align",
+                                "value": "left"
+                            },
+                            {
+                                "id": "custom.cellOptions",
+                                "value": {
+                                    "mode": "gradient",
+                                    "type": "color-background"
+                                }
+                            },
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "rgba(40, 33, 96, 0.78)",
+                                    "mode": "fixed"
+                                }
+                            },
+                            {
+                                "id": "custom.width",
+                                "value": 215
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Status"
+                        },
+                        "properties": [
+                            {
+                                "id": "mappings",
+                                "value": [
+                                    {
+                                        "options": {
+                                            "OK": {
+                                                "color": "green",
+                                                "index": 0
+                                            }
+                                        },
+                                        "type": "value"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "custom.cellOptions",
+                                "value": {
+                                    "mode": "basic",
+                                    "type": "color-background"
+                                }
+                            },
+                            {
+                                "id": "custom.width",
+                                "value": 129
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Device"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 87
+                            }
+                        ]
+                    }
+                ]
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 17,
+                "x": 0,
+                "y": 89
+            },
+            "id": 35,
+            "options": {
+                "cellHeight": "sm",
+                "footer": {
+                    "countRows": false,
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true,
+                "sortBy": []
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": true,
+                    "expr": "label_replace(\n  diskSMARTInfoDevName{job=~\"$prometheusJobName\", instance=~\"$device\"},\n  \"storageIODevice\", \"$1\", \"diskSMARTInfoDevName\", \".*/([^/]+)$\"\n)",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "SMARTInfo",
+                    "refId": "A"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": true,
+                    "expr": "diskSMARTAttrName{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "AttrName",
+                    "refId": "B"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": true,
+                    "expr": "diskSMARTAttrCurrent{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "AttrCurrent",
+                    "refId": "C"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": true,
+                    "expr": "diskSMARTAttrThreshold{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "AttrThreshold",
+                    "refId": "D"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": true,
+                    "expr": "diskSMARTAttrWorst{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "AttrWorst",
+                    "refId": "E"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": true,
+                    "expr": "diskSMARTAttrStatus{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "AttrStatus",
+                    "refId": "F"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "exemplar": true,
+                    "expr": "diskSMARTAttrRaw{job=~'$prometheusJobName',instance=~'$device'}",
+                    "format": "table",
+                    "hide": false,
+                    "instant": true,
+                    "interval": "",
+                    "legendFormat": "AttrRaw",
+                    "refId": "G"
+                }
+            ],
+            "title": "S.M.A.R.T",
+            "transformations": [
+                {
+                    "id": "seriesToColumns",
+                    "options": {
+                        "byField": "diskSMARTInfoIndex"
+                    }
+                },
+                {
+                    "id": "filterByValue",
+                    "options": {
+                        "filters": [
+                            {
+                                "config": {
+                                    "id": "greaterOrEqual",
+                                    "options": {
+                                        "value": 0
+                                    }
+                                },
+                                "fieldName": "Value #A"
+                            }
+                        ],
+                        "match": "all",
+                        "type": "include"
+                    }
+                },
+                {
+                    "id": "filterFieldsByName",
+                    "options": {
+                        "include": {
+                            "names": [
+                                "storageIODevice",
+                                "diskSMARTAttrName",
+                                "Value #C",
+                                "Value #D",
+                                "Value #E",
+                                "diskSMARTAttrStatus",
+                                "Value #G"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {},
+                        "includeByName": {},
+                        "indexByName": {
+                            "Value #C": 4,
+                            "Value #D": 5,
+                            "Value #E": 6,
+                            "Value #G": 7,
+                            "diskSMARTAttrName": 2,
+                            "diskSMARTAttrStatus": 3,
+                            "diskSMARTInfoDevName": 1,
+                            "storageIODevice": 0
+                        },
+                        "renameByName": {
+                            "Value #A": "",
+                            "Value #C": "Current",
+                            "Value #D": "Threshold",
+                            "Value #E": "Worst",
+                            "Value #F": "Status",
+                            "Value #G": "RAW",
+                            "diskSMARTAttrName": "SMART Test",
+                            "diskSMARTAttrStatus": "Status",
+                            "diskSMARTInfoDevName": "Device",
+                            "diskSMARTInfoIndex": "",
+                            "instance 1": "NAS",
+                            "storageIODevice": "Device"
+                        }
+                    }
+                },
+                {
+                    "id": "sortBy",
+                    "options": {
+                        "fields": {},
+                        "sort": [
+                            {
+                                "field": "Status"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 1
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 7,
+                "x": 17,
+                "y": 89
+            },
+            "id": 37,
+            "options": {
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "value_and_name",
+                "wideLayout": true
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "count(\n  label_replace(\n    diskSMARTAttrStatus{diskSMARTAttrStatus!=\"OK\"}\n      * on(instance, job, diskSMARTInfoIndex) group_left(diskSMARTInfoDevName)\n      diskSMARTInfoDevName,\n    \"storageIODevice\", \"$1\", \"diskSMARTInfoDevName\", \".*/([^/]+)$\"\n  )\n) by (storageIODevice)\nor\ncount(\n  label_replace(\n    diskSMARTAttrStatus\n      * on(instance, job, diskSMARTInfoIndex) group_left(diskSMARTInfoDevName)\n      diskSMARTInfoDevName,\n    \"storageIODevice\", \"$1\", \"diskSMARTInfoDevName\", \".*/([^/]+)$\"\n  )\n) by (storageIODevice) * 0",
+                    "format": "time_series",
+                    "instant": false,
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Failing SMART Checks",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 0,
+                "y": 98
+            },
+            "id": 14,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(storageIOReads{job=~'$prometheusJobName',instance=~'$device', storageIODevice=~'$storageDevice'}[$__rate_interval])",
+                    "instant": false,
+                    "legendFormat": "{{storageIODevice}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "I/O Reads",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 12,
+                "y": 98
+            },
+            "id": 29,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(storageIOWrites{job=~'$prometheusJobName',instance=~'$device', storageIODevice=~'$storageDevice'}[$__rate_interval])",
+                    "instant": false,
+                    "legendFormat": "{{storageIODevice}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "I/O Writes",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 0,
+                "y": 108
+            },
+            "id": 26,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "max",
+                        "mean"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(storageIONReadX{job=~'$prometheusJobName',instance=~'$device', storageIODevice=~'$storageDevice'}[$__rate_interval])",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{storageIODevice}}",
+                    "range": true,
+                    "refId": "Load"
+                }
+            ],
+            "title": "Read throughput",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 10,
+                "w": 12,
+                "x": 12,
+                "y": 108
+            },
+            "id": 18,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "max",
+                        "mean"
+                    ],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "rate(storageIONWrittenX{job=~'$prometheusJobName',instance=~'$device', storageIODevice=~'$storageDevice'}[$__rate_interval])",
+                    "hide": false,
+                    "instant": false,
+                    "legendFormat": "{{storageIODevice}}",
+                    "range": true,
+                    "refId": "Load"
+                }
+            ],
+            "title": "Write throughput",
+            "type": "timeseries"
+        }
+    ],
+    "preload": false,
+    "schemaVersion": 41,
+    "tags": [
+        "Synology"
+    ],
+    "templating": {
+        "list": [
+            {
+                "current": {
+                    "text": "Synology",
+                    "value": "Synology"
+                },
+                "description": "",
+                "hide": 2,
+                "name": "prometheusJobName",
+                "query": "Synology",
+                "skipUrlSync": true,
+                "type": "constant"
+            },
+            {
+                "current": {
+                    "text": "10.0.10.11:9116",
+                    "value": "10.0.10.11:9116"
+                },
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus-DSM"
+                },
+                "definition": "query_result(ssCpuUser{job=~'$prometheusJobName'})",
+                "label": "Device",
+                "name": "device",
+                "options": [],
+                "query": {
+                    "qryType": 3,
+                    "query": "query_result(ssCpuUser{job=~'$prometheusJobName'})",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
+                "refresh": 2,
+                "regex": ".*instance=\"(.*?)\".*",
+                "sort": 1,
+                "type": "query"
+            },
+            {
+                "current": {
+                    "text": "All",
+                    "value": [
+                        "$__all"
+                    ]
+                },
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "prometheus-DSM"
+                },
+                "definition": "label_values(storageIODevice{job=\"$prometheusJobName\", instance=\"$device\"},storageIODevice)",
+                "includeAll": true,
+                "label": "Storage Device",
+                "multi": true,
+                "name": "storageDevice",
+                "options": [],
+                "query": {
+                    "qryType": 1,
+                    "query": "label_values(storageIODevice{job=\"$prometheusJobName\", instance=\"$device\"},storageIODevice)",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "type": "query"
+            },
+            {
+                "current": {
+                    "text": "on(spaceIODevice) group_left(raidName)(     label_replace(spaceIOIndex == 1, \"raidName\", \"Volume 1\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 2, \"raidName\", \"Volume 2\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 3, \"raidName\", \"Volume 3\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 4, \"raidName\", \"Volume 4\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 5, \"raidName\", \"Volume 5\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 6, \"raidName\", \"Volume 6\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 7, \"raidName\", \"Volume 7\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 8, \"raidName\", \"Volume 8\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 9, \"raidName\", \"Volume 9\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 10, \"raidName\", \"Volume 10\", \"__name__\", \".*\") )",
+                    "value": "on(spaceIODevice) group_left(raidName)(     label_replace(spaceIOIndex == 1, \"raidName\", \"Volume 1\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 2, \"raidName\", \"Volume 2\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 3, \"raidName\", \"Volume 3\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 4, \"raidName\", \"Volume 4\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 5, \"raidName\", \"Volume 5\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 6, \"raidName\", \"Volume 6\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 7, \"raidName\", \"Volume 7\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 8, \"raidName\", \"Volume 8\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 9, \"raidName\", \"Volume 9\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 10, \"raidName\", \"Volume 10\", \"__name__\", \".*\") )"
+                },
+                "description": "",
+                "hide": 2,
+                "name": "joinRaidNameToSpacePool",
+                "query": "on(spaceIODevice) group_left(raidName)(     label_replace(spaceIOIndex == 1, \"raidName\", \"Volume 1\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 2, \"raidName\", \"Volume 2\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 3, \"raidName\", \"Volume 3\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 4, \"raidName\", \"Volume 4\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 5, \"raidName\", \"Volume 5\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 6, \"raidName\", \"Volume 6\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 7, \"raidName\", \"Volume 7\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 8, \"raidName\", \"Volume 8\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 9, \"raidName\", \"Volume 9\", \"__name__\", \".*\") or     label_replace(spaceIOIndex == 10, \"raidName\", \"Volume 10\", \"__name__\", \".*\") )",
+                "skipUrlSync": true,
+                "type": "constant"
+            }
+        ]
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "Europe/Warsaw",
+    "title": "Synology NAS",
+    "uid": "2e2c4a98-bc92-4dd5-b658-a08726355f7e",
+    "version": 40
+}
