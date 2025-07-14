@@ -18,7 +18,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 3,
+    "id": 10,
     "links": [],
     "panels": [
         {
@@ -40,23 +40,23 @@
                             }
                         ]
                     },
-                    "unit": "bytes"
+                    "unit": "decbytes"
                 },
                 "overrides": []
             },
             "gridPos": {
                 "h": 5,
-                "w": 12,
+                "w": 5,
                 "x": 0,
                 "y": 0
             },
             "id": 26,
             "options": {
                 "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
+                "graphMode": "none",
+                "justifyMode": "center",
                 "orientation": "auto",
-                "percentChangeColorMode": "standard",
+                "percentChangeColorMode": "inverted",
                 "reduceOptions": {
                     "calcs": [
                         "lastNotNull"
@@ -76,7 +76,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "sum(increase(router_port_tx_sum[$__range]) + increase(router_port_rx_sum[$__range]))",
+                    "expr": "sum(increase(port_tx_bytes_total{deviceType=\"$device_type\"}[$__range]) + increase(port_rx_bytes_total{deviceType=\"$device_type\"}[$__range]))",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -111,8 +111,8 @@
             },
             "gridPos": {
                 "h": 5,
-                "w": 12,
-                "x": 12,
+                "w": 5,
+                "x": 5,
                 "y": 0
             },
             "id": 27,
@@ -121,7 +121,7 @@
                 "graphMode": "area",
                 "justifyMode": "auto",
                 "orientation": "auto",
-                "percentChangeColorMode": "standard",
+                "percentChangeColorMode": "inverted",
                 "reduceOptions": {
                     "calcs": [
                         "lastNotNull"
@@ -141,7 +141,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "sum(rate(router_port_tx_sum[$increase_interval]) + rate(router_port_rx_sum[$increase_interval])) /8",
+                    "expr": "sum(increase(port_tx_bytes_total{deviceType=\"$device_type\"}[$increase_interval]) + increase(port_rx_bytes_total{deviceType=\"$device_type\"}[$increase_interval])) / 8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -161,24 +161,227 @@
                     "color": {
                         "mode": "thresholds"
                     },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 10,
+                "y": 0
+            },
+            "id": 48,
+            "options": {
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto"
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "cpu_usage{deviceType=\"$device_type\"}",
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "CPU",
+            "type": "gauge"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 4,
+                "x": 14,
+                "y": 0
+            },
+            "id": 49,
+            "options": {
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto"
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "memory_usage{deviceType=\"$device_type\"}",
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "RAM",
+            "type": "gauge"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [],
+                    "max": 100,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "celsius"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 6,
+                "x": 18,
+                "y": 0
+            },
+            "id": 50,
+            "options": {
+                "displayMode": "gradient",
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": false
+                },
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "color"
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "temperature{deviceType=\"$device_type\"}",
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Temperature",
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
                     "mappings": [
                         {
                             "options": {
-                                "1000M": {
-                                    "color": "green",
-                                    "index": 3
-                                },
-                                "100M": {
-                                    "color": "yellow",
-                                    "index": 2
-                                },
-                                "10M": {
-                                    "color": "orange",
-                                    "index": 1
-                                },
-                                "Down": {
+                                "0": {
                                     "color": "red",
-                                    "index": 0
+                                    "index": 1,
+                                    "text": "Inactive"
+                                },
+                                "1": {
+                                    "color": "green",
+                                    "index": 0,
+                                    "text": "Active"
                                 }
                             },
                             "type": "value"
@@ -212,13 +415,13 @@
                     "calcs": [
                         "lastNotNull"
                     ],
-                    "fields": "/^online$/",
+                    "fields": "",
                     "limit": 25,
-                    "values": true
+                    "values": false
                 },
                 "showPercentChange": false,
                 "textMode": "value_and_name",
-                "wideLayout": true
+                "wideLayout": false
             },
             "pluginVersion": "12.0.1",
             "targets": [
@@ -228,1088 +431,20 @@
                         "uid": "prometheus-DSM"
                     },
                     "disableTextWrap": false,
-                    "editorMode": "builder",
+                    "editorMode": "code",
                     "exemplar": false,
-                    "expr": "router_port_info{mode=\"WAN\"}",
-                    "format": "table",
+                    "expr": "port_upstream_state{deviceType=\"$device_type\"}\n* on (macAddress, portID) group_left(portName, portMode)\nmax(port_info{deviceType=\"Gateway\", portMode=\"WAN\"} == 1) by (macAddress, portID, portName, portMode)",
+                    "format": "time_series",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
-                    "instant": true,
-                    "legendFormat": "{{instance}}",
-                    "range": false,
+                    "instant": false,
+                    "legendFormat": "{{portName}}",
+                    "range": true,
                     "refId": "A",
                     "useBackend": false
                 }
             ],
             "title": "WAN LoadBalancing Active Port",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "disable": true,
-                            "duplex": true,
-                            "instance": true,
-                            "internetState": true,
-                            "ip": false,
-                            "job": true,
-                            "linkSpeed": true,
-                            "linkStatus": true,
-                            "mac": true,
-                            "mode": true,
-                            "name": true,
-                            "online": false,
-                            "operation": true,
-                            "poe": true,
-                            "port": true,
-                            "portDesc": false,
-                            "portName": true,
-                            "profileName": true,
-                            "protocol": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {},
-                        "renameByName": {
-                            "linkSpeed": ""
-                        }
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "1000M": {
-                                    "color": "green",
-                                    "index": 3
-                                },
-                                "100M": {
-                                    "color": "yellow",
-                                    "index": 2
-                                },
-                                "10M": {
-                                    "color": "orange",
-                                    "index": 1
-                                },
-                                "Down": {
-                                    "color": "red",
-                                    "index": 0
-                                }
-                            },
-                            "type": "value"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 8,
-                "y": 5
-            },
-            "id": 2,
-            "options": {
-                "colorMode": "background_solid",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "/^linkSpeed$/",
-                    "limit": 25,
-                    "values": true
-                },
-                "showPercentChange": false,
-                "textMode": "value_and_name",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "exemplar": false,
-                    "expr": "router_port_info{port=\"1\"}",
-                    "format": "table",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": true,
-                    "legendFormat": "{{instance}}",
-                    "range": false,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Port 1",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "disable": true,
-                            "duplex": true,
-                            "instance": true,
-                            "internetState": true,
-                            "ip": true,
-                            "job": true,
-                            "linkSpeed": false,
-                            "linkStatus": true,
-                            "mac": true,
-                            "mode": false,
-                            "name": true,
-                            "online": true,
-                            "operation": true,
-                            "poe": true,
-                            "port": true,
-                            "portDesc": false,
-                            "portName": true,
-                            "profileName": true,
-                            "protocol": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {},
-                        "renameByName": {
-                            "linkSpeed": ""
-                        }
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "1000M": {
-                                    "color": "green",
-                                    "index": 3
-                                },
-                                "100M": {
-                                    "color": "yellow",
-                                    "index": 2
-                                },
-                                "10M": {
-                                    "color": "orange",
-                                    "index": 1
-                                },
-                                "Down": {
-                                    "color": "red",
-                                    "index": 0
-                                }
-                            },
-                            "type": "value"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 10,
-                "y": 5
-            },
-            "id": 3,
-            "options": {
-                "colorMode": "background_solid",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "/^linkSpeed$/",
-                    "limit": 25,
-                    "values": true
-                },
-                "showPercentChange": false,
-                "textMode": "value_and_name",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "exemplar": false,
-                    "expr": "router_port_info{port=\"2\"}",
-                    "format": "table",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": true,
-                    "legendFormat": "{{instance}}",
-                    "range": false,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Port 2",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "disable": true,
-                            "duplex": true,
-                            "instance": true,
-                            "internetState": true,
-                            "ip": true,
-                            "job": true,
-                            "linkSpeed": false,
-                            "linkStatus": true,
-                            "mac": true,
-                            "mode": false,
-                            "name": true,
-                            "online": true,
-                            "operation": true,
-                            "poe": true,
-                            "port": true,
-                            "portDesc": false,
-                            "portName": true,
-                            "profileName": true,
-                            "protocol": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {},
-                        "renameByName": {
-                            "linkSpeed": ""
-                        }
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "1000M": {
-                                    "color": "green",
-                                    "index": 3
-                                },
-                                "100M": {
-                                    "color": "yellow",
-                                    "index": 2
-                                },
-                                "10M": {
-                                    "color": "orange",
-                                    "index": 1
-                                },
-                                "Down": {
-                                    "color": "red",
-                                    "index": 0
-                                }
-                            },
-                            "type": "value"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 12,
-                "y": 5
-            },
-            "id": 4,
-            "options": {
-                "colorMode": "background_solid",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "/^linkSpeed$/",
-                    "limit": 25,
-                    "values": true
-                },
-                "showPercentChange": false,
-                "textMode": "value_and_name",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "exemplar": false,
-                    "expr": "router_port_info{port=\"3\"}",
-                    "format": "table",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": true,
-                    "legendFormat": "{{instance}}",
-                    "range": false,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Port 3",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "disable": true,
-                            "duplex": true,
-                            "instance": true,
-                            "internetState": true,
-                            "ip": true,
-                            "job": true,
-                            "linkSpeed": false,
-                            "linkStatus": true,
-                            "mac": true,
-                            "mode": false,
-                            "name": true,
-                            "online": true,
-                            "operation": true,
-                            "poe": true,
-                            "port": true,
-                            "portDesc": false,
-                            "portName": true,
-                            "profileName": true,
-                            "protocol": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {},
-                        "renameByName": {
-                            "linkSpeed": ""
-                        }
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "1000M": {
-                                    "color": "green",
-                                    "index": 3
-                                },
-                                "100M": {
-                                    "color": "yellow",
-                                    "index": 2
-                                },
-                                "10M": {
-                                    "color": "orange",
-                                    "index": 1
-                                },
-                                "Down": {
-                                    "color": "red",
-                                    "index": 0
-                                }
-                            },
-                            "type": "value"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 14,
-                "y": 5
-            },
-            "id": 5,
-            "options": {
-                "colorMode": "background_solid",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "/^linkSpeed$/",
-                    "limit": 25,
-                    "values": true
-                },
-                "showPercentChange": false,
-                "textMode": "value_and_name",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "exemplar": false,
-                    "expr": "router_port_info{port=\"4\"}",
-                    "format": "table",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": true,
-                    "legendFormat": "{{instance}}",
-                    "range": false,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Port 4",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "disable": true,
-                            "duplex": true,
-                            "instance": true,
-                            "internetState": true,
-                            "ip": true,
-                            "job": true,
-                            "linkSpeed": false,
-                            "linkStatus": true,
-                            "mac": true,
-                            "mode": false,
-                            "name": true,
-                            "online": true,
-                            "operation": true,
-                            "poe": true,
-                            "port": true,
-                            "portDesc": false,
-                            "portName": true,
-                            "profileName": true,
-                            "protocol": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {},
-                        "renameByName": {
-                            "linkSpeed": ""
-                        }
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "1000M": {
-                                    "color": "green",
-                                    "index": 3
-                                },
-                                "100M": {
-                                    "color": "yellow",
-                                    "index": 2
-                                },
-                                "10M": {
-                                    "color": "orange",
-                                    "index": 1
-                                },
-                                "Down": {
-                                    "color": "red",
-                                    "index": 0
-                                }
-                            },
-                            "type": "value"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 16,
-                "y": 5
-            },
-            "id": 6,
-            "options": {
-                "colorMode": "background_solid",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "/^linkSpeed$/",
-                    "limit": 25,
-                    "values": true
-                },
-                "showPercentChange": false,
-                "textMode": "value_and_name",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "exemplar": false,
-                    "expr": "router_port_info{port=\"5\"}",
-                    "format": "table",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": true,
-                    "legendFormat": "{{instance}}",
-                    "range": false,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Port 5",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "disable": true,
-                            "duplex": true,
-                            "instance": true,
-                            "internetState": true,
-                            "ip": true,
-                            "job": true,
-                            "linkSpeed": false,
-                            "linkStatus": true,
-                            "mac": true,
-                            "mode": false,
-                            "name": true,
-                            "online": true,
-                            "operation": true,
-                            "poe": true,
-                            "port": true,
-                            "portDesc": false,
-                            "portName": true,
-                            "profileName": true,
-                            "protocol": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {},
-                        "renameByName": {
-                            "linkSpeed": ""
-                        }
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "1000M": {
-                                    "color": "green",
-                                    "index": 3
-                                },
-                                "100M": {
-                                    "color": "yellow",
-                                    "index": 2
-                                },
-                                "10M": {
-                                    "color": "orange",
-                                    "index": 1
-                                },
-                                "Down": {
-                                    "color": "red",
-                                    "index": 0
-                                }
-                            },
-                            "type": "value"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 18,
-                "y": 5
-            },
-            "id": 7,
-            "options": {
-                "colorMode": "background_solid",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "/^linkSpeed$/",
-                    "limit": 25,
-                    "values": true
-                },
-                "showPercentChange": false,
-                "textMode": "value_and_name",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "exemplar": false,
-                    "expr": "router_port_info{port=\"6\"}",
-                    "format": "table",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": true,
-                    "legendFormat": "{{instance}}",
-                    "range": false,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Port 6",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "disable": true,
-                            "duplex": true,
-                            "instance": true,
-                            "internetState": true,
-                            "ip": true,
-                            "job": true,
-                            "linkSpeed": false,
-                            "linkStatus": true,
-                            "mac": true,
-                            "mode": false,
-                            "name": true,
-                            "online": true,
-                            "operation": true,
-                            "poe": true,
-                            "port": true,
-                            "portDesc": false,
-                            "portName": true,
-                            "profileName": true,
-                            "protocol": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {},
-                        "renameByName": {
-                            "linkSpeed": ""
-                        }
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "1000M": {
-                                    "color": "green",
-                                    "index": 3
-                                },
-                                "100M": {
-                                    "color": "yellow",
-                                    "index": 2
-                                },
-                                "10M": {
-                                    "color": "orange",
-                                    "index": 1
-                                },
-                                "Down": {
-                                    "color": "red",
-                                    "index": 0
-                                }
-                            },
-                            "type": "value"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 20,
-                "y": 5
-            },
-            "id": 8,
-            "options": {
-                "colorMode": "background_solid",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "/^linkSpeed$/",
-                    "limit": 25,
-                    "values": true
-                },
-                "showPercentChange": false,
-                "textMode": "value_and_name",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "exemplar": false,
-                    "expr": "router_port_info{port=\"7\"}",
-                    "format": "table",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": true,
-                    "legendFormat": "{{instance}}",
-                    "range": false,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Port 7",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "disable": true,
-                            "duplex": true,
-                            "instance": true,
-                            "internetState": true,
-                            "ip": true,
-                            "job": true,
-                            "linkSpeed": false,
-                            "linkStatus": true,
-                            "mac": true,
-                            "mode": false,
-                            "name": true,
-                            "online": true,
-                            "operation": true,
-                            "poe": true,
-                            "port": true,
-                            "portDesc": false,
-                            "portName": true,
-                            "profileName": true,
-                            "protocol": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {},
-                        "renameByName": {
-                            "linkSpeed": ""
-                        }
-                    }
-                }
-            ],
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "1000M": {
-                                    "color": "green",
-                                    "index": 3
-                                },
-                                "100M": {
-                                    "color": "yellow",
-                                    "index": 2
-                                },
-                                "10M": {
-                                    "color": "orange",
-                                    "index": 1
-                                },
-                                "Down": {
-                                    "color": "red",
-                                    "index": 0
-                                }
-                            },
-                            "type": "value"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            }
-                        ]
-                    }
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 4,
-                "w": 2,
-                "x": 22,
-                "y": 5
-            },
-            "id": 9,
-            "options": {
-                "colorMode": "background_solid",
-                "graphMode": "none",
-                "justifyMode": "center",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "/^linkSpeed$/",
-                    "limit": 25,
-                    "values": true
-                },
-                "showPercentChange": false,
-                "textMode": "value_and_name",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "exemplar": false,
-                    "expr": "router_port_info{port=\"8\"}",
-                    "format": "table",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": true,
-                    "legendFormat": "{{instance}}",
-                    "range": false,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Port 8",
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true,
-                            "__name__": true,
-                            "disable": true,
-                            "duplex": true,
-                            "instance": true,
-                            "internetState": true,
-                            "ip": true,
-                            "job": true,
-                            "linkSpeed": false,
-                            "linkStatus": true,
-                            "mac": true,
-                            "mode": false,
-                            "name": true,
-                            "online": true,
-                            "operation": true,
-                            "poe": true,
-                            "port": true,
-                            "portDesc": false,
-                            "portName": true,
-                            "profileName": true,
-                            "protocol": true
-                        },
-                        "includeByName": {},
-                        "indexByName": {},
-                        "renameByName": {
-                            "linkSpeed": ""
-                        }
-                    }
-                }
-            ],
             "type": "stat"
         },
         {
@@ -1377,9 +512,9 @@
             },
             "gridPos": {
                 "h": 4,
-                "w": 24,
-                "x": 0,
-                "y": 9
+                "w": 16,
+                "x": 8,
+                "y": 5
             },
             "id": 28,
             "options": {
@@ -1403,7 +538,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "group(router_port_info{mode=\"WAN\", online=\"Yes\", internetState=\"Online\"}) by (portDesc)",
+                    "expr": "group(\n    port_upstream_state{deviceType=\"$device_type\"}\n    * on (macAddress, portID) group_left(portName, portMode)\n  max(port_info{deviceType=\"Gateway\", portMode=\"WAN\"} == 1) by (macAddress, portID, portName, portMode)\n    ) by (portName)",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -1426,21 +561,32 @@
                     "mappings": [
                         {
                             "options": {
-                                "match": "null",
-                                "result": {
+                                "10000000": {
+                                    "color": "orange",
+                                    "index": 1
+                                },
+                                "100000000": {
+                                    "color": "yellow",
+                                    "index": 2
+                                },
+                                "1000000000": {
+                                    "color": "green",
+                                    "index": 3
+                                },
+                                "-1": {
                                     "color": "red",
                                     "index": 0,
                                     "text": "Down"
                                 }
                             },
-                            "type": "special"
+                            "type": "value"
                         }
                     ],
                     "thresholds": {
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "blue"
+                                "color": "green"
                             }
                         ]
                     },
@@ -1449,16 +595,17 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 9,
-                "w": 3,
+                "h": 4,
+                "w": 24,
                 "x": 0,
-                "y": 13
+                "y": 9
             },
-            "id": 15,
+            "id": 47,
+            "maxPerRow": 8,
             "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
+                "colorMode": "background_solid",
+                "graphMode": "none",
+                "justifyMode": "center",
                 "orientation": "auto",
                 "percentChangeColorMode": "standard",
                 "reduceOptions": {
@@ -1466,13 +613,16 @@
                         "lastNotNull"
                     ],
                     "fields": "",
-                    "values": false
+                    "limit": 25,
+                    "values": true
                 },
                 "showPercentChange": false,
-                "textMode": "auto",
+                "textMode": "value_and_name",
                 "wideLayout": true
             },
             "pluginVersion": "12.0.1",
+            "repeat": "port_ID",
+            "repeatDirection": "h",
             "targets": [
                 {
                     "datasource": {
@@ -1481,584 +631,60 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_tx_sum{port=\"1\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"1\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"1\", linkSpeed!=\"Down\"} == 1)\n) /8",
+                    "exemplar": false,
+                    "expr": "port_speed{deviceType=\"$device_type\", portID=\"$port_ID\"}\n  * on(macAddress, portID) group_left(portName, portMode)\nport_info{deviceType=\"$device_type\"}",
+                    "format": "table",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
-                    "instant": false,
+                    "instant": true,
                     "legendFormat": "__auto",
-                    "range": true,
+                    "range": false,
                     "refId": "A",
                     "useBackend": false
                 }
             ],
-            "title": "Rate port 1",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "match": "null",
-                                "result": {
-                                    "color": "red",
-                                    "index": 0,
-                                    "text": "Down"
-                                }
-                            },
-                            "type": "special"
+            "title": "Port $port_ID",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": false,
+                            "__name__": true,
+                            "deviceType": true,
+                            "device_name": true,
+                            "disable": true,
+                            "duplex": true,
+                            "instance": true,
+                            "internetState": true,
+                            "ip": true,
+                            "job": true,
+                            "linkSpeed": false,
+                            "linkStatus": true,
+                            "mac": true,
+                            "macAddress": true,
+                            "mode": false,
+                            "name": true,
+                            "online": true,
+                            "operation": true,
+                            "poe": true,
+                            "port": true,
+                            "portDesc": false,
+                            "portID": true,
+                            "portMode": false,
+                            "portName": false,
+                            "profileName": true,
+                            "protocol": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {
+                            "linkSpeed": ""
                         }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "blue"
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 3,
-                "x": 3,
-                "y": 13
-            },
-            "id": 14,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_tx_sum{port=\"2\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"2\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"2\", linkSpeed!=\"Down\"} == 1)\n) /8",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": false,
-                    "legendFormat": "__auto",
-                    "range": true,
-                    "refId": "A",
-                    "useBackend": false
+                    }
                 }
             ],
-            "title": "Rate port 2",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "match": "null",
-                                "result": {
-                                    "color": "red",
-                                    "index": 0,
-                                    "text": "Down"
-                                }
-                            },
-                            "type": "special"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "blue"
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 3,
-                "x": 6,
-                "y": 13
-            },
-            "id": 16,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_tx_sum{port=\"3\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"3\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"3\", linkSpeed!=\"Down\"} == 1)\n) /8",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": false,
-                    "legendFormat": "__auto",
-                    "range": true,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Rate port 3",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "match": "null",
-                                "result": {
-                                    "color": "red",
-                                    "index": 0,
-                                    "text": "Down"
-                                }
-                            },
-                            "type": "special"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "blue"
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 3,
-                "x": 9,
-                "y": 13
-            },
-            "id": 17,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_tx_sum{port=\"4\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"4\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"4\", linkSpeed!=\"Down\"} == 1)\n) /8",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": false,
-                    "legendFormat": "__auto",
-                    "range": true,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Rate port 4",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "match": "null",
-                                "result": {
-                                    "color": "red",
-                                    "index": 0,
-                                    "text": "Down"
-                                }
-                            },
-                            "type": "special"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "blue"
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 3,
-                "x": 12,
-                "y": 13
-            },
-            "id": 20,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_tx_sum{port=\"5\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"5\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"5\", linkSpeed!=\"Down\"} == 1)\n) /8",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": false,
-                    "legendFormat": "__auto",
-                    "range": true,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Rate port 5",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "match": "null",
-                                "result": {
-                                    "color": "red",
-                                    "index": 0,
-                                    "text": "Down"
-                                }
-                            },
-                            "type": "special"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "blue"
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 3,
-                "x": 15,
-                "y": 13
-            },
-            "id": 18,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_tx_sum{port=\"6\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"6\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"6\", linkSpeed!=\"Down\"} == 1)\n) /8",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": false,
-                    "legendFormat": "__auto",
-                    "range": true,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Rate port 6",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "match": "null",
-                                "result": {
-                                    "color": "red",
-                                    "index": 0,
-                                    "text": "Down"
-                                }
-                            },
-                            "type": "special"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "blue"
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 3,
-                "x": 18,
-                "y": 13
-            },
-            "id": 19,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_tx_sum{port=\"7\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"7\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"7\", linkSpeed!=\"Down\"} == 1)\n) /8",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": false,
-                    "legendFormat": "__auto",
-                    "range": true,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Rate port 7",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [
-                        {
-                            "options": {
-                                "match": "null",
-                                "result": {
-                                    "color": "red",
-                                    "index": 0,
-                                    "text": "Down"
-                                }
-                            },
-                            "type": "special"
-                        }
-                    ],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "blue"
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 3,
-                "x": 21,
-                "y": 13
-            },
-            "id": 21,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_tx_sum{port=\"8\"}[$increase_interval]) + rate(router_port_rx_sum{port=\"8\"}[$increase_interval]))\n  * on (port) group_left()\n  (router_port_info{port=\"8\", linkSpeed!=\"Down\"} == 1)\n) /8",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": false,
-                    "legendFormat": "__auto",
-                    "range": true,
-                    "refId": "A",
-                    "useBackend": false
-                }
-            ],
-            "title": "Rate port 8",
             "type": "stat"
         },
         {
@@ -2117,17 +743,17 @@
                             }
                         ]
                     },
-                    "unit": "bps"
+                    "unit": "percent"
                 },
                 "overrides": []
             },
             "gridPos": {
-                "h": 11,
-                "w": 24,
+                "h": 8,
+                "w": 12,
                 "x": 0,
-                "y": 22
+                "y": 13
             },
-            "id": 29,
+            "id": 22,
             "options": {
                 "legend": {
                     "calcs": [
@@ -2154,430 +780,9 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_tx_sum[$increase_interval]))\n  * on (port) group_left(portDesc, mode)\n  (router_port_info{linkSpeed!=\"Down\"} == 1)\n) /8",
+                    "expr": "port_internet_loss{deviceType=\"$device_type\"}\n* on (macAddress, portID) group_left(portName, portMode)\n  max(port_info{deviceType=\"Gateway\", portMode=\"WAN\"} == 1) by (macAddress, portID, portName, portMode)",
                     "instant": false,
-                    "legendFormat": "{{mode}}-{{portDesc}} port: {{port}}",
-                    "range": true,
-                    "refId": "A"
-                }
-            ],
-            "title": "Router Port TX",
-            "type": "timeseries"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "palette-classic"
-                    },
-                    "custom": {
-                        "axisBorderShow": false,
-                        "axisCenteredZero": false,
-                        "axisColorMode": "text",
-                        "axisLabel": "",
-                        "axisPlacement": "auto",
-                        "barAlignment": 0,
-                        "drawStyle": "line",
-                        "fillOpacity": 0,
-                        "gradientMode": "none",
-                        "hideFrom": {
-                            "legend": false,
-                            "tooltip": false,
-                            "viz": false
-                        },
-                        "insertNulls": false,
-                        "lineInterpolation": "linear",
-                        "lineWidth": 1,
-                        "pointSize": 5,
-                        "scaleDistribution": {
-                            "type": "linear"
-                        },
-                        "showPoints": "auto",
-                        "spanNulls": false,
-                        "stacking": {
-                            "group": "A",
-                            "mode": "none"
-                        },
-                        "thresholdsStyle": {
-                            "mode": "off"
-                        }
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 11,
-                "w": 24,
-                "x": 0,
-                "y": 33
-            },
-            "id": 30,
-            "options": {
-                "legend": {
-                    "calcs": [
-                        "min",
-                        "max",
-                        "mean",
-                        "lastNotNull"
-                    ],
-                    "displayMode": "table",
-                    "placement": "bottom",
-                    "showLegend": true
-                },
-                "tooltip": {
-                    "mode": "single",
-                    "sort": "none"
-                }
-            },
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "editorMode": "code",
-                    "expr": "(\n  (rate(router_port_rx_sum[$increase_interval]))\n  * on (port) group_left(portDesc, mode)\n  (router_port_info{linkSpeed!=\"Down\"} == 1)\n) /8",
-                    "instant": false,
-                    "legendFormat": "{{mode}}-{{portDesc}} port: {{port}}",
-                    "range": true,
-                    "refId": "A"
-                }
-            ],
-            "title": "Router Port RX",
-            "type": "timeseries"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "palette-classic"
-                    },
-                    "custom": {
-                        "axisBorderShow": false,
-                        "axisCenteredZero": false,
-                        "axisColorMode": "text",
-                        "axisLabel": "",
-                        "axisPlacement": "auto",
-                        "barAlignment": 0,
-                        "drawStyle": "line",
-                        "fillOpacity": 0,
-                        "gradientMode": "none",
-                        "hideFrom": {
-                            "legend": false,
-                            "tooltip": false,
-                            "viz": false
-                        },
-                        "insertNulls": false,
-                        "lineInterpolation": "linear",
-                        "lineWidth": 1,
-                        "pointSize": 5,
-                        "scaleDistribution": {
-                            "type": "linear"
-                        },
-                        "showPoints": "auto",
-                        "spanNulls": false,
-                        "stacking": {
-                            "group": "A",
-                            "mode": "none"
-                        },
-                        "thresholdsStyle": {
-                            "mode": "off"
-                        }
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    },
-                    "unit": "%"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 14,
-                "x": 0,
-                "y": 44
-            },
-            "id": 12,
-            "options": {
-                "legend": {
-                    "calcs": [
-                        "min",
-                        "max",
-                        "mean",
-                        "lastNotNull"
-                    ],
-                    "displayMode": "table",
-                    "placement": "bottom",
-                    "showLegend": true
-                },
-                "tooltip": {
-                    "mode": "single",
-                    "sort": "none"
-                }
-            },
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "expr": "cpu_usage{deviceType=\"Router\"}",
-                    "fullMetaSearch": false,
-                    "includeNullMetadata": true,
-                    "instant": false,
-                    "legendFormat": "{{name}} ({{__name__}})",
-                    "range": true,
-                    "refId": "A",
-                    "useBackend": false
-                },
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "disableTextWrap": false,
-                    "editorMode": "builder",
-                    "expr": "memory_usage{deviceType=\"Router\"}",
-                    "fullMetaSearch": false,
-                    "hide": false,
-                    "includeNullMetadata": true,
-                    "instant": false,
-                    "legendFormat": "{{name}} ({{__name__}})",
-                    "range": true,
-                    "refId": "B",
-                    "useBackend": false
-                }
-            ],
-            "title": "Resource consumption",
-            "type": "timeseries"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "palette-classic"
-                    },
-                    "custom": {
-                        "axisBorderShow": false,
-                        "axisCenteredZero": false,
-                        "axisColorMode": "text",
-                        "axisLabel": "",
-                        "axisPlacement": "auto",
-                        "barAlignment": 0,
-                        "drawStyle": "line",
-                        "fillOpacity": 0,
-                        "gradientMode": "none",
-                        "hideFrom": {
-                            "legend": false,
-                            "tooltip": false,
-                            "viz": false
-                        },
-                        "insertNulls": false,
-                        "lineInterpolation": "linear",
-                        "lineWidth": 1,
-                        "pointSize": 5,
-                        "scaleDistribution": {
-                            "type": "linear"
-                        },
-                        "showPoints": "auto",
-                        "spanNulls": false,
-                        "stacking": {
-                            "group": "A",
-                            "mode": "none"
-                        },
-                        "thresholdsStyle": {
-                            "mode": "off"
-                        }
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    },
-                    "unit": "celsius"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 10,
-                "x": 14,
-                "y": 44
-            },
-            "id": 13,
-            "options": {
-                "legend": {
-                    "calcs": [
-                        "min",
-                        "max",
-                        "mean",
-                        "lastNotNull"
-                    ],
-                    "displayMode": "table",
-                    "placement": "bottom",
-                    "showLegend": true
-                },
-                "tooltip": {
-                    "mode": "single",
-                    "sort": "none"
-                }
-            },
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "editorMode": "code",
-                    "expr": "router_temperature",
-                    "instant": false,
-                    "legendFormat": "{{name}}",
-                    "range": true,
-                    "refId": "A"
-                }
-            ],
-            "title": "Temperature",
-            "type": "timeseries"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "palette-classic"
-                    },
-                    "custom": {
-                        "axisBorderShow": false,
-                        "axisCenteredZero": false,
-                        "axisColorMode": "text",
-                        "axisLabel": "",
-                        "axisPlacement": "auto",
-                        "barAlignment": 0,
-                        "drawStyle": "line",
-                        "fillOpacity": 0,
-                        "gradientMode": "none",
-                        "hideFrom": {
-                            "legend": false,
-                            "tooltip": false,
-                            "viz": false
-                        },
-                        "insertNulls": false,
-                        "lineInterpolation": "linear",
-                        "lineWidth": 1,
-                        "pointSize": 5,
-                        "scaleDistribution": {
-                            "type": "linear"
-                        },
-                        "showPoints": "auto",
-                        "spanNulls": false,
-                        "stacking": {
-                            "group": "A",
-                            "mode": "none"
-                        },
-                        "thresholdsStyle": {
-                            "mode": "off"
-                        }
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green"
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    },
-                    "unit": "percent"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 8,
-                "w": 12,
-                "x": 0,
-                "y": 53
-            },
-            "id": 22,
-            "options": {
-                "legend": {
-                    "calcs": [
-                        "min",
-                        "max",
-                        "mean",
-                        "lastNotNull"
-                    ],
-                    "displayMode": "table",
-                    "placement": "bottom",
-                    "showLegend": true
-                },
-                "tooltip": {
-                    "mode": "single",
-                    "sort": "none"
-                }
-            },
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "editorMode": "code",
-                    "expr": "router_port_loss\n  * on(mac, port) \n  group_left(mode, portDesc) \n  router_port_info{mode=\"WAN\"}",
-                    "instant": false,
-                    "legendFormat": "{{portDesc}}",
+                    "legendFormat": "{{portName}}",
                     "range": true,
                     "refId": "A"
                 }
@@ -2602,6 +807,7 @@
                         "axisLabel": "",
                         "axisPlacement": "auto",
                         "barAlignment": 0,
+                        "barWidthFactor": 0.6,
                         "drawStyle": "line",
                         "fillOpacity": 0,
                         "gradientMode": "none",
@@ -2648,7 +854,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 53
+                "y": 13
             },
             "id": 23,
             "options": {
@@ -2664,10 +870,12 @@
                     "showLegend": true
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "single",
                     "sort": "none"
                 }
             },
+            "pluginVersion": "12.0.1",
             "targets": [
                 {
                     "datasource": {
@@ -2675,14 +883,450 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "router_port_latency\n  * on(mac, port) \n  group_left(mode, portDesc) \n  router_port_info{mode=\"WAN\"}",
+                    "expr": "port_internet_latency{deviceType=\"$device_type\"}\n* on (macAddress, portID) group_left(portName, portMode)\n  max(port_info{deviceType=\"$device_type\", portMode=\"WAN\"} == 1) by (macAddress, portID, portName, portMode)",
                     "instant": false,
-                    "legendFormat": "{{portDesc}}",
+                    "legendFormat": "{{portName}}",
                     "range": true,
                     "refId": "A"
                 }
             ],
             "title": "Latency",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 1,
+                        "drawStyle": "points",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "smooth",
+                        "lineStyle": {
+                            "fill": "solid"
+                        },
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 24,
+                "x": 0,
+                "y": 21
+            },
+            "id": 29,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "(\n  (increase(port_tx_bytes_total{deviceType=\"Gateway\"}[$increase_interval]))\n  * on (macAddress, portID) group_left(portName, portMode)\n  max(port_info{deviceType=\"Gateway\", portMode!=\"\"} == 1) by (macAddress, portID, portName, portMode)\n) / 8 ",
+                    "instant": false,
+                    "legendFormat": "port: {{portID}} - {{portMode}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Router Port TX",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "points",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bps"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 11,
+                "w": 24,
+                "x": 0,
+                "y": 32
+            },
+            "id": 30,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "(\n  (increase(port_rx_bytes_total[$increase_interval]))\n  * on (macAddress, portID) group_left(portName, portMode)\n  max(port_info{deviceType=\"Gateway\", portMode!=\"\"} == 1) by (macAddress, portID, portName, portMode)\n) /8",
+                    "instant": false,
+                    "legendFormat": "port: {{portID}} - {{portMode}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Router Port RX",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "smooth",
+                        "lineWidth": 2,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "%"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 14,
+                "x": 0,
+                "y": 43
+            },
+            "id": 12,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "code",
+                    "expr": "cpu_usage{deviceType=\"Gateway\"}",
+                    "fullMetaSearch": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "{{name}} ({{__name__}})",
+                    "range": true,
+                    "refId": "A",
+                    "useBackend": false
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "disableTextWrap": false,
+                    "editorMode": "builder",
+                    "expr": "memory_usage{deviceType=\"Gateway\"}",
+                    "fullMetaSearch": false,
+                    "hide": false,
+                    "includeNullMetadata": true,
+                    "instant": false,
+                    "legendFormat": "{{name}} ({{__name__}})",
+                    "range": true,
+                    "refId": "B",
+                    "useBackend": false
+                }
+            ],
+            "title": "Resource consumption",
+            "type": "timeseries"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 0,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "auto",
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green"
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "celsius"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 9,
+                "w": 10,
+                "x": 14,
+                "y": 43
+            },
+            "id": 13,
+            "options": {
+                "legend": {
+                    "calcs": [
+                        "min",
+                        "max",
+                        "mean",
+                        "lastNotNull"
+                    ],
+                    "displayMode": "table",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "single",
+                    "sort": "none"
+                }
+            },
+            "pluginVersion": "12.0.1",
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "prometheus-DSM"
+                    },
+                    "editorMode": "code",
+                    "expr": "(\n    temperature{deviceType=\"$device_type\"}\n    * on(macAddress) group_left(deviceName)\n    device_info{deviceType=\"$device_type\"}\n)",
+                    "instant": false,
+                    "legendFormat": "{{deviceName}}",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Temperature",
             "type": "timeseries"
         },
         {
@@ -2776,6 +1420,18 @@
                                 "value": 245
                             }
                         ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "deviceName"
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.width",
+                                "value": 124
+                            }
+                        ]
                     }
                 ]
             },
@@ -2783,7 +1439,7 @@
                 "h": 10,
                 "w": 12,
                 "x": 0,
-                "y": 61
+                "y": 52
             },
             "id": 24,
             "options": {
@@ -2799,7 +1455,7 @@
                 "showHeader": true,
                 "sortBy": []
             },
-            "pluginVersion": "11.1.4",
+            "pluginVersion": "12.0.1",
             "targets": [
                 {
                     "datasource": {
@@ -2808,7 +1464,7 @@
                     },
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "device_info{deviceType=\"Router\"}",
+                    "expr": "device_info{deviceType=\"$device_type\"}",
                     "format": "table",
                     "instant": true,
                     "legendFormat": "__auto",
@@ -2825,24 +1481,31 @@
                             "Time": true,
                             "Value": true,
                             "__name__": true,
+                            "deviceType": true,
                             "instance": true,
                             "job": true
                         },
                         "includeByName": {},
                         "indexByName": {
+                            "IP": 7,
                             "Time": 0,
-                            "Value": 10,
+                            "Value": 5,
                             "__name__": 1,
-                            "deviceType": 7,
-                            "firmwareVersion": 6,
-                            "instance": 8,
-                            "ip": 3,
-                            "job": 9,
-                            "mac": 4,
-                            "model": 5,
-                            "name": 2
+                            "deviceFirmware": 11,
+                            "deviceModel": 9,
+                            "deviceName": 6,
+                            "deviceType": 2,
+                            "hardwareVersion": 10,
+                            "instance": 3,
+                            "job": 4,
+                            "macAddress": 8
                         },
-                        "renameByName": {}
+                        "renameByName": {
+                            "deviceFirmware": "Firmware",
+                            "deviceModel": "Model",
+                            "hardwareVersion": "Hardware Version",
+                            "macAddress": "Mac Address"
+                        }
                     }
                 }
             ],
@@ -2865,7 +1528,8 @@
                         "axisLabel": "",
                         "axisPlacement": "auto",
                         "barAlignment": 0,
-                        "drawStyle": "line",
+                        "barWidthFactor": 0.9,
+                        "drawStyle": "bars",
                         "fillOpacity": 0,
                         "gradientMode": "none",
                         "hideFrom": {
@@ -2874,8 +1538,8 @@
                             "viz": false
                         },
                         "insertNulls": false,
-                        "lineInterpolation": "linear",
-                        "lineWidth": 1,
+                        "lineInterpolation": "smooth",
+                        "lineWidth": 2,
                         "pointSize": 5,
                         "scaleDistribution": {
                             "type": "linear"
@@ -2911,7 +1575,7 @@
                 "h": 10,
                 "w": 12,
                 "x": 12,
-                "y": 61
+                "y": 52
             },
             "id": 31,
             "options": {
@@ -2927,10 +1591,12 @@
                     "showLegend": false
                 },
                 "tooltip": {
+                    "hideZeros": false,
                     "mode": "single",
                     "sort": "none"
                 }
             },
+            "pluginVersion": "12.0.1",
             "targets": [
                 {
                     "datasource": {
@@ -2938,7 +1604,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "(\n  sum(rate(router_port_rx_sum[$increase_interval]) + rate(router_port_tx_sum[$increase_interval]))\n) /8",
+                    "expr": "(\n  sum(\n    increase(port_rx_bytes_total{deviceType=\"$device_type\"}[$increase_interval]) + \n    increase(port_tx_bytes_total{deviceType=\"$device_type\"}[$increase_interval])\n  )\n) /8",
                     "instant": false,
                     "legendFormat": "Router Throughput",
                     "range": true,
@@ -2998,7 +1664,7 @@
                 "h": 8,
                 "w": 24,
                 "x": 0,
-                "y": 71
+                "y": 62
             },
             "id": 25,
             "options": {
@@ -3012,9 +1678,14 @@
                     "show": false
                 },
                 "showHeader": true,
-                "sortBy": []
+                "sortBy": [
+                    {
+                        "desc": false,
+                        "displayName": "portID"
+                    }
+                ]
             },
-            "pluginVersion": "11.1.4",
+            "pluginVersion": "12.0.1",
             "targets": [
                 {
                     "datasource": {
@@ -3023,7 +1694,7 @@
                     },
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "router_port_ipv4_config_info",
+                    "expr": "port_info{deviceType=\"$device_type\"}\n* on (macAddress) group_left(deviceName)\nmax(device_info{deviceType=\"$device_type\"}) by (macAddress, deviceName)",
                     "format": "table",
                     "instant": true,
                     "legendFormat": "__auto",
@@ -3031,7 +1702,7 @@
                     "refId": "A"
                 }
             ],
-            "title": "WAN IPv4 Config",
+            "title": "Port Config",
             "transformations": [
                 {
                     "id": "organize",
@@ -3039,33 +1710,30 @@
                         "excludeByName": {
                             "Time": true,
                             "Value": true,
-                            "__name__": true,
+                            "deviceType": true,
+                            "device_name": true,
                             "instance": true,
                             "job": true,
-                            "mac": true,
-                            "portMac": true
+                            "macAddress": true
                         },
                         "includeByName": {},
                         "indexByName": {
                             "Time": 0,
-                            "Value": 16,
-                            "__name__": 1,
-                            "gateway": 6,
-                            "gateway2": 7,
-                            "instance": 12,
-                            "ip": 4,
-                            "ip2": 5,
-                            "job": 13,
-                            "mac": 14,
-                            "name": 2,
-                            "port": 3,
-                            "portMac": 15,
-                            "priDns": 8,
-                            "priDns2": 10,
-                            "sndDns": 9,
-                            "sndDns2": 11
+                            "Value": 11,
+                            "deviceName": 5,
+                            "deviceType": 1,
+                            "instance": 2,
+                            "job": 3,
+                            "macAddress": 4,
+                            "portID": 6,
+                            "portIP": 9,
+                            "portMode": 8,
+                            "portName": 7,
+                            "portProtocol": 10
                         },
-                        "renameByName": {}
+                        "renameByName": {
+                            "deviceName": "Device Name"
+                        }
                     }
                 }
             ],
@@ -3082,14 +1750,47 @@
         "list": [
             {
                 "current": {
-                    "text": "1m",
-                    "value": "1m"
+                    "text": "5m",
+                    "value": "5m"
                 },
                 "hide": 2,
                 "name": "increase_interval",
-                "query": "1m",
+                "query": "5m",
                 "skipUrlSync": true,
                 "type": "constant"
+            },
+            {
+                "current": {
+                    "text": "Gateway",
+                    "value": "Gateway"
+                },
+                "description": "",
+                "hide": 2,
+                "name": "device_type",
+                "query": "Gateway",
+                "skipUrlSync": true,
+                "type": "constant"
+            },
+            {
+                "allowCustomValue": false,
+                "current": {
+                    "text": "All",
+                    "value": "$__all"
+                },
+                "definition": "label_values(port_info{deviceType=\"$device_type\"},portID)",
+                "hide": 2,
+                "includeAll": true,
+                "name": "port_ID",
+                "options": [],
+                "query": {
+                    "qryType": 1,
+                    "query": "label_values(port_info{deviceType=\"$device_type\"},portID)",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "sort": 3,
+                "type": "query"
             }
         ]
     },
@@ -3101,5 +1802,5 @@
     "timezone": "browser",
     "title": "Router",
     "uid": "ddw9t1fudd88wb",
-    "version": 1
+    "version": 3
 }
