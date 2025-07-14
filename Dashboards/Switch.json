@@ -18,7 +18,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 11,
+    "id": 13,
     "links": [],
     "panels": [
         {
@@ -467,6 +467,7 @@
                             "Value": false,
                             "__name__": true,
                             "deviceType": true,
+                            "device_name": true,
                             "disable": true,
                             "duplex": true,
                             "instance": true,
