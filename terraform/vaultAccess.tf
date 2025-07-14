@@ -14,6 +14,9 @@ provider "vault" {
 data "vault_generic_secret" "grafana_creds" {
   path = "infrastructure/grafana.horna.local"
 }
+data "vault_generic_secret" "influx_creds" {
+  path = "infrastructure/influx-db.horna.local"
+}
 data "vault_generic_secret" "certs" {
   for_each = toset([
     "prometheus.horna.local",

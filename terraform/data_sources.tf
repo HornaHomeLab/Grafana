@@ -36,3 +36,21 @@ resource "grafana_data_source" "loki" {
     tlsCACert = data.vault_generic_secret.certs["loki.horna.local"].data["certificate"]
   })
 }
+resource "grafana_data_source" "influx" {
+  type               = "influxdb"
+  name               = "influxDB"
+  uid                = "influxdb-dsm"
+  url                = data.vault_generic_secret.influx_creds.data["url"]
+  basic_auth_enabled = false
+  is_default         = false
+
+  json_data_encoded = jsonencode({
+    "httpMode"     = "POST",
+    "organization" = "Horna",
+    "version"      = "Flux"
+  })
+
+  secure_json_data_encoded = jsonencode({
+    token = data.vault_generic_secret.influx_creds.data["grafana_token"]
+  })
+}
