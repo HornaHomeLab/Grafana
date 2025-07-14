@@ -21,3 +21,6 @@ data "vault_generic_secret" "certs" {
   ])
   path = "cert_secrets/${each.value}"
 }
+data "vault_generic_secret" "gh_oauth_grafana" {
+  path = "external_providers/GH_o_auth_app_Grafana"
+}
