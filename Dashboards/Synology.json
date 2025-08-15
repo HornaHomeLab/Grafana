@@ -18,7 +18,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 8,
+    "id": 2,
     "links": [],
     "panels": [
         {
@@ -4864,5 +4864,5 @@
     "timezone": "Europe/Warsaw",
     "title": "Synology NAS",
     "uid": "2e2c4a98-bc92-4dd5-b658-a08726355f7e",
-    "version": 40
+    "version": 1
 }

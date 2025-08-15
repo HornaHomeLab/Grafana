@@ -18,7 +18,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 10,
+    "id": 4,
     "links": [],
     "panels": [
         {
@@ -867,7 +867,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "ohm_nic_bytes_per_second{device_name=\"LianLi\", hardware=\"Ethernet\"}",
+                    "expr": "ohm_nic_bytes_per_second{device_name=\"LianLi\", hardware=\"vEthernet (Nowy przełącznik wirtualny)\"}",
                     "instant": false,
                     "legendFormat": "{{sensor}}",
                     "range": true,
@@ -894,5 +894,5 @@
     "timezone": "Europe/Warsaw",
     "title": "LianLi",
     "uid": "97621b11-a843-41c5-a1b5-d5b54176f24f",
-    "version": 45
+    "version": 2
 }

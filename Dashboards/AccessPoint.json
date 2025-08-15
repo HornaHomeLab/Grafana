@@ -24,7 +24,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 9,
+    "id": 12,
     "links": [],
     "panels": [
         {
@@ -82,7 +82,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "sum(\n    increase(radio_rx_bytes_total{deviceType=\"$device_type\"}[$__range]) + \n    increase(radio_tx_bytes_total{deviceType=\"$device_type\"}[$__range])\n)",
+                    "expr": "sum(\n  abs(deriv(port_tx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval])) +\n  abs(deriv(port_rx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval]))\n) * $__range",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -147,7 +147,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "sum(\n    increase(port_rx_bytes_total{deviceType=\"$device_type\"}[$__range]) + \n    increase(port_tx_bytes_total{deviceType=\"$device_type\"}[$__range])\n)",
+                    "expr": "sum(\n  abs(deriv(port_tx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval])) +\n  abs(deriv(port_rx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval]))\n) * $__range",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -212,7 +212,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "sum(\n    rate(radio_rx_bytes_total[$increase_interval]) + \n    rate(radio_tx_bytes_total[$increase_interval])\n) /8",
+                    "expr": "sum(\n    abs(deriv(radio_rx_bytes_total{device_name=\"$device_name\"}[$rate_interval])) + \n    abs(deriv(radio_tx_bytes_total{device_name=\"$device_name\"}[$rate_interval]))\n) * 8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -317,7 +317,7 @@
                     },
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "avg(radio_rx_usage{deviceType=\"$device_type\"}) by (radioFrequency)",
+                    "expr": "avg(radio_rx_usage{deviceType=\"$device_type\", device_name=\"$device_name\"}) by (radioFrequency)",
                     "format": "time_series",
                     "instant": false,
                     "legendFormat": "Rx Utilization {{radioFrequency}}",
@@ -330,7 +330,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "avg(radio_tx_usage{deviceType=\"$device_type\"}) by (radioFrequency)",
+                    "expr": "avg(radio_tx_usage{deviceType=\"$device_type\", device_name=\"$device_name\"}) by (radioFrequency)",
                     "hide": false,
                     "instant": false,
                     "legendFormat": "Tx Utilization {{radioFrequency}}",
@@ -343,7 +343,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "avg(radio_interference{deviceType=\"$device_type\"}) by (radioFrequency)",
+                    "expr": "avg(radio_interference{deviceType=\"$device_type\", device_name=\"$device_name\"}) by (radioFrequency)",
                     "hide": false,
                     "instant": false,
                     "legendFormat": "Interference {{radioFrequency}}",
@@ -537,7 +537,7 @@
                     },
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "radio_info{deviceType=\"$device_type\"}\n* on (macAddress) group_left(deviceName)\nmax(device_info{deviceType=\"$device_type\"} == 1) by (macAddress, deviceName)  ",
+                    "expr": "radio_info{deviceType=\"$device_type\", device_name=\"$device_name\"}\n* on (macAddress) group_left(deviceName)\nmax(device_info{deviceType=\"$device_type\", device_name=\"$device_name\"} == 1) by (macAddress, deviceName)  ",
                     "format": "table",
                     "instant": true,
                     "legendFormat": "__auto",
@@ -554,7 +554,9 @@
                             "Time": true,
                             "Value": true,
                             "__name__": true,
+                            "deviceName": false,
                             "deviceType": true,
+                            "device_name": true,
                             "instance": true,
                             "job": true,
                             "mac": true,
@@ -587,136 +589,6 @@
                 }
             ],
             "type": "table"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "blue"
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 5,
-                "w": 12,
-                "x": 0,
-                "y": 22
-            },
-            "id": 7,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "editorMode": "code",
-                    "expr": "sum(\n    rate(radio_rx_bytes_total{radioFrequency=\"$freq_5Ghz\"}[$increase_interval]) + \n    rate(radio_rx_bytes_total{radioFrequency=\"$freq_5Ghz\"}[$increase_interval])\n) /8",
-                    "instant": false,
-                    "legendFormat": "__auto",
-                    "range": true,
-                    "refId": "A"
-                }
-            ],
-            "title": "5 GHz Rate",
-            "type": "stat"
-        },
-        {
-            "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus-DSM"
-            },
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "blue"
-                            }
-                        ]
-                    },
-                    "unit": "bps"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 5,
-                "w": 12,
-                "x": 12,
-                "y": 22
-            },
-            "id": 6,
-            "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto",
-                "percentChangeColorMode": "standard",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
-            },
-            "pluginVersion": "12.0.1",
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "prometheus",
-                        "uid": "prometheus-DSM"
-                    },
-                    "editorMode": "code",
-                    "expr": "sum(\n    rate(radio_rx_bytes_total{radioFrequency=\"$freq_24Ghz\"}[$increase_interval]) + \n    rate(radio_rx_bytes_total{radioFrequency=\"$freq_24Ghz\"}[$increase_interval])\n) /8",
-                    "instant": false,
-                    "legendFormat": "__auto",
-                    "range": true,
-                    "refId": "A"
-                }
-            ],
-            "title": "2.4 GHz Rate",
-            "type": "stat"
         },
         {
             "datasource": {
@@ -782,7 +654,7 @@
                 "h": 11,
                 "w": 24,
                 "x": 0,
-                "y": 27
+                "y": 22
             },
             "id": 11,
             "options": {
@@ -811,7 +683,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "(\n    rate(radio_tx_bytes_total[$increase_interval])\n    * on (macAddress) group_left(deviceName)\n    max(device_info{deviceType=\"$device_type\"} == 1) by (macAddress, deviceName)    \n)/8",
+                    "expr": "(\n    abs(deriv(radio_tx_bytes_total{device_name=\"$device_name\"}[$rate_interval]))\n    * on (macAddress) group_left(deviceName)\n    max(device_info{deviceType=\"$device_type\", device_name=\"$device_name\"} == 1) by (macAddress, deviceName)    \n) * 8",
                     "instant": false,
                     "legendFormat": "{{deviceName}}-{{radioFrequency}}",
                     "range": true,
@@ -885,7 +757,7 @@
                 "h": 11,
                 "w": 24,
                 "x": 0,
-                "y": 38
+                "y": 33
             },
             "id": 4,
             "options": {
@@ -914,7 +786,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "(\n    rate(radio_rx_bytes_total[$increase_interval])\n    * on (macAddress) group_left(deviceName)\n    max(device_info{deviceType=\"$device_type\"} == 1) by (macAddress, deviceName)    \n)/8",
+                    "expr": "(\n    abs(deriv(radio_rx_bytes_total{device_name=\"$device_name\"}[$rate_interval]))\n    * on (macAddress) group_left(deviceName)\n    max(device_info{deviceType=\"$device_type\", device_name=\"$device_name\"} == 1) by (macAddress, deviceName)    \n) * 8",
                     "instant": false,
                     "legendFormat": "{{deviceName}}-{{radioFrequency}}",
                     "range": true,
@@ -987,7 +859,7 @@
                 "h": 12,
                 "w": 24,
                 "x": 0,
-                "y": 49
+                "y": 44
             },
             "id": 8,
             "options": {
@@ -1016,7 +888,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "(\n    increase(radio_rx_retry_packets_total{deviceType=\"$device_type\"}[$increase_interval]) +  \n    increase(radio_tx_retry_packets_total{deviceType=\"$device_type\"}[$increase_interval])\n)\n    * on (macAddress) group_left(deviceName)\n    max(device_info{deviceType=\"$device_type\"} == 1) by (macAddress, deviceName)  ",
+                    "expr": "(\n    increase(radio_rx_retry_packets_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval]) +  \n    increase(radio_tx_retry_packets_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval])\n)\n* on (macAddress) group_left(deviceName)\nmax(device_info{deviceType=\"$device_type\", device_name=\"$device_name\"} == 1) by (macAddress, deviceName)  ",
                     "instant": false,
                     "legendFormat": "{{deviceName}}-{{radioFrequency}}",
                     "range": true,
@@ -1087,7 +959,7 @@
                 "h": 18,
                 "w": 24,
                 "x": 0,
-                "y": 61
+                "y": 56
             },
             "id": 1,
             "options": {
@@ -1118,7 +990,7 @@
                     "disableTextWrap": false,
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "memory_usage{deviceType=\"$device_type\"}\n* on (macAddress, deviceType) group_left(deviceName)\n  max(device_info{deviceType=\"$device_type\"} == 1) by (macAddress,deviceType,deviceName)",
+                    "expr": "memory_usage{deviceType=\"$device_type\", device_name=\"$device_name\"}\n* on (macAddress, deviceType) group_left(deviceName)\n  max(device_info{deviceType=\"$device_type\", device_name=\"$device_name\"} == 1) by (macAddress,deviceType,deviceName)",
                     "fullMetaSearch": false,
                     "hide": false,
                     "includeNullMetadata": true,
@@ -1231,7 +1103,7 @@
                 "h": 11,
                 "w": 10,
                 "x": 0,
-                "y": 79
+                "y": 74
             },
             "id": 5,
             "options": {
@@ -1256,7 +1128,7 @@
                     },
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "device_info{deviceType=\"AccessPoint\"}",
+                    "expr": "device_info{deviceType=\"AccessPoint\", device_name=\"$device_name\"}",
                     "format": "table",
                     "instant": true,
                     "legendFormat": "__auto",
@@ -1362,7 +1234,7 @@
                 "h": 11,
                 "w": 14,
                 "x": 10,
-                "y": 79
+                "y": 74
             },
             "id": 12,
             "options": {
@@ -1391,7 +1263,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "sum(\n    rate(radio_rx_bytes_total{deviceType=\"$device_type\"}[$increase_interval]) + \n    rate(radio_tx_bytes_total{deviceType=\"$device_type\"}[$increase_interval])\n) /8",
+                    "expr": "sum(\n    abs(deriv(radio_rx_bytes_total{device_name=\"$device_name\"}[$rate_interval])) + \n    abs(deriv(radio_tx_bytes_total{device_name=\"$device_name\"}[$rate_interval]))\n) * 8",
                     "instant": false,
                     "legendFormat": "Radio Throughput",
                     "range": true,
@@ -1412,12 +1284,12 @@
         "list": [
             {
                 "current": {
-                    "text": "5m",
-                    "value": "5m"
+                    "text": "6m",
+                    "value": "6m"
                 },
                 "hide": 2,
-                "name": "increase_interval",
-                "query": "5m",
+                "name": "rate_interval",
+                "query": "6m",
                 "skipUrlSync": true,
                 "type": "constant"
             },
@@ -1453,6 +1325,24 @@
                 "query": "2.4 GHz",
                 "skipUrlSync": true,
                 "type": "constant"
+            },
+            {
+                "current": {
+                    "text": "Omada_DS923",
+                    "value": "Omada_DS923"
+                },
+                "definition": "label_values(device_last_seen{job=\"Omada\"},device_name)",
+                "label": "Controller Name",
+                "name": "device_name",
+                "options": [],
+                "query": {
+                    "qryType": 1,
+                    "query": "label_values(device_last_seen{job=\"Omada\"},device_name)",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "type": "query"
             }
         ]
     },
@@ -1464,5 +1354,5 @@
     "timezone": "browser",
     "title": "AccessPoint",
     "uid": "bdwa3qd4rwidce",
-    "version": 2
+    "version": 6
 }

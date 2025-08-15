@@ -19,7 +19,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "id": 11,
+    "id": 6,
     "links": [],
     "panels": [
         {
@@ -1587,5 +1587,5 @@
     "timezone": "",
     "title": "Hashicorp Vault",
     "uid": "vaults",
-    "version": 6
+    "version": 1
 }

@@ -46,7 +46,7 @@
             },
             "gridPos": {
                 "h": 4,
-                "w": 6,
+                "w": 5,
                 "x": 0,
                 "y": 0
             },
@@ -76,7 +76,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "sum(\n    increase(port_tx_bytes_total{deviceType=\"$device_type\"}[$__range]) + \n    increase(port_rx_bytes_total{deviceType=\"$device_type\"}[$__range])\n)",
+                    "expr": "sum(\n  abs(deriv(port_tx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval])) +\n  abs(deriv(port_rx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval]))\n) * $__range",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -96,6 +96,7 @@
                     "color": {
                         "mode": "thresholds"
                     },
+                    "fieldMinMax": false,
                     "mappings": [],
                     "thresholds": {
                         "mode": "absolute",
@@ -111,8 +112,8 @@
             },
             "gridPos": {
                 "h": 4,
-                "w": 5,
-                "x": 6,
+                "w": 7,
+                "x": 5,
                 "y": 0
             },
             "id": 43,
@@ -141,7 +142,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "sum(\n    rate(port_tx_bytes_total[$increase_interval]) + \n    rate(port_rx_bytes_total[$increase_interval])\n) / 8",
+                    "expr": "sum(\n  abs(deriv(port_tx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval])) +\n  abs(deriv(port_rx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval]))\n) * 8",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -184,7 +185,7 @@
             "gridPos": {
                 "h": 4,
                 "w": 6,
-                "x": 11,
+                "x": 12,
                 "y": 0
             },
             "id": 41,
@@ -220,7 +221,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "(\n    count(port_speed{deviceType=\"$device_type\"} > 0) /\n    count(port_speed{deviceType=\"$device_type\"})\n) * 100",
+                    "expr": "(\n    count(port_speed{deviceType=\"$device_type\", device_name=\"$device_name\"} > 0) /\n    count(port_speed{deviceType=\"$device_type\", device_name=\"$device_name\"})\n) * 100",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -260,7 +261,7 @@
             "gridPos": {
                 "h": 4,
                 "w": 3,
-                "x": 17,
+                "x": 18,
                 "y": 0
             },
             "id": 48,
@@ -287,7 +288,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "cpu_usage{deviceType=\"$device_type\"}",
+                    "expr": "cpu_usage{deviceType=\"$device_type\", device_name=\"$device_name\"}",
                     "legendFormat": "__auto",
                     "range": true,
                     "refId": "A"
@@ -326,7 +327,7 @@
             "gridPos": {
                 "h": 4,
                 "w": 3,
-                "x": 20,
+                "x": 21,
                 "y": 0
             },
             "id": 49,
@@ -353,7 +354,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "memory_usage{deviceType=\"$device_type\"}",
+                    "expr": "memory_usage{deviceType=\"$device_type\", device_name=\"$device_name\"}",
                     "legendFormat": "__auto",
                     "range": true,
                     "refId": "A"
@@ -446,7 +447,7 @@
                     "disableTextWrap": false,
                     "editorMode": "code",
                     "exemplar": false,
-                    "expr": "port_speed{deviceType=\"$device_type\", portID=\"$port_ID\"}\n  * on(macAddress, portID) group_left(portName, portMode)\nport_info{deviceType=\"$device_type\", portID=\"$port_ID\"}",
+                    "expr": "port_speed{deviceType=\"$device_type\", device_name=\"$device_name\", portID=\"$port_ID\"}\n  * on(macAddress, portID) group_left(portName, portMode)\nport_info{deviceType=\"$device_type\", device_name=\"$device_name\", portID=\"$port_ID\"}",
                     "format": "table",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
@@ -499,6 +500,70 @@
                     }
                 }
             ],
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus-DSM"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "fixedColor": "purple",
+                        "mode": "fixed"
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "purple"
+                            }
+                        ]
+                    },
+                    "unit": "decbytes"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 2,
+                "w": 24,
+                "x": 0,
+                "y": 16
+            },
+            "id": 50,
+            "maxPerRow": 6,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+            },
+            "pluginVersion": "12.0.1",
+            "repeat": "port_ID",
+            "repeatDirection": "h",
+            "targets": [
+                {
+                    "editorMode": "code",
+                    "expr": "sum(\n  abs(deriv(port_tx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\", portID=\"$port_ID\"}[$rate_interval])) +\n  abs(deriv(port_rx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\", portID=\"$port_ID\"}[$rate_interval]))\n) * $__range",
+                    "legendFormat": "__auto",
+                    "range": true,
+                    "refId": "A"
+                }
+            ],
+            "title": "Port $port_ID - data",
             "type": "stat"
         },
         {
@@ -565,7 +630,7 @@
                 "h": 9,
                 "w": 24,
                 "x": 0,
-                "y": 16
+                "y": 22
             },
             "id": 44,
             "options": {
@@ -578,7 +643,9 @@
                     ],
                     "displayMode": "table",
                     "placement": "right",
-                    "showLegend": true
+                    "showLegend": true,
+                    "sortBy": "Name",
+                    "sortDesc": false
                 },
                 "tooltip": {
                     "hideZeros": false,
@@ -594,7 +661,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "(\n  (rate(port_tx_bytes_total{deviceType=\"$device_type\"}[$increase_interval]))\n  * on (macAddress, portID) group_left(portName, portMode)\n  max(port_info{deviceType=\"$device_type\"} == 1) by (macAddress, portID, portName, portMode)\n) / 8 ",
+                    "expr": "(\n  abs(deriv(port_tx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval]))\n) * 8\n* on (macAddress, portID) group_left(portName, portMode)\nmax(port_info{deviceType=\"$device_type\", device_name=\"$device_name\"} == 1) by (macAddress, portID, portName, portMode)",
                     "instant": false,
                     "legendFormat": "{{portID}} - {{portName}}",
                     "range": true,
@@ -668,7 +735,7 @@
                 "h": 9,
                 "w": 24,
                 "x": 0,
-                "y": 25
+                "y": 31
             },
             "id": 45,
             "options": {
@@ -681,7 +748,9 @@
                     ],
                     "displayMode": "table",
                     "placement": "right",
-                    "showLegend": true
+                    "showLegend": true,
+                    "sortBy": "Name",
+                    "sortDesc": false
                 },
                 "tooltip": {
                     "hideZeros": false,
@@ -697,7 +766,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "(\n  (rate(port_rx_bytes_total{deviceType=\"$device_type\"}[$increase_interval]))\n  * on (macAddress, portID) group_left(portName, portMode)\n  max(port_info{deviceType=\"$device_type\"} == 1) by (macAddress, portID, portName, portMode)\n) / 8 ",
+                    "expr": "(\n  abs(deriv(port_rx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval]))\n) * 8\n* on (macAddress, portID) group_left(portName, portMode)\nmax(port_info{deviceType=\"$device_type\", device_name=\"$device_name\"} == 1) by (macAddress, portID, portName, portMode)",
                     "instant": false,
                     "legendFormat": "{{portID}} - {{portName}}",
                     "range": true,
@@ -771,7 +840,7 @@
                 "h": 10,
                 "w": 24,
                 "x": 0,
-                "y": 34
+                "y": 40
             },
             "id": 2,
             "options": {
@@ -803,7 +872,7 @@
                     },
                     "disableTextWrap": false,
                     "editorMode": "code",
-                    "expr": "cpu_usage{deviceType=\"$device_type\"}\n* on (macAddress) group_left(deviceName)\nmax(device_info{deviceType=\"$device_type\"} == 1) by (macAddress, deviceName)  ",
+                    "expr": "cpu_usage{deviceType=\"$device_type\", device_name=\"$device_name\"}\n* on (macAddress) group_left(deviceName)\nmax(device_info{deviceType=\"$device_type\", device_name=\"$device_name\"} == 1) by (macAddress, deviceName)  ",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
                     "instant": false,
@@ -931,7 +1000,7 @@
                 "h": 9,
                 "w": 12,
                 "x": 0,
-                "y": 44
+                "y": 50
             },
             "id": 22,
             "options": {
@@ -955,9 +1024,9 @@
                         "uid": "prometheus-DSM"
                     },
                     "disableTextWrap": false,
-                    "editorMode": "builder",
+                    "editorMode": "code",
                     "exemplar": false,
-                    "expr": "device_info{deviceType=\"Switch\"}",
+                    "expr": "device_info{deviceType=\"$device_type\", device_name=\"$device_name\"}",
                     "format": "table",
                     "fullMetaSearch": false,
                     "includeNullMetadata": true,
@@ -1064,7 +1133,7 @@
                 "h": 9,
                 "w": 12,
                 "x": 12,
-                "y": 44
+                "y": 50
             },
             "id": 46,
             "options": {
@@ -1093,7 +1162,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "sum(\n    rate(port_tx_bytes_total[$increase_interval]) + \n    rate(port_rx_bytes_total[$increase_interval])\n) / 8",
+                    "expr": "sum(\n  abs(deriv(port_tx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval])) +\n  abs(deriv(port_rx_bytes_total{deviceType=\"$device_type\", device_name=\"$device_name\"}[$rate_interval]))\n) * 8",
                     "instant": false,
                     "legendFormat": "Switch Throughput",
                     "range": true,
@@ -1114,12 +1183,12 @@
         "list": [
             {
                 "current": {
-                    "text": "5m",
-                    "value": "5m"
+                    "text": "6m",
+                    "value": "6m"
                 },
                 "hide": 2,
-                "name": "increase_interval",
-                "query": "5m",
+                "name": "rate_interval",
+                "query": "6m",
                 "skipUrlSync": true,
                 "type": "constant"
             },
@@ -1155,6 +1224,42 @@
                 "regex": "",
                 "sort": 3,
                 "type": "query"
+            },
+            {
+                "current": {
+                    "text": "1000000000",
+                    "value": "1000000000"
+                },
+                "definition": "query_result(scalar(max(max_over_time(port_speed{deviceType=\"$device_type\"}[$__range]))))",
+                "hide": 2,
+                "name": "max_port_speed",
+                "options": [],
+                "query": {
+                    "qryType": 3,
+                    "query": "query_result(scalar(max(max_over_time(port_speed{deviceType=\"$device_type\"}[$__range]))))",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "type": "query"
+            },
+            {
+                "current": {
+                    "text": "Omada_DS923",
+                    "value": "Omada_DS923"
+                },
+                "definition": "label_values(device_last_seen{job=\"Omada\"},device_name)",
+                "label": "Controler Name",
+                "name": "device_name",
+                "options": [],
+                "query": {
+                    "qryType": 1,
+                    "query": "label_values(device_last_seen{job=\"Omada\"},device_name)",
+                    "refId": "PrometheusVariableQueryEditor-VariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "type": "query"
             }
         ]
     },
@@ -1166,5 +1271,5 @@
     "timezone": "browser",
     "title": "Switch",
     "uid": "advqgazfw4xs0c",
-    "version": 2
+    "version": 14
 }

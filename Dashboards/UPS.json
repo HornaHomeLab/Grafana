@@ -18,7 +18,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 10,
+    "id": 1,
     "links": [],
     "panels": [
         {
@@ -159,7 +159,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "upsInputVoltageValue{job=\"$jobName\"}",
+                    "expr": "upsInputVoltageValue{job=\"$jobName\"} * $measurement_error_voltage",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -240,7 +240,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "upsOutputVoltageValue{job=\"$jobName\"}",
+                    "expr": "upsOutputVoltageValue{job=\"$jobName\"} * $measurement_error_voltage",
                     "instant": false,
                     "legendFormat": "__auto",
                     "range": true,
@@ -581,6 +581,7 @@
                             "mode": "off"
                         }
                     },
+                    "decimals": 1,
                     "mappings": [],
                     "thresholds": {
                         "mode": "absolute",
@@ -596,7 +597,32 @@
                     },
                     "unit": "volt"
                 },
-                "overrides": []
+                "overrides": [
+                    {
+                        "__systemRef": "hideSeriesFrom",
+                        "matcher": {
+                            "id": "byNames",
+                            "options": {
+                                "mode": "exclude",
+                                "names": [
+                                    "Input"
+                                ],
+                                "prefix": "All except:",
+                                "readOnly": true
+                            }
+                        },
+                        "properties": [
+                            {
+                                "id": "custom.hideFrom",
+                                "value": {
+                                    "legend": false,
+                                    "tooltip": false,
+                                    "viz": true
+                                }
+                            }
+                        ]
+                    }
+                ]
             },
             "gridPos": {
                 "h": 11,
@@ -631,7 +657,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "upsInputVoltageValue{job=\"$jobName\"}",
+                    "expr": "upsInputVoltageValue{job=\"$jobName\"} * $measurement_error_voltage",
                     "instant": false,
                     "legendFormat": "Input",
                     "range": true,
@@ -643,7 +669,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "upsOutputVoltageValue{job=\"$jobName\"}",
+                    "expr": "upsOutputVoltageValue{job=\"$jobName\"} * $measurement_error_voltage",
                     "hide": false,
                     "instant": false,
                     "legendFormat": "Output",
@@ -742,7 +768,7 @@
                         "uid": "prometheus-DSM"
                     },
                     "editorMode": "code",
-                    "expr": "upsInputFrequencyValue{job=\"$jobName\"}",
+                    "expr": "upsInputFrequencyValue{job=\"$jobName\"} * $measurement_error_frequency",
                     "instant": false,
                     "legendFormat": "Input",
                     "range": true,
@@ -754,6 +780,7 @@
         }
     ],
     "preload": false,
+    "refresh": "",
     "schemaVersion": 41,
     "tags": [
         "GreenCell",
@@ -773,6 +800,29 @@
                 "query": "Synology",
                 "skipUrlSync": true,
                 "type": "constant"
+            },
+            {
+                "current": {
+                    "text": "1.01341991",
+                    "value": "1.01341991"
+                },
+                "description": "",
+                "hide": 2,
+                "name": "measurement_error_voltage",
+                "query": "1.01341991",
+                "skipUrlSync": true,
+                "type": "constant"
+            },
+            {
+                "current": {
+                    "text": "0.99800399",
+                    "value": "0.99800399"
+                },
+                "hide": 2,
+                "name": "measurement_error_frequency",
+                "query": "0.99800399",
+                "skipUrlSync": true,
+                "type": "constant"
             }
         ]
     },
@@ -784,5 +834,5 @@
     "timezone": "Europe/Warsaw",
     "title": "UPS",
     "uid": "bc3dafc8-0e4e-4b7a-a0dc-b07f567f3100",
-    "version": 1
+    "version": 3
 }
