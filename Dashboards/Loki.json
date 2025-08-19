@@ -1054,7 +1054,9 @@
     ],
     "preload": false,
     "schemaVersion": 41,
-    "tags": [],
+    "tags": [
+        "Loki"
+    ],
     "templating": {
         "list": [
             {
