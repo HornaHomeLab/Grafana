@@ -1,8 +1,9 @@
 resource "grafana_rule_group" "rule_group_7f266e298a8ed69c" {
   org_id           = 1
   name             = "Critical"
-  folder_uid       = "beurdrjuvk2dcc"
+  folder_uid       = grafana_folder.folders["Vault"].uid
   interval_seconds = 30
+  disable_provenance = true
 
   rule {
     name      = "Sealed HCP Vault"

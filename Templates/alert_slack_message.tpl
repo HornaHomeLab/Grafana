@@ -3,6 +3,7 @@ Labels:
 - {{ .Name }} = {{ .Value }}
 {{ end }}
 
-{{ if .Annotations.description }}
-Description: {{ .Annotations.description }}
+Annotations:
+{{ range .Annotations.SortedPairs }}
+- {{ .Name }} = {{ .Value }}
 {{ end }}

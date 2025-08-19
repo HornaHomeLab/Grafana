@@ -1,8 +1,9 @@
 resource "grafana_rule_group" "rule_group_b3952b91f32aa265" {
   org_id           = 1
   name             = "Critical"
-  folder_uid       = "fev69j4mpct8gb"
+  folder_uid       = grafana_folder.folders["Grafana LGTM"].uid
   interval_seconds = 30
+  disable_provenance = true
 
   rule {
     name      = "Service is down"
@@ -33,8 +34,11 @@ resource "grafana_rule_group" "rule_group_b3952b91f32aa265" {
 
     no_data_state  = "NoData"
     exec_err_state = "Error"
-    for            = "1m"
-    annotations    = {}
+    for            = "30s"
+    annotations = {
+      __dashboardUid__ = "9728820d-9ed8-4215-beff-8d591d3a467e"
+      __panelId__      = "1"
+    }
     labels         = {}
     is_paused      = false
 
