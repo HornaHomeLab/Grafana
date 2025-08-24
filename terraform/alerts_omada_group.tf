@@ -1,8 +1,8 @@
 resource "grafana_rule_group" "rule_group_fa7ce5e576608fff" {
   org_id             = 1
-  name               = "Critical"
+  name               = "1m"
   folder_uid         = grafana_folder.folders["Omada"].uid
-  interval_seconds   = 30
+  interval_seconds   = 60
   disable_provenance = true
 
   rule {
@@ -42,7 +42,7 @@ resource "grafana_rule_group" "rule_group_fa7ce5e576608fff" {
     is_paused = false
 
     notification_settings {
-      contact_point = "Slack and Email"
+      contact_point = grafana_contact_point.contact_point_both_slack_email.name
       group_by      = null
       mute_timings  = null
     }
@@ -79,12 +79,12 @@ resource "grafana_rule_group" "rule_group_fa7ce5e576608fff" {
     for            = "30s"
     annotations = {
       __dashboardUid__ = "ddw9t1fudd88wb"
-      __panelId__      = "7"
+      __panelId__      = "28"
     }
     is_paused = false
 
     notification_settings {
-      contact_point = "Slack and Email"
+      contact_point = grafana_contact_point.contact_point_both_slack_email.name
       group_by      = null
       mute_timings  = null
     }
@@ -126,7 +126,7 @@ resource "grafana_rule_group" "rule_group_fa7ce5e576608fff" {
     is_paused = false
 
     notification_settings {
-      contact_point = "Slack and Email"
+      contact_point = grafana_contact_point.contact_point_both_slack_email.name
       group_by      = null
       mute_timings  = null
     }
@@ -168,7 +168,7 @@ resource "grafana_rule_group" "rule_group_fa7ce5e576608fff" {
     is_paused = false
 
     notification_settings {
-      contact_point = "Slack and Email"
+      contact_point = grafana_contact_point.contact_point_both_slack_email.name
       group_by      = null
       mute_timings  = null
     }
@@ -176,7 +176,7 @@ resource "grafana_rule_group" "rule_group_fa7ce5e576608fff" {
 }
 resource "grafana_rule_group" "rule_group_04db20b6c60eef48" {
   org_id           = 1
-  name             = "Warning"
+  name             = "5m"
   folder_uid       = grafana_folder.folders["Omada"].uid
   interval_seconds = 300
   disable_provenance = true
@@ -218,7 +218,7 @@ resource "grafana_rule_group" "rule_group_04db20b6c60eef48" {
     is_paused = false
 
     notification_settings {
-      contact_point = "Slack-channel"
+      contact_point = grafana_contact_point.contact_point_both_slack_email.name
       group_by      = null
       mute_timings  = null
     }
@@ -255,12 +255,12 @@ resource "grafana_rule_group" "rule_group_04db20b6c60eef48" {
     for            = "5m"
     annotations = {
       __dashboardUid__ = "ddw9t1fudd88wb"
-      __panelId__      = "10"
+      __panelId__      = "23"
     }
     is_paused = false
 
     notification_settings {
-      contact_point = "Slack-channel"
+      contact_point = grafana_contact_point.contact_point_both_slack_email.name
       group_by      = null
       mute_timings  = null
     }
@@ -297,7 +297,7 @@ resource "grafana_rule_group" "rule_group_04db20b6c60eef48" {
     for            = "5m"
     annotations = {
       __dashboardUid__ = "bdwa3qd4rwidce"
-      __panelId__      = "4"
+      __panelId__      = "2"
     }
     is_paused = false
 

@@ -1,8 +1,8 @@
 resource "grafana_rule_group" "rule_group_7f266e298a8ed69c" {
-  org_id           = 1
-  name             = "Critical"
-  folder_uid       = grafana_folder.folders["Vault"].uid
-  interval_seconds = 30
+  org_id             = 1
+  name               = "1m"
+  folder_uid         = grafana_folder.folders["Vault"].uid
+  interval_seconds   = 60
   disable_provenance = true
 
   rule {
@@ -56,6 +56,49 @@ resource "grafana_rule_group" "rule_group_7f266e298a8ed69c" {
       contact_point = grafana_contact_point.contact_point_both_slack_email.name
       group_by      = null
       mute_timings  = null
+    }
+  }
+  rule {
+    name      = "No Vault data"
+    condition = "C"
+
+    data {
+      ref_id = "A"
+
+      relative_time_range {
+        from = 600
+        to   = 0
+      }
+
+      datasource_uid = "prometheus-DSM"
+      model          = "{\"editorMode\":\"code\",\"expr\":\"up{job=\\\"Vault\\\"}\",\"instant\":true,\"intervalMs\":1000,\"legendFormat\":\"__auto\",\"maxDataPoints\":43200,\"range\":false,\"refId\":\"A\"}"
+    }
+    data {
+      ref_id = "C"
+
+      relative_time_range {
+        from = 0
+        to   = 0
+      }
+
+      datasource_uid = "__expr__"
+      model          = "{\"conditions\":[{\"evaluator\":{\"params\":[1],\"type\":\"lt\"},\"operator\":{\"type\":\"and\"},\"query\":{\"params\":[\"C\"]},\"reducer\":{\"params\":[],\"type\":\"last\"},\"type\":\"query\"}],\"datasource\":{\"type\":\"__expr__\",\"uid\":\"__expr__\"},\"expression\":\"A\",\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"C\",\"type\":\"threshold\"}"
+    }
+
+    no_data_state  = "NoData"
+    exec_err_state = "Error"
+    for            = "1m"
+    annotations = {
+      __dashboardUid__ = "9728820d-9ed8-4215-beff-8d591d3a467e"
+      __panelId__      = "1"
+    }
+    labels    = {}
+    is_paused = false
+
+    notification_settings {
+      contact_point = grafana_contact_point.contact_point_both_slack_email.name
+      group_by      = null
+      mute_timings  = []
     }
   }
 }
