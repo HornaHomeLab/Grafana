@@ -3,6 +3,7 @@ locals {
     "Vault" : "vault-uid",
     "Omada" : "omada-uid",
     "Grafana LGTM" : "grafana-lgtm-uid",
+    "Synology": "synology-uid",
   }
 }
 
