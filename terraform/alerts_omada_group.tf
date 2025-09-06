@@ -34,10 +34,10 @@ resource "grafana_rule_group" "rule_group_fa7ce5e576608fff" {
 
     no_data_state  = "NoData"
     exec_err_state = "KeepLast"
-    for            = "30s"
+    for            = "1m"
     annotations = {
       __dashboardUid__ = "ddw9t1fudd88wb"
-      __panelId__      = "9"
+      __panelId__      = "22"
     }
     is_paused = false
 
@@ -76,7 +76,7 @@ resource "grafana_rule_group" "rule_group_fa7ce5e576608fff" {
 
     no_data_state  = "NoData"
     exec_err_state = "KeepLast"
-    for            = "30s"
+    for            = "1m"
     annotations = {
       __dashboardUid__ = "ddw9t1fudd88wb"
       __panelId__      = "28"
